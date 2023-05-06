@@ -1,5 +1,10 @@
 import styled from "styled-components";
 
-export const PageContainer = styled.div`
-  margin: 0px;
-`
+export const LayoutWrapper = styled.div`
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-direction: row;
+`;
+
+
