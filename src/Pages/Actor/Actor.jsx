@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 
 import * as styled from "./ActorStyles";
 import HttpError from "../../HttpServices/Error/HttpError";
-import ContentSummary from "../../components/ContentSummary/ContentSummary";
+import ContentSummary from "../../components/TvShowMovieComponents/ContentSummary/ContentSummary";
 import { getHeader, getOverview } from "../../Utils/ContentSummaryFuncs";
 import emptyProfilePic from "../../Assets/empty-profile.jpg";
 import ToggleableList from "../../components/ToggleableList/ToggleableList";
@@ -31,7 +31,7 @@ const Actor = () => {
       }
       return String(age);
     }
-    return "null";
+    return "---";
   };
   return (
     <styled.container>
@@ -45,7 +45,7 @@ const Actor = () => {
             image={getProfile(actorDetails.data.profile_path)}
             header={getHeader(actorDetails.data.name)}
             overview={getOverview(actorDetails.data.biography)}
-            rating={actorDetails.data.popularity}
+            rating={actorDetails.data.popularity?actorDetails.data.popularity: 1}
             id={actorDetails.data.id}
             age={ageCalulator(actorDetails.data.birthday)}
             birthPlace={

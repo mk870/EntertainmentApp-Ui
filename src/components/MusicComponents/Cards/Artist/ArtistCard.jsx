@@ -11,6 +11,7 @@ import { AppContext } from "../../../../Context/AppContext";
 import Snackbar from "../../../Snackbar/Snackbar";
 import { deleteResource } from "../../../../HttpServices/Delete/deleteResource";
 import { postResource } from "../../../../HttpServices/Post/postData";
+import emptyArtistImage from "../../../../Assets/empty-profile.jpg";
 
 const ArtistCard = ({ content, isFromLocalServer }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -26,39 +27,60 @@ const ArtistCard = ({ content, isFromLocalServer }) => {
   const { accessToken } = useContext(AppContext);
   const navigate = useNavigate();
   const iconSize = 18;
+  const emptyName = "not available";
   const onNavigate = () => {
     if (isFromLocalServer) navigate(`/music/artist/${content.Spotify_id}`);
     else navigate(`/music/artist/${content.id}`);
   };
   const getFollowers = () => {
     if (isFromLocalServer) {
-      return `${content.Followers} followers`;
+      if (content.Followers) return `${content.Followers} followers`;
+      else return "--- followers";
     } else {
-      return `${millify(content.followers.total)} followers`;
+      if (content.followers?.total)
+        return `${millify(content.followers.total)} followers`;
+      else return "--- followers";
     }
+  };
+  const postFollowers = (contentData) => {
+    if (contentData.followers?.total) return millify(contentData.followers.total);
+    else return "";
   };
   const getImage = () => {
     if (isFromLocalServer) {
-      return content.Poster;
+      if (content.Poster) {
+        return content.Poster;
+      } else return emptyArtistImage;
     } else {
-      return content.images[0].url;
+      if (content.images[0]?.url) {
+        return content.images[0].url;
+      } else return emptyArtistImage;
     }
+  };
+  const postImage = (contentData) => {
+    if (contentData.images[0]?.url) return contentData.images[0].url;
+    else return "";
   };
   const getName = () => {
     if (isFromLocalServer) {
       return shortenString(content.Name, 35);
     } else {
-      return shortenString(content.name, 35);
+      if (content.name) return shortenString(content.name, 35);
+      else return emptyName;
     }
+  };
+  const postName = (contentData) => {
+    if (contentData.name) return contentData.name;
+    else return emptyName;
   };
   const postArtist = (e, contentData) => {
     e.stopPropagation();
     setIsLoading(true);
     console.log(contentData);
     let data = {
-      Name: contentData.name,
-      Poster: contentData.images[0].url,
-      Followers: millify(contentData.followers.total),
+      Name: postName(contentData),
+      Poster: postImage(contentData),
+      Followers: postFollowers(contentData),
       Spotify_id: contentData.id,
     };
     postResource(

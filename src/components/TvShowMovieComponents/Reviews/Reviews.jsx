@@ -3,7 +3,7 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { AiFillStar } from "react-icons/ai";
 
 import * as styled from "./ReviewsStyles";
-import reviewsImage from "../../Assets/review.jpg";
+import reviewsImage from "Assets/review.jpg";
 
 const Reviews = ({ reviews }) => {
   const [showMoreReviews, setShowMoreReviews] = useState(false);

@@ -7,12 +7,15 @@ import { BsFillPersonFill } from "react-icons/bs";
 import { IoPlayOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 
-import { cleanTextSnippets } from "../../../Utils/utils";
+import { cleanTextSnippets, convertArtistListToString } from "../../../Utils/utils";
 import * as styled from "./MusicContentSummaryStyles";
 import { postResource } from "../../../HttpServices/Post/postData";
 import { AppContext } from "../../../Context/AppContext";
 import Snackbar from "../../Snackbar/Snackbar";
 import Spinner from "../../Spinner/Spinner";
+import emptyArtistProfile from "../../../Assets/empty-profile.jpg";
+import emptyTrackPhoto from "../../../Assets/empty_track_poster.jpg";
+import emptyAlbumCover from "../../../Assets/empty_album_poster.jpg";
 
 const MusicContentSummary = ({ content, type }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -26,20 +29,32 @@ const MusicContentSummary = ({ content, type }) => {
   const iconSize = 18;
   const getImage = () => {
     if (type === "playlist" || type === "album" || type === "artist")
-      return content.images[0].url;
-    if (type === "track") return content.album.images[0].url;
+      if (content.images[0]?.url) return content.images[0].url;
+      else {
+        if (type === "artist") return emptyArtistProfile;
+        else return emptyAlbumCover;
+      }
+    if (type === "track") {
+      if (content.album?.images[0]?.url) return content.album.images[0].url;
+      else return emptyTrackPhoto;
+    }
   };
-  const trackDurationToMins = (durationInMs) => {
-    return `${Math.round(durationInMs / 60000)} mins`;
+  const trackDurationInMins = (durationInMs) => {
+    if (durationInMs) return `${Math.round(durationInMs / 60000)} mins`;
+    else return "--- mins";
   };
   const linkText = () => {
-    if (type === "artist") return "Add To ArtistList";
-    if (type === "album") return "Add To AlbumList";
-    if (type === "track") return "Add To TrackList";
+    if (type === "artist") return "Add To MyArtistList";
+    if (type === "album") return "Add To MyAlbumList";
+    if (type === "track") return "Add To MyTrackList";
+  };
+  const getName = () => {
+    if (content.artists[0]?.name) return `by ${content.artists[0].name}`;
+    else return "";
   };
   const getVideoQueryString = () => {
     if (type === "track") {
-      return `${content.name} by ${content.artists[0].name}`;
+      return `${content.name} ${getName()}`;
     }
   };
   const goWatchVideo = (videoType) => {
@@ -49,14 +64,37 @@ const MusicContentSummary = ({ content, type }) => {
       },
     });
   };
+  const postImage = (contentData) => {
+    if (type === "track") {
+      if (contentData.album?.images[0]?.url)
+        return contentData.album.images[0].url;
+      else return "";
+    } else {
+      if (contentData.images[0]?.url) return contentData.images[0].url;
+      else return "";
+    }
+  };
+  const postFollowers = (contentData) => {
+    if (contentData.followers?.total)
+      return millify(contentData.followers.total);
+    else return "";
+  };
+  const getFollowers = () => {
+    if (content.followers?.total) return millify(content.followers.total);
+    else return "---";
+  };
+  const getTotalTracks = () => {
+    if (content.tracks?.total) return content.tracks.total;
+    else return "---";
+  };
   const handlePost = (contentData) => {
-    setIsLoading(true)
+    setIsLoading(true);
     if (type === "artist") {
       let data = {
-        Name: contentData.name,
-        Poster: contentData.images[0].url,
-        Popularity: contentData.popularity,
-        Followers: millify(contentData.followers.total),
+        Name: contentData.name ? contentData.name : "not available",
+        Poster: postImage(contentData),
+        Popularity: contentData.popularity ? contentData.popularity : "",
+        Followers: postFollowers(contentData),
         Spotify_id: contentData.id,
       };
       postResource(
@@ -70,9 +108,9 @@ const MusicContentSummary = ({ content, type }) => {
     }
     if (type === "album") {
       let data = {
-        Name: contentData.name,
-        Poster: contentData.images[0].url,
-        Artists: contentData.artists,
+        Name: contentData.name ? contentData.name : "not available",
+        Poster: postImage(contentData),
+        Artists: convertArtistListToString(contentData.artists),
         Spotify_id: contentData.id,
       };
       postResource(
@@ -86,9 +124,9 @@ const MusicContentSummary = ({ content, type }) => {
     }
     if (type === "track") {
       let data = {
-        Name: contentData.name,
-        Poster: contentData.album.images[0].url,
-        Artists: contentData.artists,
+        Name: contentData.name ? contentData.name : "not available",
+        Poster: postImage(contentData),
+        Artists: convertArtistListToString(contentData.artists),
         Spotify_id: contentData.id,
       };
       postResource(
@@ -100,7 +138,7 @@ const MusicContentSummary = ({ content, type }) => {
         postResponse
       );
     }
-  }
+  };
   useEffect(() => {
     if (postResponse && snackBarRef.current) {
       snackBarRef.current.showPopup();
@@ -120,7 +158,7 @@ const MusicContentSummary = ({ content, type }) => {
               <styled.subContainer>
                 <HiOutlineUserGroup size={iconSize} />
                 <styled.subHeaderText>
-                  {`${millify(content.followers.total)} followers`}
+                  {`${getFollowers()} followers`}
                 </styled.subHeaderText>
               </styled.subContainer>
             )}
@@ -152,7 +190,7 @@ const MusicContentSummary = ({ content, type }) => {
               <styled.subContainer>
                 <BiTime size={iconSize} />
                 <styled.subHeaderText>
-                  {trackDurationToMins(content.duration_ms)}
+                  {trackDurationInMins(content.duration_ms)}
                 </styled.subHeaderText>
               </styled.subContainer>
             )}
@@ -176,7 +214,7 @@ const MusicContentSummary = ({ content, type }) => {
               <styled.subContainer>
                 <HiOutlineMusicNote size={iconSize} />
                 <styled.subHeaderText>
-                  {`${content.tracks.total} tracks`}
+                  {`${getTotalTracks()} tracks`}
                 </styled.subHeaderText>
               </styled.subContainer>
             )}
@@ -211,20 +249,24 @@ const MusicContentSummary = ({ content, type }) => {
               ))}
             </styled.trackLinksContainer>
           )}
-          {(type === "playlist" || type === "track"|| type === "artist") && (
-            <styled.detailsText>{cleanTextSnippets(content.description)}</styled.detailsText>
+          {(type === "playlist" || type === "track" || type === "artist") && (
+            <styled.detailsText>
+              {cleanTextSnippets(content.description)}
+            </styled.detailsText>
           )}
           {type === "album" && (
             <styled.detailsText>{content.label}</styled.detailsText>
           )}
-          {(type === "artist" || type === "album"||type === "track") && (
-            <styled.AddLink onClick={()=>handlePost(content)}>
-              <styled.addLinkText>{isLoading?<Spinner/>: linkText()}</styled.addLinkText>
+          {(type === "artist" || type === "album" || type === "track") && (
+            <styled.AddLink onClick={() => handlePost(content)}>
+              <styled.addLinkText>
+                {isLoading ? <Spinner /> : linkText()}
+              </styled.addLinkText>
             </styled.AddLink>
           )}
           {type === "track" && (
             <styled.row>
-              <styled.AddLink onClick={()=>goWatchVideo("song")}>
+              <styled.AddLink onClick={() => goWatchVideo("song")}>
                 <BiMoviePlay size={20} />
                 <styled.addLinkText>Play video</styled.addLinkText>
               </styled.AddLink>

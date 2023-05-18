@@ -7,10 +7,10 @@ import { RxVideo } from "react-icons/rx";
 import { IoLocationOutline } from "react-icons/io5";
 
 import * as styled from "./ContentSummaryStyles";
-import Snackbar from "../Snackbar/Snackbar";
-import { postResource } from "../../HttpServices/Post/postData";
-import { AppContext } from "../../Context/AppContext";
-import Spinner from "../Spinner/Spinner";
+import Snackbar from "../../Snackbar/Snackbar";
+import { postResource } from "../../../HttpServices/Post/postData";
+import { AppContext } from "../../../Context/AppContext";
+import Spinner from "../../Spinner/Spinner";
 
 const ContentSummary = ({
   image,
@@ -75,10 +75,11 @@ const ContentSummary = ({
   };
   const getImageToPost = (image) => {
     const queryString = "w500/";
-    console.log(image)
-    if (image.includes(queryString)) {
-      return image.split(queryString)[1];
-    } else return image;
+    if(image){
+      if (image.includes(queryString)) {
+        return image.split(queryString)[1];
+      } else return "";
+    }else return ""
   };
   const handlePost = () => {
     setIsLoading(true)
@@ -165,12 +166,10 @@ const ContentSummary = ({
                 {type === "actor" ? birthPlace : runtime}
               </styled.subHeaderText>
             </styled.subContainer>
-            {type !== "actor" && (
               <styled.subContainer>
                 <AiFillStar size={iconSize} color={"gold"} />
                 <styled.subHeaderText>{rating}</styled.subHeaderText>
               </styled.subContainer>
-            )}
             {type !== "actor" && type !== "movie" && (
               <styled.subContainer>
                 <FaTv size={iconSize} />

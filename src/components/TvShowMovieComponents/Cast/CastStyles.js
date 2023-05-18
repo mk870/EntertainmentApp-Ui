@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { mainThemeColor, secondaryThemeColor } from "../../Css/Variables";
+import { mainThemeColor, secondaryThemeColor } from "../../../Css/Variables";
 
 export const CastWrapper = styled.div`
   display: flex;

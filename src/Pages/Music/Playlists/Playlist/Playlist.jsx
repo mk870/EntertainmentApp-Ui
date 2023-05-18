@@ -1,14 +1,14 @@
 import React, { useEffect, useRef } from "react";
+import { useParams } from "react-router-dom";
 
 import useSpotify from "../../../../HttpServices/Hooks/useSpotify";
-import { useParams } from "react-router-dom";
-import ContentSummarySkeleton from "../../../../components/SkeletonLoaders/ContentSummary/ContentSummarySkeleton";
 import HttpError from "../../../../HttpServices/Error/HttpError";
-import MusicContentSummary from "../../../../components/MusicComponents/MusicContentSummary/MusicContentSummary";
-import ToggleableList from "../../../../components/ToggleableList/ToggleableList";
-import ToggleableListSkeleton from "../../../../components/SkeletonLoaders/ToggleableList/ToggleableListSkeleton";
 import Snackbar from "../../../../components/Snackbar/Snackbar";
 import { Page } from "../../../../Css/PageStyles";
+import ContentSummarySkeleton from "components/SkeletonLoaders/ContentSummary/ContentSummarySkeleton";
+import ToggleableListSkeleton from "components/SkeletonLoaders/ToggleableList/ToggleableListSkeleton";
+import MusicContentSummary from "components/MusicComponents/MusicContentSummary/MusicContentSummary";
+import ToggleableList from "components/ToggleableList/ToggleableList";
 
 const Playlist = () => {
   const { playlistId } = useParams();

@@ -23,20 +23,13 @@ const Playlists = () => {
     }
   };
   useEffect(() => {
-    if (
-      error === "your spotify session has expired" &&
-      snackBarRef.current
-    ) {
+    if (error === "your spotify session has expired" && snackBarRef.current) {
       snackBarRef.current.showPopup();
     }
   }, [error, snackBarRef]);
   return (
     <Page hasError={error}>
-      {isLoading && (
-        <CardGridSkeleton
-          numberOfItemsShown={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]}
-        />
-      )}
+      {isLoading && <CardGridSkeleton />}
       {error && <HttpError message={error} size="large" />}
       {!error && !isLoading && data && (
         <CardGrid
@@ -45,7 +38,7 @@ const Playlists = () => {
           type={"playlist"}
         />
       )}
-      {(error === "your spotify session has expired" ) && (
+      {error === "your spotify session has expired" && (
         <Snackbar
           message={"your spotify session has expired"}
           type={"getSpotifyAccessToken"}

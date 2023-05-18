@@ -42,6 +42,7 @@ export const LoginHeaderText = styled.p`
   color: aliceblue;
   font-size: 22px;
   font-weight: 800;
+  margin: 0;
 `;
 export const LoginText = styled.p`
   font-size: 13px;

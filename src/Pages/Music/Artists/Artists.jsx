@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 
-import { top25ArtitstsIdsString } from "./Utils/Utilis";
+import { top25ArtistsIdsString } from "./Utils/Utilis";
 import ArtistListSkeleton from "../../../components/SkeletonLoaders/ArtistList/ArtistListSkeleton";
 import HttpError from "../../../HttpServices/Error/HttpError";
 import ArtistsGrid from "../../../components/MusicComponents/ArtistsGrid/ArtistsGrid";
@@ -29,7 +29,7 @@ const Artists = () => {
       setIsLoading(true);
       axios
         .get(`https://api.spotify.com/v1/artists`, {
-          params: { ids: top25ArtitstsIdsString },
+          params: { ids: top25ArtistsIdsString },
           headers: {
             Authorization: `Bearer ${spotifyAccessToken}`,
           },

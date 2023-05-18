@@ -3,7 +3,7 @@ import {
   redColor,
   secondaryThemeColor,
   transparentMainThemeColor,
-} from "../../Css/Variables";
+} from "../../../Css/Variables";
 
 export const CardWrapper = styled.div`
   display: flex;

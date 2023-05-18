@@ -157,7 +157,7 @@ export const genreContainer = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
   width: 100%;
-  gap: 5px;
+  gap: 7px;
 `;
 export const genre = styled.div`
   display: flex;
@@ -166,8 +166,9 @@ export const genre = styled.div`
   flex-direction: column;
   border: 1px solid aliceblue;
   border-radius: 10px;
-  width: 110px;
+  min-width: 110px;
   height: 20px;
+  padding: 3px 5px;
 `;
 export const genreText = styled.p`
   font-size: 12px;

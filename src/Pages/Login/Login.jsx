@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import Button from "../../components/Button/Button";
@@ -13,7 +13,8 @@ import {
 import * as styled from "./LoginStyles";
 import Snackbar from "../../components/Snackbar/Snackbar";
 import Spinner from "../../components/Spinner/Spinner";
-import { postResource } from "../../HttpServices/Post/postData";
+import { loginRequest } from "../../HttpServices/Post/postData";
+import { AppContext } from "../../Context/AppContext";
 
 const Login = () => {
   const [postResponse, setPostResponse] = useState({
@@ -29,6 +30,7 @@ const Login = () => {
   const [isPasswordValidationError, setIsPasswordValidationError] =
     useState(false);
   const [isEmailValidationError, setIsEmailValidationError] = useState(false);
+  const {setAccessToken} = useContext(AppContext)
   const navigate = useNavigate();
   const handleOnChangePassword = (value) => {
     setLoginUserData({
@@ -51,12 +53,11 @@ const Login = () => {
           Email: loginUserData.email,
           Password: loginUserData.password,
         };
-        postResource(
-          "login",
+        loginRequest(
           userData,
-          null,
           setIsLoading,
           setPostResponse,
+          setAccessToken,
           postResponse
         );
         setLoginUserData({ ...loginUserData, email: "", password: "" });
