@@ -4,12 +4,14 @@ import { FaImdb } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 import * as styled from "./CardStyles";
-import emptyProfilePic from "../../Assets/empty-profile.jpg";
-import { postResource } from "../../HttpServices/Post/postData";
-import { AppContext } from "../../Context/AppContext";
-import Snackbar from "../Snackbar/Snackbar";
-import Spinner from "../Spinner/Spinner";
-import { deleteResource } from "../../HttpServices/Delete/deleteResource";
+import emptyProfilePic from "Assets/empty-profile.jpg";
+import emptyPoster from "Assets/poster.jpg";
+import { postResource } from "../../../HttpServices/Post/postData";
+import { AppContext } from "../../../Context/AppContext";
+import Spinner from "components/Spinner/Spinner";
+import Snackbar from "components/Snackbar/Snackbar";
+import { deleteResource } from "HttpServices/Delete/deleteResource";
+
 
 const Card = ({ content, type, size, isFromLocalServer }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -45,10 +47,10 @@ const Card = ({ content, type, size, isFromLocalServer }) => {
     console.log(contentData);
     if (type === "movie") {
       let data = {
-        Title: contentData.title,
-        Release_date: contentData.release_date,
-        Poster: contentData.poster_path,
-        Rating: contentData.vote_average,
+        Title: contentData.title ? contentData.title : "",
+        Release_date: contentData.release_date ? contentData.release_date : "",
+        Poster: contentData.poster_path ? contentData.poster_path : "",
+        Rating: contentData.vote_average ? contentData.vote_average : "",
         Tmdb_id: contentData.id,
       };
       postResource(
@@ -62,10 +64,12 @@ const Card = ({ content, type, size, isFromLocalServer }) => {
     }
     if (type === "tv-show") {
       let data = {
-        Name: contentData.name,
-        Release_date: contentData.first_air_date,
-        Poster: contentData.poster_path,
-        Rating: contentData.vote_average,
+        Name: contentData.name ? contentData.name : "",
+        Release_date: contentData.first_air_date
+          ? contentData.first_air_date
+          : "",
+        Poster: contentData.poster_path ? contentData.poster_path : "",
+        Rating: contentData.vote_average ? contentData.vote_average : "",
         Tmdb_id: contentData.id,
       };
       postResource(
@@ -92,13 +96,22 @@ const Card = ({ content, type, size, isFromLocalServer }) => {
   };
   const getRating = () => {
     if (isFromLocalServer) {
-      return Math.round(content.Rating * 10) / 10;
-    } else return Math.round(content.vote_average * 10) / 10;
+      if (content.Rating) return Math.round(content.Rating * 10) / 10;
+      else return "---";
+    } else {
+      if (content.vote_average)
+        return Math.round(content.vote_average * 10) / 10;
+      else return "---";
+    }
   };
   const getPopularity = () => {
     if (isFromLocalServer) {
-      return Math.round(content.Popularity);
-    } else return Math.round(content.popularity);
+      if (content.Poster) return Math.round(content.Popularity);
+      else return "---";
+    } else {
+      if (content.popularity) return Math.round(content.popularity);
+      else return "---";
+    }
   };
   const getReleaseDateOrCharacterName = (data) => {
     if (type === "movie") {
@@ -130,9 +143,13 @@ const Card = ({ content, type, size, isFromLocalServer }) => {
       }
     } else {
       if (isFromLocalServer) {
-        return `https://image.tmdb.org/t/p/w500/${content.Poster}`;
+        if (content.Poster)
+          return `https://image.tmdb.org/t/p/w500/${content.Poster}`;
+        else return emptyPoster;
       } else {
-        return `https://image.tmdb.org/t/p/w500/${content.poster_path}`;
+        if (content.poster_path)
+          return `https://image.tmdb.org/t/p/w500/${content.poster_path}`;
+        else return emptyPoster;
       }
     }
   };

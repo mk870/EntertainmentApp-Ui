@@ -12,10 +12,14 @@ const PlaylistCard = ({ content, size }) => {
     navigate(`/music/playlist/${id}`);
   };
   const getPoster = () => {
-    if (!content.images[0].url) {
-      return emptyPlaylistPoster;
-    } else return content.images[0].url;
+    if (content.images[0]?.url) {
+      return content.images[0].url;
+    } else return emptyPlaylistPoster;
   };
+  const getTracksTotal = ()=>{
+    if(content.tracks?.total) return content.tracks.total
+    else return "---"
+  }
   return (
     <styled.CardWrapper size={size} onClick={(e) => onNavigate(e, content.id)}>
       <styled.poster size={size} src={getPoster()} />
@@ -29,7 +33,7 @@ const PlaylistCard = ({ content, size }) => {
               className="sub-icon"
             />
             <styled.detailsText>
-              {`${content.tracks.total} tracks`}
+              {`${getTracksTotal()} tracks`}
             </styled.detailsText>
           </styled.subContainer>
           <styled.viewLink onClick={(e) => onNavigate(e, content.id)}>

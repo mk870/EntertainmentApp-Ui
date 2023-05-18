@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { secondaryThemeColor } from "../../Css/Variables";
+import { secondaryThemeColor } from "../../../Css/Variables";
 
 export const ReviewsWrapper = styled.div`
   display: flex;

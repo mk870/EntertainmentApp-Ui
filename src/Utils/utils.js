@@ -44,5 +44,17 @@ export const cleanTextSnippets = (snippet) => {
   else return ""
 };
 
+export const convertArtistListToString = (artists)=>{
+  let artistsNames = ""
+  if(artists.length>0){
+    for (let i = 0; i < artists.length; i++) {
+      if(i < artists.length - 1) {
+        artistsNames += `${artists[i].name},`
+      }else artistsNames += `${artists[i].name}`
+    }
+  }
+  return artistsNames
+}
+
 export const tmdbKey = process.env.REACT_APP_TMD_API_KEY;
 export const youtubeKey = process.env.REACT_APP_YOUTUBE_API_KEY;

@@ -4,7 +4,6 @@ export const mainThemeColor = 'rgb(0,212,212)'
 export const transparentMainThemeColor = 'rgba(0,212,212,0.5)'
 export const secondaryThemeColor = '#575958'
 export const inputColor = '#b6bab7'
-//export const backgroundColor = '#1a161f' #1c1c1b
 export const backgroundColor = '#0d0c0f'
 export const redColor = '#FF2700'
 

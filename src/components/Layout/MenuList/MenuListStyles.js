@@ -49,7 +49,7 @@ export const menuItem = styled.div`
   flex-direction: row;
   justify-content: space-between;
   width: 90%;
-  height:20px;
+  height:16px;
   margin-bottom: 20px;
   font-size: 15px;
   &:hover {

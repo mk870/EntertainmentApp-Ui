@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
-import { BiLogOut, BiLogIn } from "react-icons/bi";
+import { BiLogOut } from "react-icons/bi";
 
 import * as styled from "./UserDetailsStyles";
 import { secondaryThemeColor } from "../../Css/Variables";
@@ -24,9 +24,9 @@ const UserDetails = ({ isMobileView }) => {
     setAccessToken(null);
     setOpenDropDown(false);
   };
-
+  console.log("token",accessToken)
   return (
-    <styled.UserCardWrapper isMobileView={isMobileView}>
+    <styled.UserCardWrapper isMobileView={isMobileView} isLoggedIn={accessToken?true:false}>
       {accessToken ? (
         <>
           <styled.UserCardDetailsWrapper isMobileView={isMobileView}>
@@ -64,7 +64,7 @@ const UserDetails = ({ isMobileView }) => {
         </>
       ) : (
         <styled.LogInOrOutWrapper onClick={handleLogin}>
-          {!isMobileView && <BiLogIn size={22} />}
+          {/* {!isMobileView && <BiLogIn size={22} />} */}
           <styled.LogInOrOutText>Login</styled.LogInOrOutText>
         </styled.LogInOrOutWrapper>
       )}

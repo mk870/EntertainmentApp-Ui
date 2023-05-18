@@ -29,7 +29,7 @@ export const Container = styled.div`
   position: fixed;
   left: 5%;
   border-radius: 5px;
-  bottom: 10%;
+  top: 15%;
   padding: 7px;
   border: ${(props) =>
     props.type === "failed"

@@ -1,7 +1,6 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Navigate } from "react-router-dom";
 
-import { AppContext } from "../Context/AppContext";
 import Login from "../Pages/Login/Login";
 import MovieType from "../Pages/Movies/ContentType/MovieType";
 import Movie from "../Pages/Movies/Movie/Movie";
@@ -32,8 +31,7 @@ import NewAlbums from "../Pages/Music/Albums/NewAlbums";
 import SearchResults from "../Pages/Music/Search/SearchResults";
 import Verification from "../Pages/Verification/Verification";
 
-const RoutesList = () => {
-  const { accessToken } = useContext(AppContext);
+const RoutesList = (accessToken) => {
   const routes = [
     {
       path: "/",
@@ -105,28 +103,28 @@ const RoutesList = () => {
     },
     {
       path: "/my-albums",
-      element: accessToken !== null ? <MyAlbums /> : <Navigate to={"/login"} />,
+      element: accessToken ? <MyAlbums /> : <Navigate to={"/login"} />,
     },
     {
       path: "/my-movies",
-      element: accessToken !== null ? <MyMovies /> : <Navigate to={"/login"} />,
+      element: accessToken ? <MyMovies /> : <Navigate to={"/login"} />,
     },
     {
       path: "/my-tv-shows",
-      element: accessToken !== null ? <MyTvShows /> : <Navigate to={"/login"} />,
+      element: accessToken ? <MyTvShows /> : <Navigate to={"/login"} />,
     },
     {
       path: "/my-actors",
-      element: accessToken !== null ? <MyActors /> : <Navigate to={"/login"} />,
+      element: accessToken ? <MyActors /> : <Navigate to={"/login"} />,
     },
     {
       path: "/my-artists",
       element:
-        accessToken !== null ? <MyArtists /> : <Navigate to={"/login"} />,
+        accessToken ? <MyArtists /> : <Navigate to={"/login"} />,
     },
     {
       path: "/my-songs",
-      element: accessToken !== null ? <MySongs /> : <Navigate to={"/login"} />,
+      element: accessToken ? <MySongs /> : <Navigate to={"/login"} />,
     },
     {
       path: "/login",

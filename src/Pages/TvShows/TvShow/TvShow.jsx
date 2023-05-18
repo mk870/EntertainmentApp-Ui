@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 
-import ContentSummary from "../../../components/ContentSummary/ContentSummary";
+import ContentSummary from "../../../components/TvShowMovieComponents/ContentSummary/ContentSummary";
 import HttpError from "../../../HttpServices/Error/HttpError";
 import {
   getCreators,
@@ -13,14 +13,15 @@ import {
   getRuntime,
 } from "../../../Utils/ContentSummaryFuncs";
 import * as styled from "./TvShowStyles";
-import Reviews from "../../../components/Reviews/Reviews";
-import SeasonsList from "../../../components/SeasonsList/SeasonsList";
+import Reviews from "../../../components/TvShowMovieComponents/Reviews/Reviews";
+import SeasonsList from "../../../components/TvShowMovieComponents/SeasonsList/SeasonsList";
 import ToggleableList from "../../../components/ToggleableList/ToggleableList";
 import useTMDB from "../../../HttpServices/Hooks/useTMDB";
 import emptyTVshowPoster from "../../../Assets/poster.jpg";
 import ReviewsSkeleton from "../../../components/SkeletonLoaders/Reviews/ReviewsSkeleton";
 import ToggleableListSkeleton from "../../../components/SkeletonLoaders/ToggleableList/ToggleableListSkeleton";
-import ContentSummarySkeleton from "../../../components/SkeletonLoaders/ContentSummary/ContentSummarySkeleton";
+import ContentSummarySkeleton from "components/SkeletonLoaders/ContentSummary/ContentSummarySkeleton";
+
 
 const TvShow = () => {
   const { id } = useParams();

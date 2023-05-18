@@ -3,12 +3,17 @@ import { useNavigate } from "react-router-dom";
 import { AiOutlinePlus } from "react-icons/ai";
 
 import * as styled from "./TrackAlbumStyles";
-import { shortenString } from "../../../../Utils/utils";
+import {
+  convertArtistListToString,
+  shortenString,
+} from "../../../../Utils/utils";
 import Spinner from "../../../Spinner/Spinner";
 import { AppContext } from "../../../../Context/AppContext";
 import { deleteResource } from "../../../../HttpServices/Delete/deleteResource";
 import Snackbar from "../../../Snackbar/Snackbar";
 import { postResource } from "../../../../HttpServices/Post/postData";
+import emptyTrackPoster from "../../../../Assets/empty_track_poster.jpg";
+import emptyAlbumPoster from "../../../../Assets/empty_album_poster.jpg";
 
 const TrackAlbumCard = ({ content, type, isInCarousel, isFromLocalServer }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -22,14 +27,24 @@ const TrackAlbumCard = ({ content, type, isInCarousel, isFromLocalServer }) => {
     type: "",
   });
   const { accessToken } = useContext(AppContext);
+  const postImage = (contentData) => {
+    if (type === "track") {
+      if (contentData.album?.images[0]?.url)
+        return contentData.album.images[0].url;
+      else return "";
+    } else {
+      if (contentData.images[0]?.url) return contentData.images[0].url;
+      else return "";
+    }
+  };
   const postTrackOrAlbum = (e, contentData) => {
     e.stopPropagation();
     setIsLoading(true);
     if (type === "album") {
       let data = {
-        Name: contentData.name,
-        Poster: contentData.images[0].url,
-        Artists: contentData.artists,
+        Name: contentData.name ? contentData.name : "not available",
+        Poster: postImage(contentData),
+        Artists: convertArtistListToString(contentData.artists),
         Spotify_id: contentData.id,
       };
       postResource(
@@ -42,9 +57,9 @@ const TrackAlbumCard = ({ content, type, isInCarousel, isFromLocalServer }) => {
       );
     } else {
       let data = {
-        Name: contentData.name,
-        Poster: contentData.album.images[0].url,
-        Artists: contentData.artists,
+        Name: contentData.name ? contentData.name : "not available",
+        Poster: postImage(contentData),
+        Artists: convertArtistListToString(contentData.artists),
         Spotify_id: contentData.id,
       };
       postResource(
@@ -93,9 +108,11 @@ const TrackAlbumCard = ({ content, type, isInCarousel, isFromLocalServer }) => {
   const getArtists = () => {
     if (type === "track") {
       if (isFromLocalServer) {
-        if (content.Artists.length > 1)
-          return `${content.Artists[0].name} ft...`;
-        else return `${content.Artists[0].name}`;
+        if (content.Artists) {
+          if (content.Artists.includes(",")) {
+            return `${content.Artists.split(",")[0]} ft...`;
+          } else return content.Artists.split(",")[0];
+        } else return "no artist name";
       } else {
         if (content.artists.length > 1)
           return `${content.artists[0].name} ft...`;
@@ -103,9 +120,11 @@ const TrackAlbumCard = ({ content, type, isInCarousel, isFromLocalServer }) => {
       }
     } else {
       if (isFromLocalServer) {
-        if (content.Artists.length > 1)
-          return `${content.Artists[0].name} &...`;
-        else return `${content.Artists[0].name}`;
+        if (content.Artists) {
+          if (content.Artists.includes(",")) {
+            return `${content.Artists.split(",")[0]} &...`;
+          } else return content.Artists.split(",")[0];
+        } else return "no artist name";
       } else {
         if (content.artists.length > 1)
           return `${content.artists[0].name} &...`;
@@ -115,10 +134,22 @@ const TrackAlbumCard = ({ content, type, isInCarousel, isFromLocalServer }) => {
   };
   const getPoster = () => {
     if (isFromLocalServer) {
-      return content.Poster;
+      if (type === "track") {
+        if (content.Poster) return content.Poster;
+        else return emptyTrackPoster;
+      } else {
+        if (content.Poster) return content.Poster;
+        else return emptyAlbumPoster;
+      }
     } else {
-      if (type === "track") return content.album.images[0].url;
-      else return content.images[0].url;
+      if (type === "track") {
+        if (content.album?.images[0]?.url) {
+          return content.album.images[0].url;
+        } else return emptyTrackPoster;
+      } else {
+        if (content.images[0]?.url) return content.images[0].url;
+        else return emptyAlbumPoster;
+      }
     }
   };
   const getName = () => {

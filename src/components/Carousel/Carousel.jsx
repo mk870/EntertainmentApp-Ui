@@ -3,7 +3,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 import { useSelector } from "react-redux";
 
-import Card from "../ContentCard/Card";
+import Card from "../TvShowMovieComponents/ContentCard/Card";
 import * as styled from "./CarouselStyles";
 import { carouselList } from "./Utils/utils";
 import PlaylistCard from "../MusicComponents/Cards/Playlist/PlaylistCard";

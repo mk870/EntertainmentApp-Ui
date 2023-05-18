@@ -11,7 +11,7 @@ import {
   upComingMoviesURL,
 } from "./urls";
 import { addTopArtists } from "../../../../../Redux/Slices/Content/Music/Artists/TopArtistsSlice";
-import { top25ArtitstsIdsString } from "../../../../../Pages/Music/Artists/Utils/Utilis";
+import { top25ArtistsIdsString } from "../../../../../Pages/Music/Artists/Utils/Utilis";
 import { addLatestAlbums } from "../../../../../Redux/Slices/Content/Music/LatestAlbums/LatestAlbumsSlice";
 
 export const fetchUpComingMovies = (
@@ -174,7 +174,7 @@ export const fetchTopArtists = (
     });
     axios
       .get(`https://api.spotify.com/v1/artists`, {
-        params: { ids: top25ArtitstsIdsString },
+        params: { ids: top25ArtistsIdsString },
         headers: {
           Authorization: `Bearer ${spotifyAccessToken}`,
         },

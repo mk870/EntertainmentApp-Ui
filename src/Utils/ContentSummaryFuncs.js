@@ -2,20 +2,16 @@ export const getReleaseDate = (date) => {
   if (date) {
     return `${date}`
   } else {
-    return "no date";
+    return "---";
   }
-};
-export const getImage = (image) => {
-  if (image) return `https://image.tmdb.org/t/p/w500/${image}`;
-  else return null;
 };
 export const getHeader = (text) => {
   if (text) return text;
-  else return "no data";
+  else return "not available";
 };
 export const getRating = (rate) => {
   if (rate) return `${rate}`;
-  else return "no rating";
+  else return "---";
 };
 export const getGenres = (list) => {
   if (list) {

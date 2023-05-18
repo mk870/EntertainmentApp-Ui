@@ -85,7 +85,6 @@ https://api.themoviedb.org/3/movie/top_rated?api_key=${tmdbKey}&language=en-US`
         setLoadingTopRatedMovies(false);
       } else {
         dispatch(addTopRatedMovies(data.data.results));
-        console.log("top rated", data.data);
         setLoadingTopRatedMovies(false);
       }
     })

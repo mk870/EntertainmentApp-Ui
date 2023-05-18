@@ -5,7 +5,7 @@ import millify from "millify";
 import * as styled from "./MovieStyles";
 import useTMDB from "../../../HttpServices/Hooks/useTMDB";
 import HttpError from "../../../HttpServices/Error/HttpError";
-import ContentSummary from "../../../components/ContentSummary/ContentSummary";
+import ContentSummary from "../../../components/TvShowMovieComponents/ContentSummary/ContentSummary";
 import {
   getGenres,
   getHeader,
@@ -14,14 +14,14 @@ import {
   getReleaseDate,
   getRuntime,
 } from "../../../Utils/ContentSummaryFuncs";
-import emptyMoviePoster from "../../../Assets/poster.jpg";
-import ToggleableList from "../../../components/ToggleableList/ToggleableList";
-import Reviews from "../../../components/Reviews/Reviews";
-import Cast from "../../../components/Cast/Cast";
-import ContentSummarySkeleton from "../../../components/SkeletonLoaders/ContentSummary/ContentSummarySkeleton";
-import CastSkeleton from "../../../components/SkeletonLoaders/Cast/CastSkeleton";
-import ToggleableListSkeleton from "../../../components/SkeletonLoaders/ToggleableList/ToggleableListSkeleton";
-import ReviewsSkeleton from "../../../components/SkeletonLoaders/Reviews/ReviewsSkeleton";
+import emptyMoviePoster from "Assets/poster.jpg";
+import ToggleableList from "components/ToggleableList/ToggleableList";
+import Reviews from "components/TvShowMovieComponents/Reviews/Reviews";
+import Cast from "components/TvShowMovieComponents/Cast/Cast";
+import ContentSummarySkeleton from "components/SkeletonLoaders/ContentSummary/ContentSummarySkeleton";
+import CastSkeleton from "components/SkeletonLoaders/Cast/CastSkeleton";
+import ToggleableListSkeleton from "components/SkeletonLoaders/ToggleableList/ToggleableListSkeleton";
+import ReviewsSkeleton from "components/SkeletonLoaders/Reviews/ReviewsSkeleton";
 
 const Movie = () => {
   const { id } = useParams();

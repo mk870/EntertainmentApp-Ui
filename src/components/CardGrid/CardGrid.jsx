@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-import Card from "../ContentCard/Card";
+import Card from "../TvShowMovieComponents/ContentCard/Card";
 import * as styled from "./CardGridStyles";
 import PlaylistCard from "../MusicComponents/Cards/Playlist/PlaylistCard";
 import TrackAlbumCard from "../MusicComponents/Cards/TrackAlbum/TrackAlbumCard";
@@ -39,9 +39,9 @@ const CardGrid = ({ contentList, header, type,isFromLocalServer }) => {
                   isFromLocalServer={isFromLocalServer ? true : false}
                 />
               ))
-            : contentList.map((content) => (
+            : contentList.map((content,index) => (
                 <Card
-                  key={content.id}
+                  key={index}
                   content={content}
                   type={type}
                   size={screenSize < 800 ? "small" : "large"}

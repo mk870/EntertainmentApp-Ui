@@ -3,18 +3,18 @@ import { useLocation, useParams } from "react-router-dom";
 
 import * as styled from "./EpisodeStyles";
 import HttpError from "../../../../../HttpServices/Error/HttpError";
-import ContentSummary from "../../../../../components/ContentSummary/ContentSummary";
 import {
   getCreators,
   getHeader,
-  getImage,
   getOverview,
   getReleaseDate,
-} from "../../../../../Utils/ContentSummaryFuncs";
-import Cast from "../../../../../components/Cast/Cast";
-import useTMDB from "../../../../../HttpServices/Hooks/useTMDB";
-import ContentSummarySkeleton from "../../../../../components/SkeletonLoaders/ContentSummary/ContentSummarySkeleton";
-import CastSkeleton from "../../../../../components/SkeletonLoaders/Cast/CastSkeleton";
+} from "Utils/ContentSummaryFuncs";
+import Cast from "components/TvShowMovieComponents/Cast/Cast";
+import useTMDB from "HttpServices/Hooks/useTMDB";
+import CastSkeleton from "components/SkeletonLoaders/Cast/CastSkeleton";
+import ContentSummarySkeleton from "components/SkeletonLoaders/ContentSummary/ContentSummarySkeleton";
+import ContentSummary from "components/TvShowMovieComponents/ContentSummary/ContentSummary";
+import emptyMoviePoster from "Assets/poster.jpg"
 
 const Episode = () => {
   const { episodeNumber } = useParams();
@@ -25,6 +25,10 @@ const Episode = () => {
   const castData = useTMDB({
     url: `tv/${location.state.showId}/season/${location.state.seasonNumber}/episode/${episodeNumber}/credits`,
   });
+  const getPoster = (image) => {
+    if (image) return `https://image.tmdb.org/t/p/w500/${image}`;
+    else return emptyMoviePoster;
+  };
   return (
     <styled.EpisodeWrapper>
       {isLoading && <ContentSummarySkeleton />}
@@ -32,9 +36,7 @@ const Episode = () => {
       {data && (
         <>
           <ContentSummary
-            image={getImage(
-              `https://image.tmdb.org/t/p/w500/${data.still_path}`
-            )}
+            image={getPoster(data.still_path)}
             header={getHeader(data.name)}
             releaseDate={getReleaseDate(data.air_date)}
             type={"episode"}

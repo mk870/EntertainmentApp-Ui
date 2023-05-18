@@ -4,7 +4,7 @@ import { mainThemeColor, secondaryThemeColor } from "../../Css/Variables";
 export const UserCardWrapper = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: ${({isLoggedIn})=>isLoggedIn?"space-around":"end"};
   flex-direction: row;
   width: 100%;
   position: relative;
@@ -61,12 +61,15 @@ export const UserCardDetailsEmailText = styled.span`
   color: ${secondaryThemeColor};
 `;
 export const LogInOrOutWrapper = styled.div`
-  width: 100%;
   display: flex;
   align-items: center;
   justify-content: end;
   flex-direction: row;
   height: 30px;
+  box-sizing: border-box;
+  padding: 5px 9px;
+  border-radius: 4px;
+  background-color: ${mainThemeColor};
   color: ${secondaryThemeColor};
   &:hover {
     cursor: pointer;
@@ -79,6 +82,8 @@ export const LogInOrOutText = styled.p`
   font-size: 15px;
   margin-left: ${(props) => (props.isMobileView ? "-3px" : "10px")};
   font-weight: 400;
+  margin:0;
+  color: aliceblue;
 `;
 export const dropdown = styled.div`
   position: absolute;
@@ -93,7 +98,7 @@ export const dropdown = styled.div`
   height: 30px;
   border-radius: 5px;
   background-color: ${mainThemeColor};
-  animation: dropDownAnimation ease 0.5s;
+  animation: dropDownAnimation ease 0.1s;
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
   @keyframes dropDownAnimation {

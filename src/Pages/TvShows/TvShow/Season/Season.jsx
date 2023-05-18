@@ -6,15 +6,15 @@ import { AiFillStar, AiOutlineCalendar } from "react-icons/ai";
 import { BiTime } from "react-icons/bi";
 
 import HttpError from "../../../../HttpServices/Error/HttpError";
-import ContentSummary from "../../../../components/ContentSummary/ContentSummary";
+import ContentSummary from "../../../../components/TvShowMovieComponents/ContentSummary/ContentSummary";
 import {
   getHeader,
-  getImage,
   getOverview,
   getReleaseDate,
 } from "../../../../Utils/ContentSummaryFuncs";
 import useTMDB from "../../../../HttpServices/Hooks/useTMDB";
 import SeasonSkeleton from "../../../../components/SkeletonLoaders/Season/SeasonSkeleton";
+import emptyMoviePoster from "Assets/poster.jpg"
 
 const Season = () => {
   const { seasonNumber } = useParams();
@@ -32,7 +32,10 @@ const Season = () => {
   const url = `tv/${location.state.showId}/season/${seasonNumber}`;
   const { data, isLoading, error } = useTMDB({ url });
   const iconSize = 18;
-
+  const getPoster = (image) => {
+    if (image) return `https://image.tmdb.org/t/p/w500/${image}`;
+    else return emptyMoviePoster;
+  };
   return (
     <styled.SeasonWrapper>
       {isLoading && <SeasonSkeleton />}
@@ -40,9 +43,7 @@ const Season = () => {
       {data && (
         <>
           <ContentSummary
-            image={getImage(
-              `https://image.tmdb.org/t/p/w500/${data.poster_path}`
-            )}
+            image={getPoster(data.poster_path)}
             header={getHeader(data.name)}
             releaseDate={getReleaseDate(data.air_date)}
             type={"season"}

@@ -12,11 +12,11 @@ import Snackbar from "./components/Snackbar/Snackbar";
 
 function App() {
   const [accessToken, setAccessToken] = useLocaleStorage(
-    "token",
+    null,
     "moviePlusToken"
   );
   const notificationsBarRef = useRef(null);
-  const appRoutes = RoutesList();
+  const appRoutes = RoutesList(accessToken);
   const { spotifyAccessTokenError } = useFetchSpotifyAccessToken();
   useEffect(() => {
     if (spotifyAccessTokenError && notificationsBarRef.current) {
