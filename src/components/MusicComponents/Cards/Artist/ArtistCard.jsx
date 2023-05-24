@@ -24,17 +24,17 @@ const ArtistCard = ({ content, isFromLocalServer }) => {
     message: "",
     type: "",
   });
-  const { accessToken } = useContext(AppContext);
+  const { accessToken, setDeletedItemId } = useContext(AppContext);
   const navigate = useNavigate();
   const iconSize = 18;
   const emptyName = "not available";
   const onNavigate = () => {
-    if (isFromLocalServer) navigate(`/music/artist/${content.Spotify_id}`);
+    if (isFromLocalServer) navigate(`/music/artist/${content.spotify_id}`);
     else navigate(`/music/artist/${content.id}`);
   };
   const getFollowers = () => {
     if (isFromLocalServer) {
-      if (content.Followers) return `${content.Followers} followers`;
+      if (content.followers) return `${content.followers} followers`;
       else return "--- followers";
     } else {
       if (content.followers?.total)
@@ -43,13 +43,14 @@ const ArtistCard = ({ content, isFromLocalServer }) => {
     }
   };
   const postFollowers = (contentData) => {
-    if (contentData.followers?.total) return millify(contentData.followers.total);
+    if (contentData.followers?.total)
+      return millify(contentData.followers.total);
     else return "";
   };
   const getImage = () => {
     if (isFromLocalServer) {
-      if (content.Poster) {
-        return content.Poster;
+      if (content.poster) {
+        return content.poster;
       } else return emptyArtistImage;
     } else {
       if (content.images[0]?.url) {
@@ -63,7 +64,7 @@ const ArtistCard = ({ content, isFromLocalServer }) => {
   };
   const getName = () => {
     if (isFromLocalServer) {
-      return shortenString(content.Name, 35);
+      return shortenString(content.name, 35);
     } else {
       if (content.name) return shortenString(content.name, 35);
       else return emptyName;
@@ -75,33 +76,38 @@ const ArtistCard = ({ content, isFromLocalServer }) => {
   };
   const postArtist = (e, contentData) => {
     e.stopPropagation();
-    setIsLoading(true);
-    console.log(contentData);
-    let data = {
-      Name: postName(contentData),
-      Poster: postImage(contentData),
-      Followers: postFollowers(contentData),
-      Spotify_id: contentData.id,
-    };
-    postResource(
-      "artist",
-      data,
-      accessToken,
-      setIsLoading,
-      setPostResponse,
-      postResponse
-    );
+    if (accessToken) {
+      setIsLoading(true);
+      console.log(contentData);
+      let data = {
+        Name: postName(contentData),
+        Poster: postImage(contentData),
+        Followers: postFollowers(contentData),
+        Spotify_id: contentData.id,
+      };
+      postResource(
+        "artist",
+        data,
+        accessToken,
+        setIsLoading,
+        setPostResponse,
+        postResponse
+      );
+    } else {
+      navigate("/login");
+    }
   };
   const deleteArtist = (e, id) => {
     e.stopPropagation();
     setIsLoading(true);
     deleteResource(
-      "delete",
+      "artist",
       id,
       accessToken,
       setIsLoading,
       setDeleteResponse,
-      deleteResponse
+      deleteResponse,
+      setDeletedItemId
     );
   };
   useEffect(() => {

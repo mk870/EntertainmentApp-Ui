@@ -71,7 +71,7 @@ export const row = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
   width: 100%;
-  gap: 2px;
+  gap: 5px;
   margin-bottom: 5px;
 `;
 

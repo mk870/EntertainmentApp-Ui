@@ -5,7 +5,6 @@ import CardGrid from "../../components/CardGrid/CardGrid";
 
 const Actors = () => {
   const location = useLocation();
-  console.log("location",location)
   return (
     <styled.container>
       <CardGrid

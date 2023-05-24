@@ -37,7 +37,6 @@ export const fetchUpComingMovies = (
         });
       })
       .catch((e) => {
-        console.log("upcoming", e);
         setErrors({
           ...errors,
           upComingMoviesError: "network error, could not load resource",
@@ -73,7 +72,6 @@ export const fetchTvShowsOnAir = (
         });
       })
       .catch((e) => {
-        console.log("upcoming", e);
         setErrors({
           ...errors,
           tvShowsOnAirError: "network error, could not load resource",
@@ -109,7 +107,6 @@ export const fetchTvShowsAiringToday = (
         });
       })
       .catch((e) => {
-        console.log("upcoming", e);
         setErrors({
           ...errors,
           tvShowsAiringTodayError: "network error, could not load resource",
@@ -145,7 +142,6 @@ export const fetchMoviesPlayingNow = (
         });
       })
       .catch((e) => {
-        console.log("upcoming", e);
         setErrors({
           ...errors,
           moviesPlayingNowError: "network error, could not load resource",
@@ -180,15 +176,13 @@ export const fetchTopArtists = (
         },
       })
       .then((data) => {
-        console.log(data.data.artists);
         dispatch(addTopArtists(data.data.artists));
         setLoading({
           ...loading,
           topArtists: false,
         });
       })
-      .catch((e) => {
-        console.log("upcoming", e);
+      .catch(() => {
         setErrors({
           ...errors,
           topArtistsError: "network error, could not load resource",
@@ -209,7 +203,6 @@ export const fetchLatestAlbums = (
   setErrors,
   errors,
   spotifyAccessToken,
-  setGetSpotifyAccessToken
 ) => {
   if (!latestAlbums) {
     setLoading({
@@ -223,7 +216,6 @@ export const fetchLatestAlbums = (
         },
       })
       .then((data) => {
-        console.log(data.data.albums.items);
         dispatch(addLatestAlbums(data.data.albums.items));
         setLoading({
           ...loading,
@@ -231,13 +223,11 @@ export const fetchLatestAlbums = (
         });
       })
       .catch((e) => {
-        console.log("pop", e);
         if (e.message === "Request failed with status code 401") {
           setErrors({
             ...errors,
             latestAlbumsError: "your spotify session has expired",
           });
-          setGetSpotifyAccessToken(true);
           setLoading({
             ...loading,
             latestAlbums: false,
@@ -248,7 +238,6 @@ export const fetchLatestAlbums = (
             latestAlbumsError:
               "something went wrong, please check your network connection",
           });
-          setGetSpotifyAccessToken(false);
           setLoading({
             ...loading,
             latestAlbums: false,

@@ -27,10 +27,9 @@ export const fetchPopularMovies = (
       }
     })
     .catch((e) => {
-      console.log(e.message);
       setError({
         ...error,
-        popularMoviesError: "something went wrong, please try again later!",
+        popularMoviesError: e.message,
       });
       setLoadingPopularMovies(false);
     });
@@ -58,10 +57,9 @@ export const fetchMoviesPlayingNow = (
       }
     })
     .catch((e) => {
-      console.log(e.message);
       setError({
         ...error,
-        MoviesPlayingNowError: "something went wrong, please try again later!",
+        MoviesPlayingNowError: e.message,
       });
       setLoadingMoviesPlayingNow(false);
     });
@@ -89,10 +87,9 @@ https://api.themoviedb.org/3/movie/top_rated?api_key=${tmdbKey}&language=en-US`
       }
     })
     .catch((e) => {
-      console.log(e.message);
       setError({
         ...error,
-        topRatedMoviesError: "something went wrong, please try again later!",
+        topRatedMoviesError: e.message,
       });
       setLoadingTopRatedMovies(false);
     });

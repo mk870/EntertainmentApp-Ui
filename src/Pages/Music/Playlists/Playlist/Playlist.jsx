@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 
-import useSpotify from "../../../../HttpServices/Hooks/useSpotify";
+import useSpotify from "../../../../HttpServices/Hooks/music/useSpotify";
 import HttpError from "../../../../HttpServices/Error/HttpError";
 import Snackbar from "../../../../components/Snackbar/Snackbar";
 import { Page } from "../../../../Css/PageStyles";

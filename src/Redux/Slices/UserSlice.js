@@ -10,9 +10,8 @@ const generateRandomColor = () => {
 };
 
 const user = {
-  id: "123",
-  emailAddress: "mkhue47",
-  firstName: "mkhue",
+  emailAddress: "",
+  firstName: "",
   userTheme: generateRandomColor(),
 };
 
@@ -22,12 +21,6 @@ export const userSlice = createSlice({
     value: user,
   },
   reducers: {
-    addUserId: (state, action) => {
-      state.value = {
-        ...state.value,
-        id: action.payload,
-      };
-    },
     addFirstName: (state, action) => {
       state.value = {
         ...state.value,
@@ -42,5 +35,5 @@ export const userSlice = createSlice({
     },
   },
 });
-export const { addUserId, addFirstName, addEmailAddress } = userSlice.actions;
+export const { addFirstName, addEmailAddress } = userSlice.actions;
 export default userSlice.reducer;

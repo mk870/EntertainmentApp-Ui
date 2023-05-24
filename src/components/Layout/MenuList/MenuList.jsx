@@ -110,7 +110,7 @@ const MenuList = () => {
         </styled.menuItem>
       ))}
       <styled.divider></styled.divider>
-      <styled.MenuHeader>WatchLists</styled.MenuHeader>
+      <styled.MenuHeader>My Library</styled.MenuHeader>
       {libraryList.map((item) => (
         <styled.menuItem key={item.name} onClick={() => navigate(item.path)}>
           <styled.menuItemText

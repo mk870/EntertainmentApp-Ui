@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-import useSpotify from "../../../HttpServices/Hooks/useSpotify";
+import useSpotify from "../../../HttpServices/Hooks/music/useSpotify";
 import CardGridSkeleton from "../../../components/SkeletonLoaders/CardGrid/CardGridSkeleton";
 import HttpError from "../../../HttpServices/Error/HttpError";
 import CardGrid from "../../../components/CardGrid/CardGrid";

@@ -45,7 +45,6 @@ const ContentSummary = ({
   const iconSize = 18;
   const videoLinks = ["trailer", "review", "clips"];
   const getVideoQueryString = () => {
-    console.log(showName);
     if (type === "episode") {
       return `${showName} season${seasonNumber} episode${episodeNumber}`;
     } else {
@@ -61,7 +60,7 @@ const ContentSummary = ({
   };
   const linkText = () => {
     if (isLoading) {
-      return <Spinner/>;
+      return <Spinner />;
     }
     if (type === "movie" && !isLoading) {
       return "Add to MovieList";
@@ -75,65 +74,67 @@ const ContentSummary = ({
   };
   const getImageToPost = (image) => {
     const queryString = "w500/";
-    if(image){
+    if (image) {
       if (image.includes(queryString)) {
         return image.split(queryString)[1];
       } else return "";
-    }else return ""
+    } else return "";
   };
   const handlePost = () => {
-    setIsLoading(true)
-    if (type === "movie") {
-      let data = {
-        Title: header,
-        Release_date: releaseDate,
-        Poster: getImageToPost(image),
-        Rating: rating,
-        Tmdb_id: id,
-      };
-      postResource(
-        "addMovie",
-        data,
-        accessToken,
-        setIsLoading,
-        setPostResponse,
-        postResponse
-      );
-    }
-    if (type === "tv-show") {
-      let data = {
-        Name: header,
-        Release_date: releaseDate,
-        Poster: getImageToPost(image),
-        Rating: rating,
-        Tmdb_id: id,
-      };
-      postResource(
-        "addTv-show",
-        data,
-        accessToken,
-        setIsLoading,
-        setPostResponse,
-        postResponse
-      );
-    }
-    if (type === "actor") {
-      let data = {
-        Name: header,
-        Poster: getImageToPost(image),
-        Popularity: rating,
-        Character: "",
-        Tmdb_id: id,
-      };
-      postResource(
-        "addActor",
-        data,
-        accessToken,
-        setIsLoading,
-        setPostResponse,
-        postResponse
-      );
-    }
+    if (accessToken) {
+      setIsLoading(true);
+      if (type === "movie") {
+        let data = {
+          Title: header,
+          Release_date: releaseDate,
+          Poster: getImageToPost(image),
+          Rating: rating,
+          Tmdb_id: id,
+        };
+        postResource(
+          "movie",
+          data,
+          accessToken,
+          setIsLoading,
+          setPostResponse,
+          postResponse
+        );
+      }
+      if (type === "tv-show") {
+        let data = {
+          Name: header,
+          Release_date: releaseDate,
+          Poster: getImageToPost(image),
+          Rating: rating,
+          Tmdb_id: id,
+        };
+        postResource(
+          "tvShow",
+          data,
+          accessToken,
+          setIsLoading,
+          setPostResponse,
+          postResponse
+        );
+      }
+      if (type === "actor") {
+        let data = {
+          Name: header,
+          Poster: getImageToPost(image),
+          Popularity: rating ? Math.ceil(rating) : 0,
+          Character: "",
+          Tmdb_id: id,
+        };
+        postResource(
+          "actor",
+          data,
+          accessToken,
+          setIsLoading,
+          setPostResponse,
+          postResponse
+        );
+      }
+    } else navigate("/login");
   };
   useEffect(() => {
     if (postResponse && snackBarRef.current) {
@@ -166,10 +167,10 @@ const ContentSummary = ({
                 {type === "actor" ? birthPlace : runtime}
               </styled.subHeaderText>
             </styled.subContainer>
-              <styled.subContainer>
-                <AiFillStar size={iconSize} color={"gold"} />
-                <styled.subHeaderText>{rating}</styled.subHeaderText>
-              </styled.subContainer>
+            <styled.subContainer>
+              <AiFillStar size={iconSize} color={"gold"} />
+              <styled.subHeaderText>{rating}</styled.subHeaderText>
+            </styled.subContainer>
             {type !== "actor" && type !== "movie" && (
               <styled.subContainer>
                 <FaTv size={iconSize} />

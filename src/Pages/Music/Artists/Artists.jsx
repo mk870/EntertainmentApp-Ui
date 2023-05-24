@@ -39,7 +39,6 @@ const Artists = () => {
           setIsLoading(false);
         })
         .catch((e) => {
-          console.log("upcoming", e);
           setError(
             e.message === "Request failed with status code 401"
               ? "your spotify session has expired"

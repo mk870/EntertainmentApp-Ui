@@ -6,7 +6,7 @@ const ReviewsSkeleton = () => {
   return (
     <styled.container>
       {dummyReviews.map((review) => (
-        <styled.review key={review.id}>
+        <styled.review key={review}>
           <styled.reviewerDetails>
             <styled.reviewerImage></styled.reviewerImage>
             <styled.reviewerInfo>

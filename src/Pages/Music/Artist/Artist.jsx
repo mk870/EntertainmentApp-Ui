@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 
-import useSpotify from "../../../HttpServices/Hooks/useSpotify";
+import useSpotify from "../../../HttpServices/Hooks/music/useSpotify";
 import ContentSummarySkeleton from "../../../components/SkeletonLoaders/ContentSummary/ContentSummarySkeleton";
 import HttpError from "../../../HttpServices/Error/HttpError";
 import MusicContentSummary from "../../../components/MusicComponents/MusicContentSummary/MusicContentSummary";
@@ -29,16 +29,24 @@ const Artist = () => {
       snackBarRef.current.showPopup();
     }
   }, [artist.error, snackBarRef]);
+  const errorMsg = () => {
+    if (
+      artist.error === "Request failed with status code 401" ||
+      artistTopTracks.error === "Request failed with status code 401" ||
+      artistAlbums.error === "Request failed with status code 401" ||
+      relatedArtists.error === "Request failed with status code 401"
+    ){
+      return "your spotify session has expired";
+    }
+    else return "something went wrong, please check your network connection!";
+  };
   return (
     <Page hasError={artist.error}>
       {artist.isLoading && <ContentSummarySkeleton />}
-      {artist.error && <HttpError message={artist.error} size="large" />}
+      {artist.error && <HttpError message={errorMsg()} size="large" />}
       {artist.data && <MusicContentSummary content={artist.data} type="artist" />}
       {artistTopTracks.isLoading && (
         <CardGridSkeleton numberOfItemsShown={[1,2,3,4,5,6,7,8]} />
-      )}
-      {artistTopTracks.error && (
-        <HttpError message={artistTopTracks.error} size="large" />
       )}
       {artistTopTracks.data && (
         <CardGrid
@@ -50,9 +58,6 @@ const Artist = () => {
       {artistAlbums.isLoading && (
         <CardGridSkeleton numberOfItemsShown={[1,2,3,4,5,6,7,8]} />
       )}
-      {artistAlbums.error && (
-        <HttpError message={artistAlbums.error} size="large" />
-      )}
       {artistAlbums.data && (
         <CardGrid
           contentList={artistAlbums.data.items}
@@ -61,9 +66,6 @@ const Artist = () => {
         />
       )}
       {relatedArtists.isLoading && <ArtistListSkeleton size={"large"} />}
-      {relatedArtists.error && (
-        <HttpError message={relatedArtists.error} size="large" />
-      )}
       {relatedArtists.data && (
         <ArtistsGrid
           artistsList={relatedArtists.data.artists}

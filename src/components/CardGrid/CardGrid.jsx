@@ -5,8 +5,9 @@ import Card from "../TvShowMovieComponents/ContentCard/Card";
 import * as styled from "./CardGridStyles";
 import PlaylistCard from "../MusicComponents/Cards/Playlist/PlaylistCard";
 import TrackAlbumCard from "../MusicComponents/Cards/TrackAlbum/TrackAlbumCard";
+import ArtistCard from "components/MusicComponents/Cards/Artist/ArtistCard";
 
-const CardGrid = ({ contentList, header, type,isFromLocalServer }) => {
+const CardGrid = ({ contentList, header, type, isFromLocalServer }) => {
   const screenSize = useSelector((state) => state.screenSize.value);
   return (
     <styled.CardGridWrapper>
@@ -17,11 +18,11 @@ const CardGrid = ({ contentList, header, type,isFromLocalServer }) => {
       )}
       {contentList === "none" ? (
         <styled.TextContainer>
-          <styled.Text>{`${header} content not found at the moment`}</styled.Text>
+          <styled.Text>{`${type}s watchlist empty`}</styled.Text>
         </styled.TextContainer>
       ) : (
         <styled.Grid>
-          {type === "artist" || type === "playlist"
+          {type === "playlist"
             ? contentList.map((content) => (
                 <PlaylistCard
                   key={content.id}
@@ -39,7 +40,15 @@ const CardGrid = ({ contentList, header, type,isFromLocalServer }) => {
                   isFromLocalServer={isFromLocalServer ? true : false}
                 />
               ))
-            : contentList.map((content,index) => (
+            : type === "artist"
+            ? contentList.map((content) => (
+                <ArtistCard
+                  key={content.id}
+                  content={content}
+                  isFromLocalServer={isFromLocalServer ? true : false}
+                />
+              ))
+            : contentList.map((content, index) => (
                 <Card
                   key={index}
                   content={content}

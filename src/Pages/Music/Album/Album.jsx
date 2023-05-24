@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useSelector } from "react-redux";
 
-import useSpotify from "../../../HttpServices/Hooks/useSpotify";
+import useSpotify from "../../../HttpServices/Hooks/music/useSpotify";
 import HttpError from "../../../HttpServices/Error/HttpError";
 import MusicContentSummary from "../../../components/MusicComponents/MusicContentSummary/MusicContentSummary";
 import ContentSummarySkeleton from "../../../components/SkeletonLoaders/ContentSummary/ContentSummarySkeleton";

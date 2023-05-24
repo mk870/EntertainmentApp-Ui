@@ -26,7 +26,7 @@ const TrackAlbumCard = ({ content, type, isInCarousel, isFromLocalServer }) => {
     message: "",
     type: "",
   });
-  const { accessToken } = useContext(AppContext);
+  const { accessToken,setDeletedItemId } = useContext(AppContext);
   const postImage = (contentData) => {
     if (type === "track") {
       if (contentData.album?.images[0]?.url)
@@ -39,67 +39,71 @@ const TrackAlbumCard = ({ content, type, isInCarousel, isFromLocalServer }) => {
   };
   const postTrackOrAlbum = (e, contentData) => {
     e.stopPropagation();
-    setIsLoading(true);
-    if (type === "album") {
-      let data = {
-        Name: contentData.name ? contentData.name : "not available",
-        Poster: postImage(contentData),
-        Artists: convertArtistListToString(contentData.artists),
-        Spotify_id: contentData.id,
-      };
-      postResource(
-        "addAlbum",
-        data,
-        accessToken,
-        setIsLoading,
-        setPostResponse,
-        postResponse
-      );
-    } else {
-      let data = {
-        Name: contentData.name ? contentData.name : "not available",
-        Poster: postImage(contentData),
-        Artists: convertArtistListToString(contentData.artists),
-        Spotify_id: contentData.id,
-      };
-      postResource(
-        "addTrack",
-        data,
-        accessToken,
-        setIsLoading,
-        setPostResponse,
-        postResponse
-      );
-    }
+    if (accessToken) {
+      setIsLoading(true);
+      if (type === "album") {
+        let data = {
+          Name: contentData.name ? contentData.name : "not available",
+          Poster: postImage(contentData),
+          Artists: convertArtistListToString(contentData.artists),
+          Spotify_id: contentData.id,
+        };
+        postResource(
+          "album",
+          data,
+          accessToken,
+          setIsLoading,
+          setPostResponse,
+          postResponse
+        );
+      } else {
+        let data = {
+          Name: contentData.name ? contentData.name : "not available",
+          Poster: postImage(contentData),
+          Artists: convertArtistListToString(contentData.artists),
+          Spotify_id: contentData.id,
+        };
+        postResource(
+          "track",
+          data,
+          accessToken,
+          setIsLoading,
+          setPostResponse,
+          postResponse
+        );
+      }
+    } else navigate("/login");
   };
   const deleteTrackOrAlbum = (e, id) => {
     e.stopPropagation();
     setIsLoading(true);
     if (type === "album") {
       deleteResource(
-        "deleteAlbum",
+        "album",
         id,
         accessToken,
         setIsLoading,
         setDeleteResponse,
-        deleteResponse
+        deleteResponse,
+        setDeletedItemId
       );
     } else {
       deleteResource(
-        "deleteTrack",
+        "track",
         id,
         accessToken,
         setIsLoading,
         setDeleteResponse,
-        deleteResponse
+        deleteResponse,
+        setDeletedItemId
       );
     }
   };
   const navigate = useNavigate();
   const onNavigate = () => {
     if (isFromLocalServer) {
-      if (type === "track") navigate(`/music/track/${content.Spotify_id}`);
-      else navigate(`/music/album/${content.Spotify_id}`);
+      if (type === "track") navigate(`/music/track/${content.spotify_id}`);
+      else navigate(`/music/album/${content.spotify_id}`);
     } else {
       if (type === "track") navigate(`/music/track/${content.id}`);
       else navigate(`/music/album/${content.id}`);
@@ -108,10 +112,10 @@ const TrackAlbumCard = ({ content, type, isInCarousel, isFromLocalServer }) => {
   const getArtists = () => {
     if (type === "track") {
       if (isFromLocalServer) {
-        if (content.Artists) {
-          if (content.Artists.includes(",")) {
-            return `${content.Artists.split(",")[0]} ft...`;
-          } else return content.Artists.split(",")[0];
+        if (content.artists) {
+          if (content.artists.includes(",")) {
+            return `${content.artists.split(",")[0]} ft...`;
+          } else return content.artists.split(",")[0];
         } else return "no artist name";
       } else {
         if (content.artists.length > 1)
@@ -120,10 +124,10 @@ const TrackAlbumCard = ({ content, type, isInCarousel, isFromLocalServer }) => {
       }
     } else {
       if (isFromLocalServer) {
-        if (content.Artists) {
-          if (content.Artists.includes(",")) {
-            return `${content.Artists.split(",")[0]} &...`;
-          } else return content.Artists.split(",")[0];
+        if (content.artists) {
+          if (content.artists.includes(",")) {
+            return `${content.artists.split(",")[0]} &...`;
+          } else return content.artists.split(",")[0];
         } else return "no artist name";
       } else {
         if (content.artists.length > 1)
@@ -135,10 +139,10 @@ const TrackAlbumCard = ({ content, type, isInCarousel, isFromLocalServer }) => {
   const getPoster = () => {
     if (isFromLocalServer) {
       if (type === "track") {
-        if (content.Poster) return content.Poster;
+        if (content.poster) return content.poster;
         else return emptyTrackPoster;
       } else {
-        if (content.Poster) return content.Poster;
+        if (content.poster) return content.poster;
         else return emptyAlbumPoster;
       }
     } else {
@@ -154,7 +158,7 @@ const TrackAlbumCard = ({ content, type, isInCarousel, isFromLocalServer }) => {
   };
   const getName = () => {
     if (isFromLocalServer) {
-      return shortenString(content.Name, 35);
+      return shortenString(content.name, 35);
     } else return shortenString(content.name, 35);
   };
   useEffect(() => {

@@ -1,32 +1,28 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { FaRegCheckCircle } from "react-icons/fa";
 import { useParams } from "react-router-dom";
 
 import * as styled from "./VerificationStyles";
-import { postResource } from "../../HttpServices/Post/postData";
 import HttpError from "../../HttpServices/Error/HttpError";
+import useQuery from "HttpServices/Hooks/useQuery";
+import { AppContext } from "Context/AppContext";
 
 const Verification = () => {
-  const [response, setResponse] = useState({
-    message: null,
-    type: null,
-  });
-  const [isLoading, setIsLoading] = useState(true);
   const { token } = useParams();
+  const { setAccessToken } = useContext(AppContext);
+  const { data, isLoading, error } = useQuery({ url: `verification/${token}` });
   useEffect(() => {
-    postResource("backend", token, null, setIsLoading, setResponse, response);
-  }, [token]);
+    if (data) setAccessToken(data.accessToken);
+  }, [data]);
   return (
     <styled.container>
       {isLoading && <styled.loader></styled.loader>}
-      {response.type === "failed" && (
-        <HttpError message={response.message} size={"large"} />
-      )}
-      {response.type === "success" && (
+      {error && <HttpError message={error} size={"large"} />}
+      {data && (
         <styled.messageContainer>
           <FaRegCheckCircle size={18} className="success" />
-          <styled.Text>{response.message}</styled.Text>
+          <styled.Text>{"Verification successful"}</styled.Text>
         </styled.messageContainer>
       )}
     </styled.container>

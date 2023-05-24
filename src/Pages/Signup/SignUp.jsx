@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import Button from "../../components/Button/Button";
@@ -13,7 +13,7 @@ import * as styled from "./SignUpStyles";
 import Snackbar from "../../components/Snackbar/Snackbar";
 import Spinner from "../../components/Spinner/Spinner";
 import { signupRequest } from "../../HttpServices/Post/postData";
-import { AppContext } from "../../Context/AppContext";
+
 
 const SignUp = () => {
   const [signUpData, setSignUpData] = useState({
@@ -35,7 +35,6 @@ const SignUp = () => {
     useState(false);
   const [isLastNameValidationError, setIsLastNameValidationError] =
     useState(false);
-  const {setAccessToken} = useContext(AppContext)
   const navigate = useNavigate();
   const handleOnChangeFirstName = (value) => {
     setSignUpData({
@@ -86,7 +85,6 @@ const SignUp = () => {
           userData,
           setIsLoading,
           setPostResponse,
-          setAccessToken,
           postResponse
         );
         setSignUpData({
