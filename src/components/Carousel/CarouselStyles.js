@@ -69,6 +69,12 @@ export const slidercontent = styled.div`
     top: 45%;
     bottom: 50%;
     z-index: 10;
+    padding: 4px;
+    border-radius: 100%;
+    background-color: ${secondaryThemeColor};
+    &:hover {
+    cursor: pointer;
+  }
   }
   .leftArrow {
     position: absolute;
@@ -80,6 +86,12 @@ export const slidercontent = styled.div`
     top: 45%;
     bottom: 50%;
     z-index: 10;
+    padding: 4px;
+    border-radius: 100%;
+    background-color: ${secondaryThemeColor};
+    &:hover {
+    cursor: pointer;
+  }
   }
   .slide {
     display: none;

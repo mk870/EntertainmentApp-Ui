@@ -1,40 +1,25 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import * as styled from "./MusicStyles";
 import { itemsShownPerScreenSize } from "../../components/Carousel/Utils/utils";
-import {
-  fetchElectroPlaylists,
-  fetchHipHopPlaylists,
-  fetchRnbPlaylists,
-  fetchtopListPlaylists,
-} from "./Utils/datafetching";
 import HttpError from "../../HttpServices/Error/HttpError";
 import CarouselSkeleton from "../../components/SkeletonLoaders/Carousel/CarouselSkeleton";
 import Carousel from "../../components/Carousel/Carousel";
+import withSpotifyNotification from "components/HOCs/SpotifyHoc";
+import useFetchElectro from "HttpServices/Hooks/music/Playlists/useFetchElectro";
+import useFetchHipHop from "HttpServices/Hooks/music/Playlists/useFetchHipHop";
+import useFetchTopList from "HttpServices/Hooks/music/Playlists/useFetchTopList";
+import useFetchRnB from "HttpServices/Hooks/music/Playlists/useFetchRnB";
 
-const Music = () => {
-  const [error, setError] = useState({
-    electroPlaylistsError: null,
-    hipHopPlaylistsError: null,
-    topListPlaylistsError: null,
-    rnbPlaylistsError: null,
-  });
-  const [loadingElectroPlaylists, setLoadingElectroPlaylists] = useState(false);
-  const [loadingHipHopPlaylists, setLoadingHipHopPlaylists] = useState(false);
-  const [loadingTopListPlaylists, setLoadingTopListPlaylists] = useState(false);
-  const [loadingRnbPlaylists, setLoadingRnbPlaylists] = useState(false);
-  const dispatch = useDispatch();
+const Music = ({setGetSpotifyAccessToken}) => {
   const electroPlaylists = useSelector((state) => state.electroPlaylists.value);
   const hipHopPlaylists = useSelector((state) => state.hipHopPlaylists.value);
   const rnbPlaylists = useSelector((state) => state.rnbPlaylists.value);
   const topListPlaylists = useSelector((state) => state.topListPlaylists.value);
   const screenSize = useSelector((state) => state.screenSize.value);
-  const spotifyAccessToken = useSelector(
-    (state) => state.spotifyAccessToken.value
-  );
   const navigate = useNavigate();
   const musicGenresToShow = [
     { id: "toplists", name: "Toplist", selected: false },
@@ -46,78 +31,28 @@ const Music = () => {
     navigate(route);
   };
   const numberOfItemstoShow = itemsShownPerScreenSize(screenSize);
-  useEffect(() => {
-    if (!topListPlaylists) {
-      fetchtopListPlaylists(
-        dispatch,
-        setError,
-        setLoadingTopListPlaylists,
-        error,
-        spotifyAccessToken,
-        musicGenresToShow[0].id
-      );
-    }
-    if (!electroPlaylists) {
-      fetchElectroPlaylists(
-        dispatch,
-        setError,
-        setLoadingElectroPlaylists,
-        error,
-        spotifyAccessToken,
-        musicGenresToShow[1].id
-      );
-    }
-    if (!hipHopPlaylists) {
-      fetchHipHopPlaylists(
-        dispatch,
-        setError,
-        setLoadingHipHopPlaylists,
-        error,
-        spotifyAccessToken,
-        musicGenresToShow[2].id
-      );
-    }
-    if (!rnbPlaylists) {
-      fetchRnbPlaylists(
-        dispatch,
-        setError,
-        setLoadingRnbPlaylists,
-        error,
-        spotifyAccessToken,
-        musicGenresToShow[3].id
-      );
-    }
-  }, [spotifyAccessToken]);
-  useEffect(() => {
-    if (topListPlaylists) {
-      setError({ ...error, topListPlaylistsError: null });
-    }
-    if (hipHopPlaylists) {
-      setError({ ...error, hipHopPlaylistsError: null });
-    }
-    if (electroPlaylists) {
-      setError({ ...error, electroPlaylistsError: null });
-    }
-    if (rnbPlaylists) {
-      setError({ ...error, rnbPlaylistsError: null });
-    }
-  }, [rnbPlaylists, electroPlaylists, hipHopPlaylists, topListPlaylists]);
+  const electro = useFetchElectro()
+  const hipHop = useFetchHipHop()
+  const topList = useFetchTopList()
+  const rnb = useFetchRnB()
   const errorMsg = () => {
     if (
-      error.electroPlaylistsError === "Request failed with status code 401" ||
-      error.hipHopPlaylistsError === "Request failed with status code 401" ||
-      error.topListPlaylistsError === "Request failed with status code 401" ||
-      error.rnbPlaylistsError === "Request failed with status code 401"
-    )
+      electro.error === "Request failed with status code 401" ||
+      hipHop.error === "Request failed with status code 401" ||
+      topList.error === "Request failed with status code 401" ||
+      rnb.error === "Request failed with status code 401"
+    ){
+      setGetSpotifyAccessToken(true)
       return "your spotify session has expired";
+    }
     else return "something went wrong, please check your network connection!";
   };
   const errorChecking = () => {
     if (
-      error.electroPlaylistsError ||
-      error.hipHopPlaylistsError ||
-      error.topListPlaylistsError ||
-      error.rnbPlaylistsError
+      electro.error ||
+      hipHop.error ||
+      topList.error ||
+      rnb.error
     ) {
       return <HttpError message={errorMsg()} size={"large"} />;
     }
@@ -125,13 +60,13 @@ const Music = () => {
   return (
     <styled.container>
       {errorChecking()}
-      {!error.electroPlaylistsError &&
-        !error.hipHopPlaylistsError &&
-        !error.rnbPlaylistsError &&
-        !error.topListPlaylistsError && (
+      {!hipHop.error &&
+        !rnb.error &&
+        !electro.error &&
+        !topList.error && (
           <>
             <styled.topListPlaylistsWrapper>
-              {loadingTopListPlaylists && (
+              {topList.isLoading && !topListPlaylists && (
                 <CarouselSkeleton
                   numberOfItemsShown={numberOfItemstoShow}
                   size={"large"}
@@ -140,7 +75,7 @@ const Music = () => {
               {topListPlaylists === "none" && (
                 <styled.Text>No toplist playlists at the moment</styled.Text>
               )}
-              {topListPlaylists !== "none" && topListPlaylists && (
+              {topListPlaylists !== "none" && topListPlaylists && !topList.isLoading &&(
                 <Carousel
                   dataList={topListPlaylists}
                   headerText="Trending Playlists"
@@ -155,7 +90,7 @@ const Music = () => {
               )}
             </styled.topListPlaylistsWrapper>
             <styled.electroPlaylistsWrapper>
-              {loadingElectroPlaylists && (
+              {electro.isLoading && !electroPlaylists && (
                 <CarouselSkeleton
                   numberOfItemsShown={numberOfItemstoShow}
                   size={"large"}
@@ -164,7 +99,7 @@ const Music = () => {
               {electroPlaylists === "none" && (
                 <styled.Text>No electro playlists at the moment</styled.Text>
               )}
-              {electroPlaylists !== "none" && electroPlaylists && (
+              {electroPlaylists !== "none" && electroPlaylists && !electro.isLoading &&(
                 <Carousel
                   dataList={electroPlaylists}
                   headerText="Electro Playlists"
@@ -179,7 +114,7 @@ const Music = () => {
               )}
             </styled.electroPlaylistsWrapper>
             <styled.hipHopPlaylistsWrapper>
-              {loadingHipHopPlaylists && (
+              {hipHop.isLoading && (
                 <CarouselSkeleton
                   numberOfItemsShown={numberOfItemstoShow}
                   size={"large"}
@@ -203,7 +138,7 @@ const Music = () => {
               )}
             </styled.hipHopPlaylistsWrapper>
             <styled.rnbPlaylistsWrapper>
-              {loadingRnbPlaylists && (
+              {rnb.isLoading && (
                 <CarouselSkeleton
                   numberOfItemsShown={numberOfItemstoShow}
                   size={"large"}
@@ -232,4 +167,4 @@ const Music = () => {
   );
 };
 
-export default Music;
+export default withSpotifyNotification(Music);

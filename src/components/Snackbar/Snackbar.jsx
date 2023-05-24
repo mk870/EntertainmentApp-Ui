@@ -36,13 +36,11 @@ const Snackbar = forwardRef((props, ref) => {
     })
       .then((response) => response.json())
       .then((response) => {
-        console.log("accesstoken", response);
         dispatch(addSpotifyAccessToken(response.access_token));
         setAccessTokenSuccess("Session successfully renewed");
         setIsloading(false);
       })
       .catch((e) => {
-        console.log(e.message);
         setSpotifyAccessTokenError("error occurred");
         setIsloading(false);
       });
@@ -79,10 +77,10 @@ const Snackbar = forwardRef((props, ref) => {
     <styled.Container type={props.type} show={showSnackBar}>
       <styled.messageContainer>
         {props.type === "success" && (
-          <FaRegCheckCircle size={18} className="snackbar-icon success" />
+          <FaRegCheckCircle size={18} className="snackbar-icon" />
         )}
         {props.type === "failed" && (
-          <MdErrorOutline size={18} className="snackbar-icon failed" />
+          <MdErrorOutline size={18} className="snackbar-icon" />
         )}
         <styled.text type={props.type}>
           {spotifyAccessTokenError

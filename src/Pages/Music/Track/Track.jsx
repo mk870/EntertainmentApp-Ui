@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 
 import * as styled from "./TrackStyles";
-import useSpotify from "../../../HttpServices/Hooks/useSpotify";
+import useSpotify from "../../../HttpServices/Hooks/music/useSpotify";
 import ContentSummarySkeleton from "../../../components/SkeletonLoaders/ContentSummary/ContentSummarySkeleton";
 import ToggleableListSkeleton from "../../../components/SkeletonLoaders/ToggleableList/ToggleableListSkeleton";
 import HttpError from "../../../HttpServices/Error/HttpError";

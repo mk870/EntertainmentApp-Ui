@@ -7,7 +7,10 @@ import { BsFillPersonFill } from "react-icons/bs";
 import { IoPlayOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 
-import { cleanTextSnippets, convertArtistListToString } from "../../../Utils/utils";
+import {
+  cleanTextSnippets,
+  convertArtistListToString,
+} from "../../../Utils/utils";
 import * as styled from "./MusicContentSummaryStyles";
 import { postResource } from "../../../HttpServices/Post/postData";
 import { AppContext } from "../../../Context/AppContext";
@@ -88,56 +91,58 @@ const MusicContentSummary = ({ content, type }) => {
     else return "---";
   };
   const handlePost = (contentData) => {
-    setIsLoading(true);
-    if (type === "artist") {
-      let data = {
-        Name: contentData.name ? contentData.name : "not available",
-        Poster: postImage(contentData),
-        Popularity: contentData.popularity ? contentData.popularity : "",
-        Followers: postFollowers(contentData),
-        Spotify_id: contentData.id,
-      };
-      postResource(
-        "addArtist",
-        data,
-        accessToken,
-        setIsLoading,
-        setPostResponse,
-        postResponse
-      );
-    }
-    if (type === "album") {
-      let data = {
-        Name: contentData.name ? contentData.name : "not available",
-        Poster: postImage(contentData),
-        Artists: convertArtistListToString(contentData.artists),
-        Spotify_id: contentData.id,
-      };
-      postResource(
-        "addAlbum",
-        data,
-        accessToken,
-        setIsLoading,
-        setPostResponse,
-        postResponse
-      );
-    }
-    if (type === "track") {
-      let data = {
-        Name: contentData.name ? contentData.name : "not available",
-        Poster: postImage(contentData),
-        Artists: convertArtistListToString(contentData.artists),
-        Spotify_id: contentData.id,
-      };
-      postResource(
-        "addTrack",
-        data,
-        accessToken,
-        setIsLoading,
-        setPostResponse,
-        postResponse
-      );
-    }
+    if (accessToken) {
+      setIsLoading(true);
+      if (type === "artist") {
+        let data = {
+          Name: contentData.name ? contentData.name : "not available",
+          Poster: postImage(contentData),
+          Popularity: contentData.popularity ? contentData.popularity : "",
+          Followers: postFollowers(contentData),
+          Spotify_id: contentData.id,
+        };
+        postResource(
+          "artist",
+          data,
+          accessToken,
+          setIsLoading,
+          setPostResponse,
+          postResponse
+        );
+      }
+      if (type === "album") {
+        let data = {
+          Name: contentData.name ? contentData.name : "not available",
+          Poster: postImage(contentData),
+          Artists: convertArtistListToString(contentData.artists),
+          Spotify_id: contentData.id,
+        };
+        postResource(
+          "album",
+          data,
+          accessToken,
+          setIsLoading,
+          setPostResponse,
+          postResponse
+        );
+      }
+      if (type === "track") {
+        let data = {
+          Name: contentData.name ? contentData.name : "not available",
+          Poster: postImage(contentData),
+          Artists: convertArtistListToString(contentData.artists),
+          Spotify_id: contentData.id,
+        };
+        postResource(
+          "track",
+          data,
+          accessToken,
+          setIsLoading,
+          setPostResponse,
+          postResponse
+        );
+      }
+    } else navigate("/login");
   };
   useEffect(() => {
     if (postResponse && snackBarRef.current) {

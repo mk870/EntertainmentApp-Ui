@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 
-import useSpotify from "../../../HttpServices/Hooks/useSpotify";
+import useSpotify from "../../../HttpServices/Hooks/music/useSpotify";
 import HttpError from "../../../HttpServices/Error/HttpError";
 import CardGrid from "../../../components/CardGrid/CardGrid";
 import CardGridSkeleton from "../../../components/SkeletonLoaders/CardGrid/CardGridSkeleton";

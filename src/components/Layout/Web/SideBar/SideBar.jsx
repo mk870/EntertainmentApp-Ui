@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -20,11 +20,9 @@ import {
 import CarouselSkeleton from "../../../SkeletonLoaders/Carousel/CarouselSkeleton";
 import ArtistsGrid from "../../../MusicComponents/ArtistsGrid/ArtistsGrid";
 import ArtistListSkeleton from "../../../SkeletonLoaders/ArtistList/ArtistListSkeleton";
-import Snackbar from "../../../Snackbar/Snackbar";
 
 const SideBar = () => {
   const [showMoreGenres, setShowMoreGenres] = useState(false);
-  const [getSpotifyAccessToken, setGetSpotifyAccessToken] = useState(false);
   const [fetchErrors, setFetchErrors] = useState({
     moviesPlayingNowError: null,
     upComingMoviesError: null,
@@ -44,7 +42,6 @@ const SideBar = () => {
   const { pathname } = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const snackBarRef = useRef(null);
   const upComingMovies = useSelector((state) => state.upComingMovies.value);
   const moviesPlayingNow = useSelector((state) => state.moviesPlayingNow.value);
   const tvShowsOnAir = useSelector((state) => state.tvShowsOnAir.value);
@@ -118,15 +115,9 @@ const SideBar = () => {
         setFetchErrors,
         fetchErrors,
         spotifyAccessToken,
-        setGetSpotifyAccessToken
       );
     }
   }, [pathname, spotifyAccessToken]);
-  useEffect(() => {
-    if (getSpotifyAccessToken && snackBarRef.current) {
-      snackBarRef.current.showPopup();
-    }
-  }, [getSpotifyAccessToken, snackBarRef]);
   useEffect(() => {
     if (latestAlbums) {
       setFetchErrors({
@@ -261,16 +252,6 @@ const SideBar = () => {
             <CarouselSkeleton numberOfItemsShown={1} size={"small"} />
           )}
         </>
-      )}
-      {getSpotifyAccessToken && (
-        <Snackbar
-          message={"your spotify session has expired"}
-          type={"getSpotifyAccessToken"}
-          handleClose={() =>
-            setFetchErrors({ ...fetchErrors, latestAlbumsError: null })
-          }
-          ref={snackBarRef}
-        />
       )}
     </styled.SidebarWrapper>
   );

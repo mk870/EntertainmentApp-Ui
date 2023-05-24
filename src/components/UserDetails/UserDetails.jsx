@@ -16,7 +16,6 @@ const UserDetails = ({ isMobileView }) => {
   const { accessToken, setAccessToken } = useContext(AppContext);
   const navigate = useNavigate();
   const handleLogin = () => {
-    setAccessToken("token");
     setOpenDropDown(false);
     navigate("/login");
   };
@@ -24,10 +23,9 @@ const UserDetails = ({ isMobileView }) => {
     setAccessToken(null);
     setOpenDropDown(false);
   };
-  console.log("token",accessToken)
   return (
     <styled.UserCardWrapper isMobileView={isMobileView} isLoggedIn={accessToken?true:false}>
-      {accessToken ? (
+      {accessToken && (
         <>
           <styled.UserCardDetailsWrapper isMobileView={isMobileView}>
             <styled.UserCardAbbrev backgroundColor={userTheme}>
@@ -62,9 +60,9 @@ const UserDetails = ({ isMobileView }) => {
             )}
           </styled.UserIconWrapper>
         </>
-      ) : (
+      )}
+      {!accessToken &&  (
         <styled.LogInOrOutWrapper onClick={handleLogin}>
-          {/* {!isMobileView && <BiLogIn size={22} />} */}
           <styled.LogInOrOutText>Login</styled.LogInOrOutText>
         </styled.LogInOrOutWrapper>
       )}

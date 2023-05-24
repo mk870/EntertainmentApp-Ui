@@ -8,17 +8,16 @@ const useTMDB = ({ url }) => {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
-    console.log("url", url);
+    setData(null)
+    setError(null)
     axios
       .get(`https://api.themoviedb.org/3/${url}?api_key=${tmdbKey}&language=en-US`)
       .then((data) => {
         setData(data.data);
-        console.log(data.data);
         setIsLoading(false);
       })
       .catch((e) => {
-        console.log(e.message);
-        setError("something went wrong, please check your network connection");
+        setError(e.message);
         setIsLoading(false);
       });
   }, [url]);

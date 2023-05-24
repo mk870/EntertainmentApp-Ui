@@ -1,3 +1,6 @@
+import { backendUrl } from "Utils/utils";
+import axios from "axios";
+
 export const postResource = (
   url,
   data,
@@ -6,15 +9,37 @@ export const postResource = (
   setPostResponse,
   postResponse
 ) => {
-  console.log("posted", data, accessToken,url);
-  setTimeout(() => {
-    setIsLoading(false);
-    setPostResponse({
-      ...postResponse,
-      message: "data successufully created",
-      type: "success",
+  axios
+    .post(backendUrl + url, data, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+    .then((res) => {
+      setIsLoading(false)
+      setPostResponse({
+        ...postResponse,
+        message: res.data,
+        type: "success",
+      });
+    })
+    .catch((e) => {
+      if (e.response?.data?.error !== "") {
+        setPostResponse({
+          ...postResponse,
+          message: e.response?.data?.error,
+          type: "failed",
+        });
+      }
+      if (JSON.stringify(e).message === "Network Error") {
+        setPostResponse({
+          ...postResponse,
+          message: "your internet connection is poor",
+          type: "failed",
+        });
+      }
+      setIsLoading(false);
     });
-  }, 1000);
 };
 
 export const loginRequest = (
@@ -25,31 +50,69 @@ export const loginRequest = (
   postResponse
 ) => {
   console.log("posted", data);
-  setTimeout(() => {
-    setIsLoading(false);
-    setAccessToken("123")
-    setPostResponse({
-      ...postResponse,
-      message: "data successufully created",
-      type: "success",
+  axios
+    .post(backendUrl + "login", data)
+    .then((res) => {
+      console.log(res.data);
+      setAccessToken(res.data.accessToken);
+      setIsLoading(false);
+      setPostResponse({
+        ...postResponse,
+        message: "login successful",
+        type: "success",
+      });
+    })
+    .catch((e) => {
+      if (e.response?.data?.error !== "") {
+        setPostResponse({
+          ...postResponse,
+          message: e.response?.data?.error,
+          type: "failed",
+        });
+      }
+      if (JSON.stringify(e).message === "Network Error") {
+        setPostResponse({
+          ...postResponse,
+          message: "your internet connection is poor",
+          type: "failed",
+        });
+      }
+      setIsLoading(false);
     });
-  }, 1000);
 };
 export const signupRequest = (
   data,
   setIsLoading,
   setPostResponse,
-  setAccessToken,
   postResponse
 ) => {
   console.log("posted", data);
-  setTimeout(() => {
-    setIsLoading(false);
-    setAccessToken("123")
-    setPostResponse({
-      ...postResponse,
-      message: "data successufully created",
-      type: "success",
+  axios
+    .post(backendUrl + "user", data)
+    .then((res) => {
+      console.log(res.data);
+      setIsLoading(false);
+      setPostResponse({
+        ...postResponse,
+        message: res.data,
+        type: "success",
+      });
+    })
+    .catch((e) => {
+      if (e.response?.data?.error !== "") {
+        setPostResponse({
+          ...postResponse,
+          message: e.response?.data?.error,
+          type: "failed",
+        });
+      }
+      if (JSON.stringify(e).message === "Network Error") {
+        setPostResponse({
+          ...postResponse,
+          message: "your internet connection is poor",
+          type: "failed",
+        });
+      }
+      setIsLoading(false);
     });
-  }, 1000);
 };

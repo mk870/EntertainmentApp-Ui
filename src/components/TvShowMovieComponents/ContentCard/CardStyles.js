@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import {
+  mainThemeColor,
   redColor,
   secondaryThemeColor,
-  transparentMainThemeColor,
 } from "../../../Css/Variables";
 
 export const CardWrapper = styled.div`
@@ -30,7 +30,7 @@ export const overlay = styled.div`
   bottom: 0;
   background-color: rgba(26, 24, 29, 0.4);
   background-color: ${(props) =>
-    props.size === "large" ? "rgba(26, 24, 29, 0.6)" : "rgba(26, 24, 29, 0.5)"};
+    props.size === "large" ? "rgba(26, 24, 29, 0.4)" : "rgba(26, 24, 29, 0.4)"};
   background-blend-mode: overlay;
   z-index: 2;
   border-radius: 10px;
@@ -71,7 +71,6 @@ export const contentDetails = styled.div`
   position: absolute;
   bottom: 5px;
   left: 9px;
-  z-index: 4;
 `;
 export const name = styled.p`
   color: aliceblue;
@@ -79,6 +78,7 @@ export const name = styled.p`
   font-weight: 800;
   margin-top: 0;
   margin-bottom: 5px;
+  z-index: 4;
 `;
 export const date = styled.p`
   color: aliceblue;
@@ -86,6 +86,7 @@ export const date = styled.p`
   font-weight: 200;
   margin-top: 0;
   margin-bottom: 5px;
+  z-index: 4;
 `;
 export const linksContainer = styled.div`
   display: flex;
@@ -98,7 +99,7 @@ export const linksContainer = styled.div`
   bottom: 5px;
   left: 0;
   right: 0;
-  z-index: 3;
+  z-index: 4;
 `;
 export const viewLink = styled.div`
   display: flex;
@@ -107,11 +108,12 @@ export const viewLink = styled.div`
   flex-direction: column;
   color: aliceblue;
   border-radius: ${(props) => (props.size === "large" ? "5px" : "3px")};
-  background: ${transparentMainThemeColor};
+  background: ${mainThemeColor};
   width: ${(props) => (props.size === "large" ? "60px" : "45px")};
   height: ${(props) => (props.size === "large" ? "25px" : "20px")};
   font-size: ${(props) => (props.size === "large" ? "13px" : "11px")};
   margin-right: ${(props) => (props.size === "large" ? "5px" : "0")};
+  z-index: 8;
   &:hover {
     cursor: pointer;
   }
@@ -127,6 +129,7 @@ export const addLink = styled.div`
   height: ${(props) => (props.size === "large" ? "30px" : "25px")};
   width: ${(props) => (props.size === "large" ? "30px" : "25px")};
   margin-right: ${(props) => (props.size === "large" ? "5px" : "0")};
+  z-index: 8;
   &:hover {
     cursor: pointer;
   }
@@ -143,6 +146,7 @@ export const deleteLink = styled.div`
   height: ${(props) => (props.size === "large" ? "25px" : "20px")};
   font-size: ${(props) => (props.size === "large" ? "13px" : "11px")};
   margin-right: ${(props) => (props.size === "large" ? "5px" : "0")};
+  z-index: 8;
   &:hover {
     cursor: pointer;
   }
@@ -152,6 +156,7 @@ export const largeCardRatingContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   flex-direction: row;
+  z-index: 4;
   .imdb-icon {
     margin-right: 5px;
   }

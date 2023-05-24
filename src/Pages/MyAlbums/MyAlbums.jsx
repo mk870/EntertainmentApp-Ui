@@ -1,12 +1,14 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Page } from '../../Css/PageStyles'
 import CardGridSkeleton from '../../components/SkeletonLoaders/CardGrid/CardGridSkeleton';
 import HttpError from '../../HttpServices/Error/HttpError';
 import CardGrid from '../../components/CardGrid/CardGrid';
-import useBackendQuery from '../../HttpServices/Hooks/useBackendQuery';
+import useQuery from '../../HttpServices/Hooks/useQuery';
+import { AppContext } from 'Context/AppContext';
 
 const MyAlbums = () => {
-  const { data, isLoading, error } = useBackendQuery({ url: "" });
+  const {deletedItemId} = useContext(AppContext)
+  const { data, isLoading, error } = useQuery({ url: "albums",deletedItemId });
   return (
     <Page hasError={error}>
       {isLoading && <CardGridSkeleton />}

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 
-import useSpotify from "../../../HttpServices/Hooks/useSpotify";
+import useSpotify from "../../../HttpServices/Hooks/music/useSpotify";
 import ToggleableListSkeleton from "../../../components/SkeletonLoaders/ToggleableList/ToggleableListSkeleton";
 import HttpError from "../../../HttpServices/Error/HttpError";
 import ToggleableList from "../../../components/ToggleableList/ToggleableList";

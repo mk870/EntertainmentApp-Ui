@@ -1,5 +1,6 @@
 import styled, { keyframes, css } from "styled-components";
-import { backgroundColor, mainThemeColor, redColor } from "../../Css/Variables";
+import { mainThemeColor, redColor } from "../../Css/Variables";
+import { secondaryThemeColor } from "../../Css/Variables";
 
 const slideIn = keyframes`
   0% { left:-100%;}
@@ -11,7 +12,7 @@ const slideOut = keyframes`
   100% { left:-100%;}
 `;
 const slideInOutAnimation = css`
-  animation: ${slideIn} 0.5s, ${slideOut} 0.5s 3.1s;
+  animation: ${slideIn} 0.5s, ${slideOut} 0.5s 5.1s;
 `;
 const slideInAnimation = css`
   animation: ${slideIn} 0.5s;
@@ -31,11 +32,12 @@ export const Container = styled.div`
   border-radius: 5px;
   top: 15%;
   padding: 7px;
-  border: ${(props) =>
+  background: ${(props) =>
     props.type === "failed"
-      ? `1px solid ${redColor}`
-      : `1px solid ${mainThemeColor}`};
-  background: ${backgroundColor};
+      ? redColor
+      : props.type === "success"?
+      "green"
+      : secondaryThemeColor};
   .snackbar-icon {
     margin-left: 10px;
   }
@@ -44,27 +46,22 @@ export const Container = styled.div`
       margin-left: 5px;
     }
   }
+  @media (max-width: 360px) {
+    max-width: 250px;
+  }
 `;
 export const messageContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: start;
   width: 100%;
-  .failed {
-    color: ${redColor};
-  }
-  .success {
-    color: ${mainThemeColor};
+  .snackbar-icon {
+    color: aliceblue;
   }
 `;
 export const text = styled.p`
   font-size: 13px;
-  color: ${({ type }) =>
-    type === "failed"
-      ? redColor
-      : type === "success"
-      ? mainThemeColor
-      : "aliceblue"};
+  color: aliceblue;
   margin: 0 0 0 7px;
   @media (max-width: 500px) {
     font-size: 13px;

@@ -12,6 +12,7 @@ const useSpotify = ({ url }) => {
     (state) => state.spotifyAccessToken.value
   );
   useEffect(() => {
+    setData(null)
     setError(null)
     axios
       .get(`https://api.spotify.com/v1/${url}`, {
@@ -21,11 +22,9 @@ const useSpotify = ({ url }) => {
       })
       .then((data) => {
         setData(data.data);
-        console.log(data.data);
         setIsLoading(false);
       })
       .catch((e) => {
-        console.log(e.message);
         setError(
           e.message === "Request failed with status code 401"
             ? "your spotify session has expired"
