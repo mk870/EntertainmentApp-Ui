@@ -19,5 +19,6 @@ export const ButtonField = styled.button`
   font-weight: 700;
   &:hover {
     background-color: #029999;
+    cursor: pointer;
   }
 `;
