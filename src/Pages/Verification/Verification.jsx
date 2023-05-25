@@ -1,20 +1,33 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { FaRegCheckCircle } from "react-icons/fa";
 import { useParams } from "react-router-dom";
+import axios from "axios";
 
 import * as styled from "./VerificationStyles";
 import HttpError from "../../HttpServices/Error/HttpError";
-import useQuery from "HttpServices/Hooks/useQuery";
 import { AppContext } from "Context/AppContext";
+import { backendUrl } from "Utils/utils";
 
 const Verification = () => {
   const { token } = useParams();
   const { setAccessToken } = useContext(AppContext);
-  const { data, isLoading, error } = useQuery({ url: `verification/${token}` });
+  const [data, setData] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
   useEffect(() => {
-    if (data) setAccessToken(data.accessToken);
-  }, [data]);
+    axios
+      .get(backendUrl + `verification/${token}`)
+      .then((data) => {
+        setIsLoading(false);
+        setData(data.data);
+        setAccessToken(data.data.accessToken);
+      })
+      .catch((e) => {
+        setIsLoading(false);
+        setError(e.message);
+      });
+  }, []);
   return (
     <styled.container>
       {isLoading && <styled.loader></styled.loader>}
