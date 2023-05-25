@@ -38,7 +38,7 @@ const useFetchTopList = () => {
           setError(e.message);
           setIsLoading(false);
         });
-    }
+    }else setIsLoading(false)
   }, [dispatch, spotifyAccessToken, topListPlaylists]);
   return { error, isLoading };
 };

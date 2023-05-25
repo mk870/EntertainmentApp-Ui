@@ -38,7 +38,7 @@ const useFetchHipHop = () => {
           setError(e.message);
           setIsLoading(false);
         });
-    }
+    }else setIsLoading(false)
   }, [dispatch, hipHopPlaylists, spotifyAccessToken]);
   return { error, isLoading };
 };

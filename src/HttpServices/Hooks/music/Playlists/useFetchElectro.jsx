@@ -38,7 +38,7 @@ const useFetchElectro = () => {
           setError(e.message);
           setIsLoading(false);
         });
-    }
+    }else setIsLoading(false)
   }, [dispatch, electroPlaylists, spotifyAccessToken]);
   return { error, isLoading };
 };

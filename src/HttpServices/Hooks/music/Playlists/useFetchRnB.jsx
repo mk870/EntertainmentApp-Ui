@@ -38,7 +38,7 @@ const useFetchRnB = () => {
           setError(e.message);
           setIsLoading(false);
         });
-    }
+    }else setIsLoading(false)
   }, [dispatch, rnbPlaylists, spotifyAccessToken]);
   return { error, isLoading };
 };
