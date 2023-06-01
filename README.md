@@ -1,70 +1,65 @@
-# Getting Started with Create React App
+# TubeMax (React Frontend) <img src="https://i.ibb.co/cv4GRqX/logo.png"  alt="logo5" border="0" align="center" width="100" border-radius="15">
+<img src="https://i.ibb.co/XCg7GTR/home.png" alt="moviehome" border="0">
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Project Summary 
+* This app allows you to search and access your favourite movies, tv shows, music, artists, albums and actors.
+* The app also allows you to add and delete your favourite movies, tvshows, songs, albums, artists and actors in your own account via its [***Golang Gin server***](https://github.com/mk870/EntertainmentApp-Server). 
+* Another feature is that it allows you to watch movie trailers and reviews and also song videos through the youtube api.
+### Project Steps :
+* The app has 15 pages created using react-router (homepage, myMovies, myActors, myAlbums,myArtists, videos, , login, actor, movie, artists, artist,verification, music,tvshows and signup page)
+* This app consumes 1 custom made api, a golang gin app with a postgreSQL database.
+* Finally, styled-components was used to style the entire application.
 
-## Available Scripts
+### **Resources Used**
+***
+**React Version :** 17.0.2  
 
-In the project directory, you can run:
+**Language Used :** Javascript
 
-### `npm start`
+**Dependencies**:  React-router, React-icons, styled-components, react-context, redux, react-loader-spinner and axios.  
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=flat&logo=javascript&logoColor=%23F7DF1E) ![React](https://img.shields.io/badge/react-%2320232a.svg?style=flat&logo=react&logoColor=%2361DAFB)	![React Router](https://img.shields.io/badge/React_Router-CA4245?style=flat&logo=react-router&logoColor=white) ![Styled Components](https://img.shields.io/badge/styled--components-DB7093?style=flat&logo=styled-components&logoColor=white) ![JWT](https://img.shields.io/badge/JWT-black?style=flat&logo=JSON%20web%20tokens) ![Redux](https://img.shields.io/badge/redux-%23593d88.svg?style=flat&logo=redux&logoColor=white) ![Spotify](https://img.shields.io/badge/Spotify-1ED760?style=flat&logo=spotify&logoColor=white)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+**For Web Framework Requirements**: npm install
 
-### `npm test`
+**APIs**: tmdb, youtube ,context Api, spotify and [***Golang Gin server***](https://github.com/mk870/EntertainmentApp-Server)  
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<img src="https://i.ibb.co/jDtWp87/info.png" alt="Movie-Plus-1" border="0">
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### **Movie and TvShow Info**  
+* The app displays  more movie and tvshow information, these include the cast and the reviews thanks to the TMDB api.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+<img src="https://i.ibb.co/1qXLgtL/track.png" alt="cast" border="0">
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### **Album and Song Info**  
+* The app displays  more movie and tvshow information, these include the cast and the reviews thanks to the TMDB api.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+<img src="https://i.ibb.co/vjsNY8x/actor.png" alt="cast" border="0">
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### **Actor and Artist Info**  
+* Actors's bio, age, featured movie-list etc are also diplayed by the app on the clicked actor's page.
+* Used react-router (dynamic routing) feature to achieve this.  
 
-## Learn More
+<img src="https://i.ibb.co/ydpk2kg/videos.png" alt="Movie-Plus-3" border="0">
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### **Movie trailer, tvshow episode snippets, music videos and videos reviews**  
+* This is rendered in the videos page, the youtube api is consumed to return the appropriate video data and an html iframe displays the video to the client.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### **MyMovies, MyTvShows and MyActors**  
+* The client's movies, tvshows and actors are created, deleted and saved via a restful [***Golang Gin server***](https://github.com/mk870/EntertainmentApp-Server) to a postgreSQL database.
+* The client can access, delete his/her movies, tvshows and actors on  his/her account.
 
-### Code Splitting
+### **MySongs, MyAlbums and MyArtists**  
+* The client's songs, albums and artists are created, deleted and saved via a restful [***Golang Gin server***](https://github.com/mk870/EntertainmentApp-Server) to a postgreSQL database.
+* The client can access, delete his/her songs, albums and artists on  his/her account.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### **Productionization**
+Deployed the app to Vercel.
 
-### Analyzing the Bundle Size
+**Live Implemantation:** [TubeMax](https://tube-max.vercel.app/)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
