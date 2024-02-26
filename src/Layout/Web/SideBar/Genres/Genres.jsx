@@ -4,10 +4,10 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 
-import { toggleMovieGenre } from "../../../../../Redux/Slices/Genres/MovieGenresSlice";
-import { toggleTvShowGenre } from "../../../../../Redux/Slices/Genres/TvShowGenresSlice";
+import { toggleMovieGenre } from "Redux/Slices/Genres/MovieGenresSlice";
+import { toggleTvShowGenre } from "Redux/Slices/Genres/TvShowGenresSlice";
 import * as styled from "./GenresStyles";
-import { toggleMusicGenres } from "../../../../../Redux/Slices/Genres/MusicGenres";
+import { toggleMusicGenres } from "Redux/Slices/Genres/MusicGenres";
 
 const Genres = ({ showMoreGenres, setShowMoreGenres }) => {
   const { pathname } = useLocation();

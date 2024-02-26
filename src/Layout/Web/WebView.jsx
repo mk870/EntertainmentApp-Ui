@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-import { mainThemeColor, secondaryThemeColor } from "../../../Css/Variables";
-import UserDetails from "../../UserDetails/UserDetails";
 import SideBar from "./SideBar/SideBar";
 import SideMenu from "./SideMenu/SideMenu";
 import * as styled from "./WebViewStyles";
+import UserDetails from "components/UserDetails/UserDetails";
+import { mainThemeColor, secondaryThemeColor } from "Css/Variables";
 
 const WebView = ({ children }) => {
   const [showUserDetails, setShowUserDetails] = useState(false);

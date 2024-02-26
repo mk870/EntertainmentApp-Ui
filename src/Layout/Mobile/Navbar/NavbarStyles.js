@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { mainThemeColor } from "../../../../Css/Variables";
+import { mainThemeColor } from "Css/Variables";
 
 export const NavbarInputWrapper = styled.div`
   width:70%;

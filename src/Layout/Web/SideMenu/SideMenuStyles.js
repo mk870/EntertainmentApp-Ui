@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { backgroundColor } from "../../../../Css/Variables";
+import { backgroundColor } from "Css/Variables";
 
 export const SideMenuWrapper = styled.div`
   display: flex;

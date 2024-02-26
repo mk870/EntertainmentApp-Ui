@@ -1,11 +1,15 @@
 import React, { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-
-import InputField from "../../../../InputField/InputField";
-import * as styled from "./SearchBarStyles";
 import { useSelector } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
+import { FiMenu } from "react-icons/fi";
 
-const SearchBar = () => {
+import InputField from "components/InputField/InputField";
+import Drawer from "../MenuDrawer/Drawer";
+import * as styles from "./NavbarStyles";
+import UserDetails from "components/UserDetails/UserDetails";
+import { secondaryThemeColor } from "Css/Variables";
+
+const Navbar = ({ isMobileView, openMobileMenu, setOpenMobileMenu }) => {
   const [searchInputValue, setSearchInputValue] = useState("");
   const tvShowGenres = useSelector((state) => state.tvShowGenres.value);
   const moviesGenres = useSelector((state) => state.movieGenres.value);
@@ -45,7 +49,7 @@ const SearchBar = () => {
       navigate(`movies/search`, {
         state: {
           queryString: searchInputValue,
-          contentType: "search",
+          contentType: "movie",
           genreList,
         },
       });
@@ -71,20 +75,37 @@ const SearchBar = () => {
       return "search any video";
     else return "search movies";
   };
-  const onChangeFunc = (value) => setSearchInputValue(value);
   return (
-    <styled.SearchBarWrapper>
-      <InputField
-        label={inputLabel()}
-        inputValue={searchInputValue}
-        onChangeFunc={(value) => onChangeFunc(value)}
-        isSearch={true}
-        handleOnKeyEnter={onNavigate}
-        backgroundColor={"black"}
-        hasFloatingLabel={false}
-      />
-    </styled.SearchBarWrapper>
+    <styles.NavbarDetails>
+      <styles.NavbarLogoWrapper>
+        <FiMenu
+          fontSize={29}
+          color={secondaryThemeColor}
+          onClick={() => setOpenMobileMenu(!openMobileMenu)}
+        />
+      </styles.NavbarLogoWrapper>
+      <styles.NavbarInputWrapper>
+        <InputField
+          label={inputLabel()}
+          inputValue={searchInputValue}
+          isSearch={true}
+          onChangeFunc={(value) => setSearchInputValue(value)}
+          handleOnKeyEnter={onNavigate}
+          backgroundColor="black"
+          hasFloatingLabel={true}
+        />
+      </styles.NavbarInputWrapper>
+      <styles.NavbarUserDetails>
+        <UserDetails isMobileView={isMobileView} />
+      </styles.NavbarUserDetails>
+      {openMobileMenu && (
+        <Drawer
+          openMobileMenu={openMobileMenu}
+          setOpenMobileMenu={setOpenMobileMenu}
+        />
+      )}
+    </styles.NavbarDetails>
   );
 };
 
-export default SearchBar;
+export default Navbar;

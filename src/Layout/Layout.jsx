@@ -1,11 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import MobileView from "./Mobile/MobileView";
 import WebView from "./Web/WebView";
 import * as styled from "./LayoutStyles";
-import { useDispatch, useSelector } from "react-redux";
-import { setScreenSize } from "../../Redux/Slices/ScreenSizeSlice";
+import { setScreenSize } from "Redux/Slices/ScreenSizeSlice";
 
 const Layout = ({ children }) => {
   const [mobileMenu, setMobileMenu] = useState(false);

@@ -3,9 +3,8 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 
-import HttpError from "../../../../HttpServices/Error/HttpError";
-import Carousel from "../../../Carousel/Carousel";
-import UserDetails from "../../../UserDetails/UserDetails";
+import HttpError from "HttpServices/Error/HttpError";
+import Carousel from "components/Carousel/Carousel";
 import Genres from "./Genres/Genres";
 import SearchBar from "./SearchBar/SearchBar";
 import * as styled from "./SideBarStyles";
@@ -17,9 +16,11 @@ import {
   fetchTvShowsOnAir,
   fetchUpComingMovies,
 } from "./Utils/dataFetching";
-import CarouselSkeleton from "../../../SkeletonLoaders/Carousel/CarouselSkeleton";
-import ArtistsGrid from "../../../MusicComponents/ArtistsGrid/ArtistsGrid";
-import ArtistListSkeleton from "../../../SkeletonLoaders/ArtistList/ArtistListSkeleton";
+import UserDetails from "components/UserDetails/UserDetails";
+import CarouselSkeleton from "components/SkeletonLoaders/Carousel/CarouselSkeleton";
+import ArtistListSkeleton from "components/SkeletonLoaders/ArtistList/ArtistListSkeleton";
+import ArtistsGrid from "components/MusicComponents/ArtistsGrid/ArtistsGrid";
+
 
 const SideBar = () => {
   const [showMoreGenres, setShowMoreGenres] = useState(false);

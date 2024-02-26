@@ -6,6 +6,7 @@ export const secondaryThemeColor = '#575958'
 export const inputColor = '#b6bab7'
 export const backgroundColor = '#0d0c0f'
 export const redColor = '#FF2700'
+export const menuHoverColor = "#1B1B1C"
 
 export const skeletonAnimation = keyframes`
   0% { background-color:${backgroundColor};}

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { backgroundColor, secondaryThemeColor } from "../../../Css/Variables";
+import { backgroundColor, secondaryThemeColor } from "Css/Variables";
 
 export const WebViewWrapper = styled.div`
   display: flex;

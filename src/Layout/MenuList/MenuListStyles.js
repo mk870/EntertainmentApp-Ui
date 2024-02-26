@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import {
-  backgroundColor,
   mainThemeColor,
+  menuHoverColor,
   secondaryThemeColor,
-} from "../../../Css/Variables";
+} from "Css/Variables";
 
 export const MenuContainer = styled.div`
   display: flex;
@@ -11,10 +11,13 @@ export const MenuContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   width: 100%;
+  height:100%;
+  border:1px solid red;
   padding-top: 20px;
   padding-left: 20%;
   padding-bottom: 2px;
   color: ${secondaryThemeColor};
+  //overflow-y:auto;
   @media(max-width: 920px){
     padding-top: 5px;
   }
@@ -25,6 +28,7 @@ export const MenuLogo = styled.div`
   align-items: flex-start;
   flex-direction: column;
   justify-content: center;
+  margin-bottom: 25px;
   img {
     width: 120px;
     height: 90px;
@@ -48,12 +52,16 @@ export const menuItem = styled.div`
   align-items: center;
   flex-direction: row;
   justify-content: space-between;
-  width: 90%;
-  height:16px;
-  margin-bottom: 20px;
+  width: 80%;
+  height:35px;
+  border-radius: 4px;
   font-size: 15px;
+  box-sizing:border-box;
+  padding:3px 0px 3px 3px;
+  margin-bottom:5px;
   &:hover {
     cursor: pointer;
+    background-color:${menuHoverColor};
   }
   @media(max-width: 920px){
     height:17px;
@@ -66,6 +74,7 @@ export const menuItemText = styled.div`
   align-items: center;
   flex-direction: row;
   justify-content: space-between;
+  font-size: 15px;
   .menu-icon {
     color: ${(props) => (props.clicked ? mainThemeColor : secondaryThemeColor)};
     font-size: 22px;
@@ -86,13 +95,16 @@ export const menuItemHighlight = styled.div`
   height: 20px;
   border-top-left-radius:3px;
   border-bottom-left-radius:3px;
-  background-color: ${(props) =>
-    props.clicked ? mainThemeColor : backgroundColor};
+  background-color: ${mainThemeColor};
+  &:hover{
+    background-color: ${menuHoverColor};
+  }
   @media(max-width: 920px){
     height:17px;
   }
 `;
-export const header = styled.p`
+export const header = styled.span`
+  margin: 10px 0px;
   font-size: 18px;
   @media(max-width: 920px){
     font-size:15px;
@@ -108,20 +120,41 @@ export const logoutWrapper = styled.div`
   align-items: center;
   flex-direction: row;
   justify-content: space-between;
-  width: 90%;
-  height:20px;
+  border-radius: 4px;
   font-size: 15px;
-  margin-bottom:10px;
+  box-sizing:border-box;
+  padding:3px 0px 3px 3px;
+  width: 80%;
+  height:35px;
+  font-size: 15px;
   p {
     margin-left: 10px;
   }
   margin-top: 15px;
   &:hover {
     cursor: pointer;
+    background-color:${menuHoverColor};
   }
   @media(max-width: 920px){
     height:17px;
     margin-top: 20px;
-    margin-bottom:10px;
   }
 `;
+
+export const MenuGroup = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 85%;
+  height:35px;
+  border-radius:4px;
+  margin-bottom: 5px;
+  font-size: 15px;
+  box-sizing:border-box;
+  padding:3px 0px 3px 3px;
+  &:hover {
+    cursor: pointer;
+    background-color:${menuHoverColor};
+  }
+`

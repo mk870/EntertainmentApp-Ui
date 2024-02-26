@@ -1,18 +1,18 @@
 import axios from "axios";
 
-import { addMoviesPlayingNow } from "../../../../../Redux/Slices/Content/Movies/NowPlayingSlice";
-import { addUpComingMovies } from "../../../../../Redux/Slices/Content/Movies/UpComingSlice";
-import { addTvShowsAiringToday } from "../../../../../Redux/Slices/Content/TvShows/airingTodaySlice";
-import { addTvShowsOnAir } from "../../../../../Redux/Slices/Content/TvShows/onAirSlice";
 import {
   moviesPlayingNowURL,
   tvShowsAiringTodayURL,
   tvShowsOnAirURL,
   upComingMoviesURL,
 } from "./urls";
-import { addTopArtists } from "../../../../../Redux/Slices/Content/Music/Artists/TopArtistsSlice";
-import { top25ArtistsIdsString } from "../../../../../Pages/Music/Artists/Utils/Utilis";
-import { addLatestAlbums } from "../../../../../Redux/Slices/Content/Music/LatestAlbums/LatestAlbumsSlice";
+import { addUpComingMovies } from "Redux/Slices/Content/Movies/UpComingSlice";
+import { addTvShowsOnAir } from "Redux/Slices/Content/TvShows/onAirSlice";
+import { addTvShowsAiringToday } from "Redux/Slices/Content/TvShows/airingTodaySlice";
+import { addMoviesPlayingNow } from "Redux/Slices/Content/Movies/NowPlayingSlice";
+import { addTopArtists } from "Redux/Slices/Content/Music/Artists/TopArtistsSlice";
+import { addLatestAlbums } from "Redux/Slices/Content/Music/LatestAlbums/LatestAlbumsSlice";
+import { top25ArtistsIdsString } from "Pages/Music/Artists/Utils/Utilis";
 
 export const fetchUpComingMovies = (
   upComingMovies,

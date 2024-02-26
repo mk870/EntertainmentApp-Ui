@@ -1,4 +1,5 @@
-import { tmdbKey } from "../../../../../Utils/utils";
+import { tmdbKey } from "Utils/utils";
+
 
 export const tvShowsAiringTodayURL = `https://api.themoviedb.org/3/tv/airing_today?api_key=${tmdbKey}&language=en-US`;
 export const tvShowsOnAirURL = `https://api.themoviedb.org/3/tv/on_the_air?api_key=${tmdbKey}&language=en-US`;

@@ -1,8 +1,5 @@
+import { mainThemeColor, secondaryThemeColor } from "Css/Variables";
 import styled from "styled-components";
-import {
-  mainThemeColor,
-  secondaryThemeColor,
-} from "../../../../../Css/Variables";
 
 export const GenresWrapper = styled.div`
   display: flex;

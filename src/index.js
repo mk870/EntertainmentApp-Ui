@@ -13,3 +13,5 @@ ReactDOM.render(
   </React.StrictMode>,document.getElementById('root')
 );
 
+// "start": "react-scripts --openssl-legacy-provider start",
+//     "build": "react-scripts --openssl-legacy-provider build",
