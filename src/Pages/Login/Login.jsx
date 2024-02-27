@@ -15,6 +15,7 @@ import Snackbar from "../../components/Snackbar/Snackbar";
 import Spinner from "../../components/Spinner/Spinner";
 import { loginRequest } from "../../HttpServices/Post/postData";
 import { AppContext } from "../../Context/AppContext";
+import PageHOC from "components/HOCs/Page/PageHOC";
 
 const Login = () => {
   const [postResponse, setPostResponse] = useState({
@@ -155,4 +156,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default PageHOC(Login);

@@ -3,11 +3,12 @@ import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 
 import { top25ArtistsIdsString } from "./Utils/Utilis";
-import ArtistListSkeleton from "../../../components/SkeletonLoaders/ArtistList/ArtistListSkeleton";
-import HttpError from "../../../HttpServices/Error/HttpError";
-import ArtistsGrid from "../../../components/MusicComponents/ArtistsGrid/ArtistsGrid";
-import Snackbar from "../../../components/Snackbar/Snackbar";
-import { Page } from "../../../Css/PageStyles";
+import ArtistListSkeleton from "components/SkeletonLoaders/ArtistList/ArtistListSkeleton";
+import HttpError from "HttpServices/Error/HttpError";
+import ArtistsGrid from "components/MusicComponents/ArtistsGrid/ArtistsGrid";
+import Snackbar from "components/Snackbar/Snackbar";
+import { Page } from "Css/PageStyles";
+import PageHOC from "components/HOCs/Page/PageHOC";
 
 const Artists = () => {
   const [topArtistsList, setTopArtistsList] = useState(null);
@@ -73,4 +74,4 @@ const Artists = () => {
   );
 };
 
-export default Artists;
+export default PageHOC(Artists);

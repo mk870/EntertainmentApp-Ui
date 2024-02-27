@@ -4,7 +4,7 @@ import jwt_decode from "jwt-decode";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
-import Layout from "./components/Layout/Layout";
+import Layout from "./Layout/Layout";
 import { AppContext } from "./Context/AppContext";
 import { Globalstyles } from "./GlobalStyles/GlobalStyles";
 import RoutesList from "./Routes/RoutesList";

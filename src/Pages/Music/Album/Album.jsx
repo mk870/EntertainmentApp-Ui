@@ -3,16 +3,17 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useSelector } from "react-redux";
 
-import useSpotify from "../../../HttpServices/Hooks/music/useSpotify";
-import HttpError from "../../../HttpServices/Error/HttpError";
-import MusicContentSummary from "../../../components/MusicComponents/MusicContentSummary/MusicContentSummary";
-import ContentSummarySkeleton from "../../../components/SkeletonLoaders/ContentSummary/ContentSummarySkeleton";
-import ToggleableListSkeleton from "../../../components/SkeletonLoaders/ToggleableList/ToggleableListSkeleton";
-import ToggleableList from "../../../components/ToggleableList/ToggleableList";
-import ArtistsGrid from "../../../components/MusicComponents/ArtistsGrid/ArtistsGrid";
-import ArtistListSkeleton from "../../../components/SkeletonLoaders/ArtistList/ArtistListSkeleton";
-import Snackbar from "../../../components/Snackbar/Snackbar";
-import { Page } from "../../../Css/PageStyles";
+import useSpotify from "HttpServices/Hooks/music/useSpotify";
+import HttpError from "HttpServices/Error/HttpError";
+import MusicContentSummary from "components/MusicComponents/MusicContentSummary/MusicContentSummary";
+import ContentSummarySkeleton from "components/SkeletonLoaders/ContentSummary/ContentSummarySkeleton";
+import ToggleableListSkeleton from "components/SkeletonLoaders/ToggleableList/ToggleableListSkeleton";
+import ToggleableList from "components/ToggleableList/ToggleableList";
+import ArtistsGrid from "components/MusicComponents/ArtistsGrid/ArtistsGrid";
+import ArtistListSkeleton from "components/SkeletonLoaders/ArtistList/ArtistListSkeleton";
+import Snackbar from "components/Snackbar/Snackbar";
+import { Page } from "Css/PageStyles";
+import PageHOC from "components/HOCs/Page/PageHOC";
 
 const Album = () => {
   const [albumTracksError, setAlbumTracksError] = useState(null);
@@ -175,4 +176,4 @@ const Album = () => {
   );
 };
 
-export default Album;
+export default PageHOC(Album);

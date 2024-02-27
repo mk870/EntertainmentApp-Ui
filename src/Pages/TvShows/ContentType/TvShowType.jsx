@@ -3,8 +3,8 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useParams } from "react-router-dom";
 
-import CardGrid from "../../../components/CardGrid/CardGrid";
-import HttpError from "../../../HttpServices/Error/HttpError";
+import CardGrid from "components/CardGrid/CardGrid";
+import HttpError from "HttpServices/Error/HttpError";
 import * as styled from "./TvShowTypeStyles";
 import {
   fetchAiringTodayTvShows,
@@ -13,7 +13,8 @@ import {
   fetchSearchedTvShow,
   fetchTopRatedTvShows,
 } from "./utils/utils";
-import CardGridSkeleton from "../../../components/SkeletonLoaders/CardGrid/CardGridSkeleton";
+import CardGridSkeleton from "components/SkeletonLoaders/CardGrid/CardGridSkeleton";
+import PageHOC from "components/HOCs/Page/PageHOC";
 
 const TvShowType = () => {
   const [searchResults, setSearchResults] = useState(null);
@@ -103,4 +104,4 @@ const TvShowType = () => {
   );
 };
 
-export default TvShowType;
+export default PageHOC(TvShowType);

@@ -12,14 +12,13 @@ import { useDispatch } from "react-redux";
 import * as styled from "./SnackbarStyles";
 import { addSpotifyAccessToken } from "../../Redux/Slices/Content/Music/Token/SpotifyAccessToken";
 import Spinner from "../Spinner/Spinner";
+import { client_id, client_secret } from "Utils/utils";
 
 const Snackbar = forwardRef((props, ref) => {
   const [showSnackBar, setShowSnackBar] = useState(false);
   const [spotifyAccessTokenError, setSpotifyAccessTokenError] = useState(null);
   const [isloading, setIsloading] = useState(false);
   const [accessTokenSuccess, setAccessTokenSuccess] = useState(null);
-  const client_id = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
-  const client_secret = process.env.REACT_APP_SPOTIFY_CLIENT_SECRET;
   const dispatch = useDispatch();
   const getSpotifyAccessToken = () => {
     setIsloading(true);

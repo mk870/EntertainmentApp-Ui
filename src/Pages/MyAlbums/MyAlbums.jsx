@@ -1,14 +1,16 @@
-import React, { useContext } from 'react'
-import { Page } from '../../Css/PageStyles'
-import CardGridSkeleton from '../../components/SkeletonLoaders/CardGrid/CardGridSkeleton';
-import HttpError from '../../HttpServices/Error/HttpError';
-import CardGrid from '../../components/CardGrid/CardGrid';
-import useQuery from '../../HttpServices/Hooks/useQuery';
-import { AppContext } from 'Context/AppContext';
+import React, { useContext } from "react";
+
+import { Page } from "Css/PageStyles";
+import CardGridSkeleton from "components/SkeletonLoaders/CardGrid/CardGridSkeleton";
+import HttpError from "HttpServices/Error/HttpError";
+import CardGrid from "components/CardGrid/CardGrid";
+import useQuery from "HttpServices/Hooks/useQuery";
+import { AppContext } from "Context/AppContext";
+import PageHOC from "components/HOCs/Page/PageHOC";
 
 const MyAlbums = () => {
-  const {deletedItemId} = useContext(AppContext)
-  const { data, isLoading, error } = useQuery({ url: "albums",deletedItemId });
+  const { deletedItemId } = useContext(AppContext);
+  const { data, isLoading, error } = useQuery({ url: "albums", deletedItemId });
   return (
     <Page hasError={error}>
       {isLoading && <CardGridSkeleton />}
@@ -22,7 +24,7 @@ const MyAlbums = () => {
         />
       )}
     </Page>
-  )
-}
+  );
+};
 
-export default MyAlbums
+export default PageHOC(MyAlbums);

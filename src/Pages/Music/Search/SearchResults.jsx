@@ -1,11 +1,12 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 
-import useSpotify from "../../../HttpServices/Hooks/music/useSpotify";
-import HttpError from "../../../HttpServices/Error/HttpError";
-import CardGrid from "../../../components/CardGrid/CardGrid";
-import CardGridSkeleton from "../../../components/SkeletonLoaders/CardGrid/CardGridSkeleton";
-import { Page } from "../../../Css/PageStyles";
+import useSpotify from "HttpServices/Hooks/music/useSpotify";
+import HttpError from "HttpServices/Error/HttpError";
+import CardGrid from "components/CardGrid/CardGrid";
+import CardGridSkeleton from "components/SkeletonLoaders/CardGrid/CardGridSkeleton";
+import { Page } from "Css/PageStyles";
+import PageHOC from "components/HOCs/Page/PageHOC";
 
 const SearchResults = () => {
   const { queryString } = useParams();
@@ -27,4 +28,4 @@ const SearchResults = () => {
   );
 };
 
-export default SearchResults;
+export default PageHOC(SearchResults);

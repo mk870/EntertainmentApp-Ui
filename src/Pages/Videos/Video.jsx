@@ -3,9 +3,10 @@ import { useLocation, useParams } from "react-router-dom";
 import axios from "axios";
 
 import * as styled from "./VideoStyles";
-import HttpError from "../../HttpServices/Error/HttpError";
-import { cleanTextSnippets, youtubeKey } from "../../Utils/utils";
-import VideoSkeleton from "../../components/SkeletonLoaders/Videos/VideoSkeleton";
+import HttpError from "HttpServices/Error/HttpError";
+import { cleanTextSnippets, youtubeKey } from "Utils/utils";
+import VideoSkeleton from "components/SkeletonLoaders/Videos/VideoSkeleton";
+import PageHOC from "components/HOCs/Page/PageHOC";
 
 const Video = () => {
   const { type } = useParams();
@@ -95,4 +96,4 @@ const Video = () => {
   );
 };
 
-export default Video;
+export default PageHOC(Video);

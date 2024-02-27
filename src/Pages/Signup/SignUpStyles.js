@@ -25,7 +25,7 @@ export const SignupFormWrapper = styled.div`
   justify-content: start;
   flex-direction: column;
   background-color: ${backgroundColor};
-  width: 450px;
+  width: 400px;
   margin-top: 50px;
   margin-bottom: 50px;
   padding: 40px 20px;

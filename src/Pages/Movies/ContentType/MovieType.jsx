@@ -16,6 +16,7 @@ import {
   fetchUpComingMovies,
 } from "./Utils/utils";
 import CardGridSkeleton from "../../../components/SkeletonLoaders/CardGrid/CardGridSkeleton";
+import PageHOC from "components/HOCs/Page/PageHOC";
 
 const MovieType = () => {
   const [searchResults, setSearchResults] = useState(null);
@@ -97,4 +98,4 @@ const MovieType = () => {
   );
 };
 
-export default MovieType;
+export default PageHOC(MovieType);

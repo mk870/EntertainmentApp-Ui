@@ -30,6 +30,7 @@ import Album from "../Pages/Music/Album/Album";
 import NewAlbums from "../Pages/Music/Albums/NewAlbums";
 import SearchResults from "../Pages/Music/Search/SearchResults";
 import Verification from "../Pages/Verification/Verification";
+import News from "Pages/News/News";
 
 const RoutesList = (accessToken) => {
   const routes = [
@@ -150,6 +151,10 @@ const RoutesList = (accessToken) => {
       path: "/verification/:token",
       element: <Verification />,
     },
+    {
+      path: "/news/:topic",
+      element: <News/>
+    }
   ];
   return { routes };
 };

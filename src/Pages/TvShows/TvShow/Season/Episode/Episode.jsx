@@ -2,7 +2,7 @@ import React from "react";
 import { useLocation, useParams } from "react-router-dom";
 
 import * as styled from "./EpisodeStyles";
-import HttpError from "../../../../../HttpServices/Error/HttpError";
+import HttpError from "HttpServices/Error/HttpError";
 import {
   getCreators,
   getHeader,
@@ -14,7 +14,8 @@ import useTMDB from "HttpServices/Hooks/useTMDB";
 import CastSkeleton from "components/SkeletonLoaders/Cast/CastSkeleton";
 import ContentSummarySkeleton from "components/SkeletonLoaders/ContentSummary/ContentSummarySkeleton";
 import ContentSummary from "components/TvShowMovieComponents/ContentSummary/ContentSummary";
-import emptyMoviePoster from "Assets/poster.jpg"
+import emptyMoviePoster from "Assets/poster.jpg";
+import PageHOC from "components/HOCs/Page/PageHOC";
 
 const Episode = () => {
   const { episodeNumber } = useParams();
@@ -63,4 +64,4 @@ const Episode = () => {
   );
 };
 
-export default Episode;
+export default PageHOC(Episode);

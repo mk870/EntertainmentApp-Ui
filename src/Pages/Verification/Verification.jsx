@@ -5,9 +5,10 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 
 import * as styled from "./VerificationStyles";
-import HttpError from "../../HttpServices/Error/HttpError";
+import HttpError from "HttpServices/Error/HttpError";
 import { AppContext } from "Context/AppContext";
 import { backendUrl } from "Utils/utils";
+import PageHOC from "components/HOCs/Page/PageHOC";
 
 const Verification = () => {
   const { token } = useParams();
@@ -42,4 +43,4 @@ const Verification = () => {
   );
 };
 
-export default Verification;
+export default PageHOC(Verification);
