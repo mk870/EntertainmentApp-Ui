@@ -6,6 +6,7 @@ import HttpError from "../../../HttpServices/Error/HttpError";
 import ToggleableList from "../../../components/ToggleableList/ToggleableList";
 import Snackbar from "../../../components/Snackbar/Snackbar";
 import { Page } from "../../../Css/PageStyles";
+import PageHOC from "components/HOCs/Page/PageHOC";
 
 const NewAlbums = () => {
   const snackBarRef = useRef(null);
@@ -44,4 +45,4 @@ const NewAlbums = () => {
   );
 };
 
-export default NewAlbums;
+export default PageHOC(NewAlbums);

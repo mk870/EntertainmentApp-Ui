@@ -3,16 +3,17 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import Carousel from "../../components/Carousel/Carousel";
-import { itemsShownPerScreenSize } from "../../components/Carousel/Utils/utils";
-import HttpError from "../../HttpServices/Error/HttpError";
+import Carousel from "components/Carousel/Carousel";
+import { itemsShownPerScreenSize } from "components/Carousel/Utils/utils";
+import HttpError from "HttpServices/Error/HttpError";
 import * as styled from "./TvShowsStyles";
 import {
   fetchOnAirTvShows,
   fetchPopularTvShows,
   fetchTopRatedTvShows,
 } from "./Utils/dataFetching";
-import CarouselSkeleton from "../../components/SkeletonLoaders/Carousel/CarouselSkeleton";
+import CarouselSkeleton from "components/SkeletonLoaders/Carousel/CarouselSkeleton";
+import PageHOC from "components/HOCs/Page/PageHOC";
 
 const TvShows = () => {
   const [error, setError] = useState({
@@ -145,4 +146,4 @@ const TvShows = () => {
   );
 };
 
-export default TvShows;
+export default PageHOC(TvShows);

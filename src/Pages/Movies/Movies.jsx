@@ -14,6 +14,7 @@ import {
   fetchTopRatedMovies,
 } from "./Utils/utils";
 import CarouselSkeleton from "../../components/SkeletonLoaders/Carousel/CarouselSkeleton";
+import PageHOC from "components/HOCs/Page/PageHOC";
 
 const Movies = () => {
   const [error, setError] = useState({
@@ -145,4 +146,4 @@ const Movies = () => {
   );
 };
 
-export default Movies;
+export default PageHOC(Movies);

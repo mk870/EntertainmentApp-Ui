@@ -22,6 +22,7 @@ import ContentSummarySkeleton from "components/SkeletonLoaders/ContentSummary/Co
 import CastSkeleton from "components/SkeletonLoaders/Cast/CastSkeleton";
 import ToggleableListSkeleton from "components/SkeletonLoaders/ToggleableList/ToggleableListSkeleton";
 import ReviewsSkeleton from "components/SkeletonLoaders/Reviews/ReviewsSkeleton";
+import PageHOC from "components/HOCs/Page/PageHOC";
 
 const Movie = () => {
   const { id } = useParams();
@@ -84,4 +85,4 @@ const Movie = () => {
   );
 };
 
-export default Movie;
+export default PageHOC(Movie);

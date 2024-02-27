@@ -1,16 +1,14 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 import SideBar from "./SideBar/SideBar";
 import SideMenu from "./SideMenu/SideMenu";
 import * as styled from "./WebViewStyles";
-import UserDetails from "components/UserDetails/UserDetails";
-import { mainThemeColor, secondaryThemeColor } from "Css/Variables";
+import Navbar from "./Navbar/Navbar";
 
 const WebView = ({ children }) => {
   const [showUserDetails, setShowUserDetails] = useState(false);
-  const navigate = useNavigate();
   const location = useLocation();
   const marginRight = () => {
     if (
@@ -36,33 +34,6 @@ const WebView = ({ children }) => {
       );
     }
   };
-  const pageLinks = [
-    {
-      name: "Home",
-      path: "/",
-    },
-    {
-      name: "TV Shows",
-      path: "/tv-shows",
-    },
-    {
-      name: "Music",
-      path: "/music",
-    },
-  ];
-  const pageLinkStyles = (path) => {
-    if (location.pathname === path) {
-      return {
-        color: "aliceblue",
-        borderBottom: mainThemeColor,
-      };
-    } else {
-      return {
-        color: secondaryThemeColor,
-        borderBottom: "transparent",
-      };
-    }
-  };
   useEffect(() => {
     if (
       location.pathname === "/music" ||
@@ -81,22 +52,7 @@ const WebView = ({ children }) => {
         <SideMenu />
       </styled.WebViewMenuBarContainer>
       <styled.WebViewPagesContainer marginRight={marginRight}>
-        <styled.pagesContainerNavbar
-          justifyContent={showUserDetails ? "space-between" : "start"}
-        >
-          <styled.pageLinks>
-            {pageLinks.map((link) => (
-              <styled.pageLink
-                key={link.name}
-                onClick={() => navigate(link.path)}
-                styles={pageLinkStyles(link.path)}
-              >
-                {link.name}
-              </styled.pageLink>
-            ))}
-          </styled.pageLinks>
-          {showUserDetails && <div className="web-view-user-details"><UserDetails /></div>}
-        </styled.pagesContainerNavbar>
+        <Navbar showUserDetails={showUserDetails}/>
         <styled.childrenContainer>{children}</styled.childrenContainer>
       </styled.WebViewPagesContainer>
       {renderSideBar()}

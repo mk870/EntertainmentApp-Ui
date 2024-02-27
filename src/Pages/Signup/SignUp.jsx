@@ -1,19 +1,19 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import Button from "../../components/Button/Button";
-import InputField from "../../components/InputField/InputField";
-import { backgroundColor } from "../../Css/Variables";
+import Button from "components/Button/Button";
+import InputField from "components/InputField/InputField";
+import { backgroundColor } from "Css/Variables";
 import {
   emailValidator,
   passwordGuideLines,
   passwordValidator,
-} from "../../Utils/utils";
+} from "Utils/utils";
 import * as styled from "./SignUpStyles";
-import Snackbar from "../../components/Snackbar/Snackbar";
-import Spinner from "../../components/Spinner/Spinner";
-import { signupRequest } from "../../HttpServices/Post/postData";
-
+import Snackbar from "components/Snackbar/Snackbar";
+import Spinner from "components/Spinner/Spinner";
+import { signupRequest } from "HttpServices/Post/postData";
+import PageHOC from "components/HOCs/Page/PageHOC";
 
 const SignUp = () => {
   const [signUpData, setSignUpData] = useState({
@@ -81,12 +81,7 @@ const SignUp = () => {
           Email: signUpData.email,
           Password: signUpData.password,
         };
-        signupRequest(
-          userData,
-          setIsLoading,
-          setPostResponse,
-          postResponse
-        );
+        signupRequest(userData, setIsLoading, setPostResponse, postResponse);
         setSignUpData({
           ...signUpData,
           email: "",
@@ -190,7 +185,7 @@ const SignUp = () => {
         <styled.SignupForm onSubmit={(e) => handleSignUp(e)}>
           <styled.SignupHeaderText>Signup</styled.SignupHeaderText>
           <InputField
-            label={"FirstName"}
+            label={"Given Name"}
             onChangeFunc={handleOnChangeFirstName}
             inputValue={signUpData.firstName}
             isSearch={false}
@@ -204,7 +199,7 @@ const SignUp = () => {
             </styled.validationErrorText>
           )}
           <InputField
-            label={"LastName"}
+            label={"Family Name"}
             onChangeFunc={handleOnChangeLastName}
             inputValue={signUpData.lastName}
             isSearch={false}
@@ -278,4 +273,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default PageHOC(SignUp);

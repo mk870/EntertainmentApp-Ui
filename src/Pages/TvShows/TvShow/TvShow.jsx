@@ -1,8 +1,8 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 
-import ContentSummary from "../../../components/TvShowMovieComponents/ContentSummary/ContentSummary";
-import HttpError from "../../../HttpServices/Error/HttpError";
+import ContentSummary from "components/TvShowMovieComponents/ContentSummary/ContentSummary";
+import HttpError from "HttpServices/Error/HttpError";
 import {
   getCreators,
   getGenres,
@@ -11,17 +11,17 @@ import {
   getRating,
   getReleaseDate,
   getRuntime,
-} from "../../../Utils/ContentSummaryFuncs";
+} from "Utils/ContentSummaryFuncs";
 import * as styled from "./TvShowStyles";
-import Reviews from "../../../components/TvShowMovieComponents/Reviews/Reviews";
-import SeasonsList from "../../../components/TvShowMovieComponents/SeasonsList/SeasonsList";
-import ToggleableList from "../../../components/ToggleableList/ToggleableList";
-import useTMDB from "../../../HttpServices/Hooks/useTMDB";
-import emptyTVshowPoster from "../../../Assets/poster.jpg";
-import ReviewsSkeleton from "../../../components/SkeletonLoaders/Reviews/ReviewsSkeleton";
-import ToggleableListSkeleton from "../../../components/SkeletonLoaders/ToggleableList/ToggleableListSkeleton";
+import Reviews from "components/TvShowMovieComponents/Reviews/Reviews";
+import SeasonsList from "components/TvShowMovieComponents/SeasonsList/SeasonsList";
+import ToggleableList from "components/ToggleableList/ToggleableList";
+import useTMDB from "HttpServices/Hooks/useTMDB";
+import emptyTVshowPoster from "Assets/poster.jpg";
+import ReviewsSkeleton from "components/SkeletonLoaders/Reviews/ReviewsSkeleton";
+import ToggleableListSkeleton from "components/SkeletonLoaders/ToggleableList/ToggleableListSkeleton";
 import ContentSummarySkeleton from "components/SkeletonLoaders/ContentSummary/ContentSummarySkeleton";
-
+import PageHOC from "components/HOCs/Page/PageHOC";
 
 const TvShow = () => {
   const { id } = useParams();
@@ -81,4 +81,4 @@ const TvShow = () => {
   );
 };
 
-export default TvShow;
+export default PageHOC(TvShow);

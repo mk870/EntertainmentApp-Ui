@@ -1,13 +1,18 @@
 import React from "react";
-import * as styled from "./MenuGroupListStyles";
 import { useNavigate } from "react-router-dom";
 
-const MenuGroupList = ({ menuGroupList, clickedMenuListItem }) => {
+import * as styled from "./MenuGroupListStyles";
+
+const MenuGroupList = ({ menuGroupList, clickedMenuListItem, isClosed }) => {
   const navigate = useNavigate();
   return (
-    <styled.Container>
+    <styled.Container isClosed={isClosed}>
       {menuGroupList.map((item) => (
-        <styled.MenuGroupItem key={item.name} onClick={() => navigate(item.path)}>
+        <styled.MenuGroupItem
+          key={item.name}
+          onClick={() => navigate(item.path)}
+          isClosed={isClosed}
+        >
           <styled.MenuGroupItemText
             clicked={item.path === clickedMenuListItem ? true : false}
           >

@@ -19,10 +19,10 @@ const Navbar = ({ isMobileView, openMobileMenu, setOpenMobileMenu }) => {
     if (
       location.pathname.includes("/music") ||
       location.pathname === "/my-songs" ||
-      location.pathname === "/my-artists"||
+      location.pathname === "/my-artists" ||
       location.pathname === "/my-albums"
     )
-    navigate(`music/search/${searchInputValue}`);
+      navigate(`music/search/${searchInputValue}`);
     else if (
       location.pathname.includes("/tv-show") ||
       location.pathname === "/my-tv-shows"
@@ -35,16 +35,13 @@ const Navbar = ({ isMobileView, openMobileMenu, setOpenMobileMenu }) => {
           genreList,
         },
       });
-    } else if (
-      location.pathname.includes("/video")
-    ) {
+    } else if (location.pathname.includes("/video")) {
       navigate(`video/${searchInputValue}`, {
         state: {
           queryString: searchInputValue,
         },
       });
-    }
-    else {
+    } else {
       const genreList = moviesGenres.filter((genre) => genre.selected === true);
       navigate(`movies/search`, {
         state: {
@@ -60,7 +57,7 @@ const Navbar = ({ isMobileView, openMobileMenu, setOpenMobileMenu }) => {
     if (
       location.pathname.includes("/music") ||
       location.pathname === "/my-songs" ||
-      location.pathname === "/my-artists"||
+      location.pathname === "/my-artists" ||
       location.pathname === "/my-albums"
     )
       return "song title";
@@ -68,11 +65,8 @@ const Navbar = ({ isMobileView, openMobileMenu, setOpenMobileMenu }) => {
       location.pathname.includes("/tv-show") ||
       location.pathname === "/my-tv-shows"
     )
-    return "search tv shows";
-    else if (
-      location.pathname.includes("/video")
-    ) 
-      return "search any video";
+      return "search tv shows";
+    else if (location.pathname.includes("/video")) return "search any video";
     else return "search movies";
   };
   return (
@@ -98,12 +92,7 @@ const Navbar = ({ isMobileView, openMobileMenu, setOpenMobileMenu }) => {
       <styles.NavbarUserDetails>
         <UserDetails isMobileView={isMobileView} />
       </styles.NavbarUserDetails>
-      {openMobileMenu && (
-        <Drawer
-          openMobileMenu={openMobileMenu}
-          setOpenMobileMenu={setOpenMobileMenu}
-        />
-      )}
+      {openMobileMenu && <Drawer setOpenMobileMenu={setOpenMobileMenu} />}
     </styles.NavbarDetails>
   );
 };

@@ -8,4 +8,5 @@ export const SideMenuWrapper = styled.div`
   flex-direction: column;
   background-color: ${backgroundColor};
   width:100%;
+  height: 100%;
 `;

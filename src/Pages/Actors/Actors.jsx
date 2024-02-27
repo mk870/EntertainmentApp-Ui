@@ -2,6 +2,7 @@ import React from "react";
 import * as styled from "./ActorsStyles";
 import { useLocation } from "react-router-dom";
 import CardGrid from "../../components/CardGrid/CardGrid";
+import PageHOC from "components/HOCs/Page/PageHOC";
 
 const Actors = () => {
   const location = useLocation();
@@ -16,4 +17,4 @@ const Actors = () => {
   );
 };
 
-export default Actors;
+export default PageHOC(Actors);

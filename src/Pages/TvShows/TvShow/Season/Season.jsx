@@ -5,16 +5,17 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { AiFillStar, AiOutlineCalendar } from "react-icons/ai";
 import { BiTime } from "react-icons/bi";
 
-import HttpError from "../../../../HttpServices/Error/HttpError";
-import ContentSummary from "../../../../components/TvShowMovieComponents/ContentSummary/ContentSummary";
+import HttpError from "HttpServices/Error/HttpError";
+import ContentSummary from "components/TvShowMovieComponents/ContentSummary/ContentSummary";
 import {
   getHeader,
   getOverview,
   getReleaseDate,
-} from "../../../../Utils/ContentSummaryFuncs";
-import useTMDB from "../../../../HttpServices/Hooks/useTMDB";
-import SeasonSkeleton from "../../../../components/SkeletonLoaders/Season/SeasonSkeleton";
-import emptyMoviePoster from "Assets/poster.jpg"
+} from "Utils/ContentSummaryFuncs";
+import useTMDB from "HttpServices/Hooks/useTMDB";
+import SeasonSkeleton from "components/SkeletonLoaders/Season/SeasonSkeleton";
+import emptyMoviePoster from "Assets/poster.jpg";
+import PageHOC from "components/HOCs/Page/PageHOC";
 
 const Season = () => {
   const { seasonNumber } = useParams();
@@ -100,4 +101,4 @@ const Season = () => {
   );
 };
 
-export default Season;
+export default PageHOC(Season);

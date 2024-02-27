@@ -2,12 +2,13 @@ import React, { useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-import useSpotify from "../../../HttpServices/Hooks/music/useSpotify";
-import CardGridSkeleton from "../../../components/SkeletonLoaders/CardGrid/CardGridSkeleton";
-import HttpError from "../../../HttpServices/Error/HttpError";
-import CardGrid from "../../../components/CardGrid/CardGrid";
-import Snackbar from "../../../components/Snackbar/Snackbar";
-import { Page } from "../../../Css/PageStyles";
+import useSpotify from "HttpServices/Hooks/music/useSpotify";
+import CardGridSkeleton from "components/SkeletonLoaders/CardGrid/CardGridSkeleton";
+import HttpError from "HttpServices/Error/HttpError";
+import CardGrid from "components/CardGrid/CardGrid";
+import Snackbar from "components/Snackbar/Snackbar";
+import { Page } from "Css/PageStyles";
+import PageHOC from "components/HOCs/Page/PageHOC";
 
 const Playlists = () => {
   const { genreId } = useParams();
@@ -49,4 +50,4 @@ const Playlists = () => {
   );
 };
 
-export default Playlists;
+export default PageHOC(Playlists);

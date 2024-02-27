@@ -1,12 +1,10 @@
-import React from 'react'
-import * as styled from './NewsStyles'
+import React from "react";
+
+import * as styled from "./NewsStyles";
+import PageHOC from "components/HOCs/Page/PageHOC";
 
 const News = () => {
-  return (
-    <styled.container>
-     News
-    </styled.container>
-  )
-}
+  return <styled.container>News</styled.container>;
+};
 
-export default News
+export default PageHOC(News);

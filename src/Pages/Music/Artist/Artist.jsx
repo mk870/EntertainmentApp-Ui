@@ -1,16 +1,17 @@
 import React, { useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 
-import useSpotify from "../../../HttpServices/Hooks/music/useSpotify";
-import ContentSummarySkeleton from "../../../components/SkeletonLoaders/ContentSummary/ContentSummarySkeleton";
-import HttpError from "../../../HttpServices/Error/HttpError";
-import MusicContentSummary from "../../../components/MusicComponents/MusicContentSummary/MusicContentSummary";
-import ArtistListSkeleton from "../../../components/SkeletonLoaders/ArtistList/ArtistListSkeleton";
-import ArtistsGrid from "../../../components/MusicComponents/ArtistsGrid/ArtistsGrid";
-import CardGrid from "../../../components/CardGrid/CardGrid";
-import CardGridSkeleton from "../../../components/SkeletonLoaders/CardGrid/CardGridSkeleton";
-import Snackbar from "../../../components/Snackbar/Snackbar";
-import { Page } from "../../../Css/PageStyles";
+import useSpotify from "HttpServices/Hooks/music/useSpotify";
+import ContentSummarySkeleton from "components/SkeletonLoaders/ContentSummary/ContentSummarySkeleton";
+import HttpError from "HttpServices/Error/HttpError";
+import MusicContentSummary from "components/MusicComponents/MusicContentSummary/MusicContentSummary";
+import ArtistListSkeleton from "components/SkeletonLoaders/ArtistList/ArtistListSkeleton";
+import ArtistsGrid from "components/MusicComponents/ArtistsGrid/ArtistsGrid";
+import CardGrid from "components/CardGrid/CardGrid";
+import CardGridSkeleton from "components/SkeletonLoaders/CardGrid/CardGridSkeleton";
+import Snackbar from "components/Snackbar/Snackbar";
+import { Page } from "Css/PageStyles";
+import PageHOC from "components/HOCs/Page/PageHOC";
 
 const Artist = () => {
   const { artistId } = useParams();
@@ -85,4 +86,4 @@ const Artist = () => {
   );
 };
 
-export default Artist;
+export default PageHOC(Artist);

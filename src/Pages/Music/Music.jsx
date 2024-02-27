@@ -4,10 +4,10 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import * as styled from "./MusicStyles";
-import { itemsShownPerScreenSize } from "../../components/Carousel/Utils/utils";
-import HttpError from "../../HttpServices/Error/HttpError";
-import CarouselSkeleton from "../../components/SkeletonLoaders/Carousel/CarouselSkeleton";
-import Carousel from "../../components/Carousel/Carousel";
+import { itemsShownPerScreenSize } from "components/Carousel/Utils/utils";
+import HttpError from "HttpServices/Error/HttpError";
+import CarouselSkeleton from "components/SkeletonLoaders/Carousel/CarouselSkeleton";
+import Carousel from "components/Carousel/Carousel";
 import withSpotifyNotification from "components/HOCs/SpotifyHoc";
 import useFetchElectro from "HttpServices/Hooks/music/Playlists/useFetchElectro";
 import useFetchHipHop from "HttpServices/Hooks/music/Playlists/useFetchHipHop";

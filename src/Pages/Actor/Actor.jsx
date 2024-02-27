@@ -10,6 +10,7 @@ import ToggleableList from "../../components/ToggleableList/ToggleableList";
 import useTMDB from "../../HttpServices/Hooks/useTMDB";
 import ContentSummarySkeleton from "../../components/SkeletonLoaders/ContentSummary/ContentSummarySkeleton";
 import ToggleableListSkeleton from "../../components/SkeletonLoaders/ToggleableList/ToggleableListSkeleton";
+import PageHOC from "components/HOCs/Page/PageHOC";
 
 const Actor = () => {
   const { id } = useParams();
@@ -83,4 +84,4 @@ const Actor = () => {
   );
 };
 
-export default Actor;
+export default PageHOC(Actor);

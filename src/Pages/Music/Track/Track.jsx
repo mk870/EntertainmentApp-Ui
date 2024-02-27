@@ -4,18 +4,19 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 
 import * as styled from "./TrackStyles";
-import useSpotify from "../../../HttpServices/Hooks/music/useSpotify";
-import ContentSummarySkeleton from "../../../components/SkeletonLoaders/ContentSummary/ContentSummarySkeleton";
-import ToggleableListSkeleton from "../../../components/SkeletonLoaders/ToggleableList/ToggleableListSkeleton";
-import HttpError from "../../../HttpServices/Error/HttpError";
-import MusicContentSummary from "../../../components/MusicComponents/MusicContentSummary/MusicContentSummary";
-import TrackAlbumCard from "../../../components/MusicComponents/Cards/TrackAlbum/TrackAlbumCard";
-import ToggleableList from "../../../components/ToggleableList/ToggleableList";
-import CardSkeleton from "../../../components/SkeletonLoaders/Card/CardSkeleton";
-import ArtistListSkeleton from "../../../components/SkeletonLoaders/ArtistList/ArtistListSkeleton";
-import ArtistsGrid from "../../../components/MusicComponents/ArtistsGrid/ArtistsGrid";
-import Snackbar from "../../../components/Snackbar/Snackbar";
-import { Page } from "../../../Css/PageStyles";
+import useSpotify from "HttpServices/Hooks/music/useSpotify";
+import ContentSummarySkeleton from "components/SkeletonLoaders/ContentSummary/ContentSummarySkeleton";
+import ToggleableListSkeleton from "components/SkeletonLoaders/ToggleableList/ToggleableListSkeleton";
+import HttpError from "HttpServices/Error/HttpError";
+import MusicContentSummary from "components/MusicComponents/MusicContentSummary/MusicContentSummary";
+import TrackAlbumCard from "components/MusicComponents/Cards/TrackAlbum/TrackAlbumCard";
+import ToggleableList from "components/ToggleableList/ToggleableList";
+import CardSkeleton from "components/SkeletonLoaders/Card/CardSkeleton";
+import ArtistListSkeleton from "components/SkeletonLoaders/ArtistList/ArtistListSkeleton";
+import ArtistsGrid from "components/MusicComponents/ArtistsGrid/ArtistsGrid";
+import Snackbar from "components/Snackbar/Snackbar";
+import { Page } from "Css/PageStyles";
+import PageHOC from "components/HOCs/Page/PageHOC";
 
 const Track = () => {
   const [trackArtistsLoading, setTrackArtistsLoading] = useState(true);
@@ -135,4 +136,4 @@ const Track = () => {
   );
 };
 
-export default Track;
+export default PageHOC(Track);
