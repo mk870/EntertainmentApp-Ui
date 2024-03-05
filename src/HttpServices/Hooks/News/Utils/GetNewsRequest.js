@@ -47,6 +47,7 @@ export const getNewsRequest = (
 ) => {
   setIsLoading(true);
   setError(null);
+  setData(null)
   if (!newsDataInStorage) {
     axios
       .get(newsUrl(category, newsApiKey))
@@ -58,7 +59,6 @@ export const getNewsRequest = (
       })
       .catch((e) => {
         setError(e.message);
-        console.log(e.message);
         setIsLoading(false);
       });
   } else {
