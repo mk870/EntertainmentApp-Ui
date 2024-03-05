@@ -21,6 +21,13 @@ import { electroPlaylistsSlice } from "./Slices/Content/Music/Playlists/ElectroS
 import { rnbPlaylistsSlice } from "./Slices/Content/Music/Playlists/RNBSlice";
 import { topListPlaylistsSlice } from "./Slices/Content/Music/Playlists/TopListSlice";
 import { latestAlbumsSlice } from "./Slices/Content/Music/LatestAlbums/LatestAlbumsSlice";
+import { artistsNewsSlice } from "./Slices/Content/News/ArtistsSlice";
+import { actorsNewsSlice } from "./Slices/Content/News/ActorsSlice";
+import { songsNewsSlice } from "./Slices/Content/News/SongsSlice";
+import { albumsNewsSlice } from "./Slices/Content/News/AlbumsSlice";
+import { moviesNewsSlice } from "./Slices/Content/News/MoviesSlice";
+import { tvShowsNewsSlice } from "./Slices/Content/News/TvShowsSlice";
+import { entertainmentSlice } from "./Slices/Content/News/EntertainmentSlice";
 
 export const reduxStore = configureStore({
   reducer: {
@@ -45,5 +52,12 @@ export const reduxStore = configureStore({
     rnbPlaylists: rnbPlaylistsSlice.reducer,
     topListPlaylists: topListPlaylistsSlice.reducer,
     latestAlbums: latestAlbumsSlice.reducer,
+    artistsNews: artistsNewsSlice.reducer,
+    actorsNews: actorsNewsSlice.reducer,
+    songsNews: songsNewsSlice.reducer,
+    albumsNews: albumsNewsSlice.reducer,
+    moviesNews: moviesNewsSlice.reducer,
+    tvShowsNews: tvShowsNewsSlice.reducer,
+    entertainmentNews: entertainmentSlice.reducer,
   },
 });

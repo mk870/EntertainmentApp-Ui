@@ -16,4 +16,6 @@ export const MobileViewPagesWrapper = styled.div`
   flex-direction: column;
   width:100%;
   min-height: 100vh;
+  box-sizing: border-box;
+  padding: 5px 10px;
 `;

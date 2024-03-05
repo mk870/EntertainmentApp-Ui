@@ -41,6 +41,7 @@ export const WebViewMenuBarContainer = styled.div`
   overflow-y: auto;
   background-color: ${backgroundColor};
   position: fixed;
+  z-index: 1;
   left: 0;
   bottom: 0;
   ::-webkit-scrollbar {

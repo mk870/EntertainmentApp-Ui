@@ -67,11 +67,9 @@ const Album = () => {
         )
         .then((data) => {
           setAlbumTracks(data.data);
-          console.log("albumtracks", data.data);
           setAlbumTracksLoading(false);
         })
         .catch((e) => {
-          console.log(e.message);
           setAlbumTracksError(
             e.message === "Request failed with status code 401"
               ? "your spotify session has expired"
@@ -96,11 +94,9 @@ const Album = () => {
         )
         .then((data) => {
           setAlbumArtists(data.data);
-          console.log("albumArtists", data.data);
           setAlbumArtistsLoading(false);
         })
         .catch((e) => {
-          console.log(e.message);
           setAlbumArtistsError(
             e.message === "Request failed with status code 401"
               ? "your spotify session has expired"

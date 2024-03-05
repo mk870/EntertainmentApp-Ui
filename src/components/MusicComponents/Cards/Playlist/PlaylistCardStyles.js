@@ -1,15 +1,35 @@
-import styled from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 import {
   backgroundColor,
   mainThemeColor,
   secondaryThemeColor,
 } from "../../../../Css/Variables";
+import { slideOnLeftClickAnimation, slideOnRightClickAnimation } from "Utils/CarouselCardAnimations";
+
 
 export const CardWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: start;
   flex-direction: column;
+  ${({
+    isInCarousel,
+    animationTime,
+    animationDistance,
+    leftCarouselMovement,
+  }) =>
+    isInCarousel &&
+    leftCarouselMovement &&
+    slideOnLeftClickAnimation(animationTime, animationDistance)}
+  ${({
+    isInCarousel,
+    animationTime,
+    animationDistance,
+    rightCarouselMovement,
+  }) =>
+    isInCarousel &&
+    rightCarouselMovement &&
+    slideOnRightClickAnimation(animationTime, animationDistance)}
   width: ${(props) => (props.size === "large" ? "225px" : "180px")};
   height: ${(props) => (props.size === "large" ? "250px" : "175px")};
   margin: 0 3px;
@@ -21,8 +41,12 @@ export const CardWrapper = styled.div`
     cursor: pointer;
   }
   @media (max-width: 400px) {
-    width: 150px;
-    height: 130px;
+    width: 100%;
+    height: 390px;
+  }
+  @media (max-width: 350px) {
+    width: 100%;
+    height: 330px;
   }
 `;
 export const poster = styled.img`
@@ -30,13 +54,15 @@ export const poster = styled.img`
   height: ${(props) => (props.size === "large" ? "180px" : "110px")};
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
-  border-bottom-left-radius: ${(props) => (props.size === "large" ? "0px" : "10px")};
-  border-bottom-right-radius: ${(props) => (props.size === "large" ? "0px" : "10px")};
+  border-bottom-left-radius: ${(props) =>
+    props.size === "large" ? "0px" : "10px"};
+  border-bottom-right-radius: ${(props) =>
+    props.size === "large" ? "0px" : "10px"};
   background: ${backgroundColor};
   @media (max-width: 400px) {
     width: 100%;
     border-radius: 10px;
-    height:100%;
+    height: 100%;
   }
 `;
 
@@ -77,7 +103,7 @@ export const row = styled.div`
   width: 100%;
   gap: 2px;
   margin-bottom: 5px;
-  width:100%;
+  width: 100%;
 `;
 export const detailsText = styled.p`
   font-size: 13px;
@@ -93,8 +119,8 @@ export const subContainer = styled.div`
   justify-content: space-between;
   flex-direction: row;
   margin-right: 10px;
-  .sub-icon{
-    margin-right:5px;
+  .sub-icon {
+    margin-right: 5px;
   }
 `;
 export const viewLink = styled.div`

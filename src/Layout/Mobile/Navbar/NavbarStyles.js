@@ -11,9 +11,10 @@ export const NavbarInputWrapper = styled.div`
 export const NavbarDetails = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   flex-direction: row;
-  padding-top: 10px;
+  box-sizing: border-box;
+  padding: 10px 10px 0px 10px;
   width:100%;
 `;
 export const NavbarUserDetails = styled.div`
@@ -28,10 +29,6 @@ export const NavbarUserDetails = styled.div`
   }
 `;
 export const NavbarLogoWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
   width:40px;
 `;
 export const NavbarLogoName = styled.p`

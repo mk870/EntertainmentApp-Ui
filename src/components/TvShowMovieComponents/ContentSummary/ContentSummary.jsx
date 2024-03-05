@@ -1,9 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { BiTime } from "react-icons/bi";
-import { AiFillStar, AiOutlineCalendar } from "react-icons/ai";
-import { FaTv } from "react-icons/fa";
-import { RxVideo } from "react-icons/rx";
+import { AiOutlineCalendar } from "react-icons/ai";
 import { IoLocationOutline } from "react-icons/io5";
 
 import * as styled from "./ContentSummaryStyles";
@@ -11,6 +9,13 @@ import Snackbar from "../../Snackbar/Snackbar";
 import { postResource } from "../../../HttpServices/Post/postData";
 import { AppContext } from "../../../Context/AppContext";
 import Spinner from "../../Spinner/Spinner";
+import VideoLink from "./Components/Link/Video/Link";
+import PostLink from "./Components/Link/Post/Link";
+import GenreList from "./Components/GenreList/GenreList";
+import Creators from "./Components/Creators/Creators";
+import Finances from "./Components/Finances/Finances";
+import ContentNumber from "./Components/ContentNumber/ContentNumber";
+import Ratings from "./Components/Ratings/Ratings";
 
 const ContentSummary = ({
   image,
@@ -167,80 +172,44 @@ const ContentSummary = ({
                 {type === "actor" ? birthPlace : runtime}
               </styled.subHeaderText>
             </styled.subContainer>
-            <styled.subContainer>
-              <AiFillStar size={iconSize} color={"gold"} />
-              <styled.subHeaderText>{rating}</styled.subHeaderText>
-            </styled.subContainer>
+            <Ratings rating={rating} iconSize={iconSize} />
             {type !== "actor" && type !== "movie" && (
-              <styled.subContainer>
-                <FaTv size={iconSize} />
-                <styled.subHeaderText>
-                  {type === "season" && `no. episodes ${episodes}`}
-                  {type === "episode" && `season ${seasonNumber}`}
-                  {type === "tv-show" && `no. seasons ${seasons}`}
-                </styled.subHeaderText>
-              </styled.subContainer>
+              <ContentNumber
+                seasonNumber={seasonNumber}
+                seasons={seasons}
+                episodes={episodes}
+                iconSize={iconSize}
+                type={type}
+              />
             )}
           </styled.row>
-          {type === "movie" && (
-            <styled.row>
-              <styled.subContainer>
-                <styled.subHeaderText>{"Budget:"}</styled.subHeaderText>
-                <styled.subHeaderText>{budget}</styled.subHeaderText>
-              </styled.subContainer>
-              <styled.subContainer>
-                <styled.subHeaderText>{"Revenue:"}</styled.subHeaderText>
-                <styled.subHeaderText>{revenue}</styled.subHeaderText>
-              </styled.subContainer>
-            </styled.row>
-          )}
+          {type === "movie" && <Finances budget={budget} revenue={revenue} />}
           {(type === "episode" || type === "tv-show") && (
-            <styled.creatorsContainer>
-              <div className="heading">
-                {type === "episode" ? "Crew:" : "Created by:"}
-              </div>
-              {creators ? (
-                creators.map((creator, index) => (
-                  <span className="creatorText" key={creator.id}>
-                    {creators.length - 1 === index
-                      ? ` ${creator.name}`
-                      : `${creator.name}, `}
-                  </span>
-                ))
-              ) : (
-                <span className="creatorText">no data</span>
-              )}
-            </styled.creatorsContainer>
+            <Creators creators={creators} type={type}/>
           )}
           {(type === "movie" || type === "tv-show") && (
-            <styled.genreContainer>
-              {genres ? (
-                genres.map((genre) => (
-                  <styled.genre key={genre.id}>
-                    <styled.genreText>{genre.name}</styled.genreText>
-                  </styled.genre>
-                ))
-              ) : (
-                <styled.genreText>no genre data</styled.genreText>
-              )}
-            </styled.genreContainer>
+            <GenreList genres={genres} />
           )}
           {type === "movie" && (
             <styled.detailsText>{movieTagLine}</styled.detailsText>
           )}
           <styled.detailsText>{overview}</styled.detailsText>
           {(type === "movie" || type === "tv-show" || type === "actor") && (
-            <styled.AddLink onClick={handlePost}>
-              <styled.addLinkText>{linkText()}</styled.addLinkText>
-            </styled.AddLink>
+            <PostLink
+              onClickFunc={handlePost}
+              text={linkText()}
+              iconSize={iconSize}
+            />
           )}
           {(type === "movie" || type === "episode") && (
             <styled.videoLinksContainer>
               {videoLinks.map((link) => (
-                <styled.videoLink key={link} onClick={() => goWatchVideo(link)}>
-                  <RxVideo size={iconSize} className="video-icon" />
-                  <styled.addLinkText>{link}</styled.addLinkText>
-                </styled.videoLink>
+                <VideoLink
+                  key={link}
+                  link={link}
+                  onClickFunc={() => goWatchVideo(link)}
+                  iconSize={iconSize}
+                />
               ))}
             </styled.videoLinksContainer>
           )}

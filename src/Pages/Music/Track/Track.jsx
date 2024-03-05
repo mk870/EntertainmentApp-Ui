@@ -56,11 +56,9 @@ const Track = () => {
         )
         .then((data) => {
           setTrackArtists(data.data.artists);
-          console.log("Artists", data.data.artists);
           setTrackArtistsLoading(false);
         })
         .catch((e) => {
-          console.log(e.message);
           setTrackArtistsError(
             e.message === "Request failed with status code 401"
               ? "your spotify session has expired"
