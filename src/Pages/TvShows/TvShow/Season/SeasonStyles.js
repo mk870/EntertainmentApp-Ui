@@ -43,7 +43,6 @@ export const Episode = styled.div`
 export const poster = styled.img`
   width: 180px;
   height: 160px;
-  border-radius: 10px;
   margin-left: 5px;
   @media (max-width: 760px) {
     height: 150px;

@@ -14,10 +14,10 @@ import {
   songsNewsCategory,
   tvShowsNewsCategory,
 } from "Utils/Constants";
-import { newsApiKey } from "Utils/utils";
+import { backendUrl } from "Utils/utils";
 
-const newsUrl = (category, key) => {
-  return `https://newsapi.org/v2/everything?q=${category}&apiKey=${key}`;
+const newsUrl = (category) => {
+  return `${backendUrl}news/${category}`;
 };
 
 const dispatchData = (data, dispatch, category) => {
@@ -50,7 +50,7 @@ export const getNewsRequest = (
   setData(null)
   if (!newsDataInStorage) {
     axios
-      .get(newsUrl(category, newsApiKey))
+      .get(newsUrl(category))
       .then((res) => {
         console.log(res.data.articles);
         dispatchData(res.data.articles, dispatch, category);
