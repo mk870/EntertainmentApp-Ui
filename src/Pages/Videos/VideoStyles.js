@@ -105,7 +105,8 @@ export const videoListItem = styled.div`
   justify-content: start;
   width: 100%;
   gap: 10px;
-  padding: 7px 0;
+  box-sizing:border-box;
+  padding: 7px;
   &:hover {
     background: ${backgroundColor};
     cursor: pointer;
@@ -124,8 +125,6 @@ export const videoListItem = styled.div`
 export const videoListItemPoster = styled.img`
   width: 200px;
   height: 150px;
-  border-radius: 15px;
-  border: 1px solid ${secondaryThemeColor};
   @media (max-width: 500px) {
     width: 120px;
     height: 90px;

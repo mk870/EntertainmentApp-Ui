@@ -28,10 +28,13 @@ export const itemsShownPerScreenSize = (screenSize) => {
     return 4;
   } if (screenSize <= 935 && screenSize > 760) {
     return 4;
-  }if (screenSize <= 760 && screenSize > 560) {
+  }if (screenSize <= 760 && screenSize > 570) {
     return 3;
   }
-  if (screenSize <= 560) {
-    return 2;
+if (screenSize <= 570 && screenSize > 400) {
+  return 2;
+}
+  if (screenSize <= 400) {
+    return 1;
   }
 };

@@ -21,6 +21,10 @@ const Navbar = ({ showUserDetails }) => {
       name: "Music",
       path: "/music",
     },
+    {
+      name: "News",
+      path: "/news/entertainment",
+    },
   ];
   const pageLinkStyles = (path) => {
     if (location.pathname === path) {

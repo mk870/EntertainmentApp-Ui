@@ -12,7 +12,17 @@ import Spinner from "components/Spinner/Spinner";
 import Snackbar from "components/Snackbar/Snackbar";
 import { deleteResource } from "HttpServices/Delete/deleteResource";
 
-const Card = ({ content, type, size, isFromLocalServer }) => {
+const Card = ({
+  content,
+  type,
+  size,
+  isFromLocalServer,
+  isInCarousel,
+  animationTime,
+  animationDistance,
+  leftCarouselMovement,
+  rightCarouselMovement,
+}) => {
   const [isLoading, setIsLoading] = useState(false);
   const snackBarRef = useRef(null);
   const [postResponse, setPostResponse] = useState({
@@ -23,7 +33,7 @@ const Card = ({ content, type, size, isFromLocalServer }) => {
     message: "",
     type: "",
   });
-  const { accessToken,setDeletedItemId } = useContext(AppContext);
+  const { accessToken, setDeletedItemId } = useContext(AppContext);
   const navigate = useNavigate();
   const onNavigate = (e) => {
     e.stopPropagation();
@@ -93,11 +103,11 @@ const Card = ({ content, type, size, isFromLocalServer }) => {
       }
     } else navigate("/login");
   };
-  const handleDelete = (e,id) => {
+  const handleDelete = (e, id) => {
     e.stopPropagation();
     setIsLoading(true);
     deleteResource(
-      type === "tv-show" ? "tvShow":type==="actor"?"actor" : "movie",
+      type === "tv-show" ? "tvShow" : type === "actor" ? "actor" : "movie",
       id,
       accessToken,
       setIsLoading,
@@ -108,18 +118,17 @@ const Card = ({ content, type, size, isFromLocalServer }) => {
   };
   const getRating = () => {
     if (isFromLocalServer) {
-      if (content.rating)
-        return Math.round(+content.rating * 10) / 10;
+      if (content.rating) return Math.round(+content.rating * 10) / 10;
       else return "---";
-    }else{
+    } else {
       if (content.vote_average)
         return Math.round(content.vote_average * 10) / 10;
       else return "---";
     }
   };
   const getPopularity = () => {
-      if (content.popularity) return Math.round(content.popularity);
-      else return "---";
+    if (content.popularity) return Math.round(content.popularity);
+    else return "---";
   };
   const getReleaseDateOrCharacterName = (data) => {
     if (type === "movie") {
@@ -172,7 +181,15 @@ const Card = ({ content, type, size, isFromLocalServer }) => {
     }
   }, [snackBarRef, deleteResponse]);
   return (
-    <styled.CardWrapper size={size} onClick={(e)=>onNavigate(e)}>
+    <styled.CardWrapper
+      size={size}
+      onClick={(e) => onNavigate(e)}
+      isInCarousel={isInCarousel}
+      animationDistance={animationDistance}
+      animationTime={animationTime}
+      leftCarouselMovement={leftCarouselMovement}
+      rightCarouselMovement={rightCarouselMovement}
+    >
       <styled.overlay size={size}></styled.overlay>
       <styled.poster alt="poster" src={getImage()} size={size} />
       {size !== "large" && (
@@ -192,9 +209,7 @@ const Card = ({ content, type, size, isFromLocalServer }) => {
           <styled.largeCardRatingContainer>
             <FaImdb size={29} color={"gold"} className="imdb-icon" />
             <styled.ratingText size={size}>
-              {type === "actor"
-                ? `${getPopularity()}`
-                : `${getRating()}`}
+              {type === "actor" ? `${getPopularity()}` : `${getRating()}`}
             </styled.ratingText>
           </styled.largeCardRatingContainer>
         )}
@@ -211,7 +226,7 @@ const Card = ({ content, type, size, isFromLocalServer }) => {
         {isFromLocalServer && (
           <styled.deleteLink
             size={size}
-            onClick={(e) => handleDelete(e,content.id)}
+            onClick={(e) => handleDelete(e, content.id)}
           >
             {isLoading ? <Spinner /> : "Delete"}
           </styled.deleteLink>

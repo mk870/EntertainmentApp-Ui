@@ -1,11 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { HiOutlineMusicNote, HiOutlineUserGroup } from "react-icons/hi";
-import { AiFillStar, AiOutlineCalendar } from "react-icons/ai";
-import { BiMoviePlay, BiTime } from "react-icons/bi";
 import millify from "millify";
-import { BsFillPersonFill } from "react-icons/bs";
-import { IoPlayOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
+import HTMLReactParser from "html-react-parser";
 
 import {
   cleanTextSnippets,
@@ -19,6 +15,15 @@ import Spinner from "../../Spinner/Spinner";
 import emptyArtistProfile from "../../../Assets/empty-profile.jpg";
 import emptyTrackPhoto from "../../../Assets/empty_track_poster.jpg";
 import emptyAlbumCover from "../../../Assets/empty_album_poster.jpg";
+import Artists from "./Components/Artists/Artists";
+import GenreList from "./Components/GenreList/GenreList";
+import TrackNumber from "./Components/TrackNumber/TrackNumber";
+import Duration from "./Components/Duration/Duration";
+import NumberOfTracks from "./Components/NumberOfTracks/NumberOfTracks";
+import ReleaseDate from "./Components/ReleaseDate/ReleaseDate";
+import Popularity from "./Components/Popularity/Popularity";
+import Followers from "./Components/Followers/Followers";
+import Link from "./Components/Link/Link";
 
 const MusicContentSummary = ({ content, type }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -41,10 +46,6 @@ const MusicContentSummary = ({ content, type }) => {
       if (content.album?.images[0]?.url) return content.album.images[0].url;
       else return emptyTrackPhoto;
     }
-  };
-  const trackDurationInMins = (durationInMs) => {
-    if (durationInMs) return `${Math.round(durationInMs / 60000)} mins`;
-    else return "--- mins";
   };
   const linkText = () => {
     if (type === "artist") return "Add To MyArtistList";
@@ -81,10 +82,6 @@ const MusicContentSummary = ({ content, type }) => {
     if (contentData.followers?.total)
       return millify(contentData.followers.total);
     else return "";
-  };
-  const getFollowers = () => {
-    if (content.followers?.total) return millify(content.followers.total);
-    else return "---";
   };
   const getTotalTracks = () => {
     if (content.tracks?.total) return content.tracks.total;
@@ -151,7 +148,6 @@ const MusicContentSummary = ({ content, type }) => {
   }, [postResponse, snackBarRef]);
   return (
     <styled.container>
-      <styled.Background pic={getImage()} />
       <styled.contentWrapper>
         <styled.poster src={getImage()} alt="poster" />
         <styled.detailsContainer>
@@ -160,133 +156,76 @@ const MusicContentSummary = ({ content, type }) => {
           </styled.header>
           <styled.row>
             {(type === "playlist" || type === "artist") && (
-              <styled.subContainer>
-                <HiOutlineUserGroup size={iconSize} />
-                <styled.subHeaderText>
-                  {`${getFollowers()} followers`}
-                </styled.subHeaderText>
-              </styled.subContainer>
+              <Followers content={content} iconSize={iconSize} />
             )}
             {(type === "track" || type === "album" || type === "artist") && (
-              <styled.subContainer>
-                <AiFillStar color="gold" size={iconSize} />
-                <styled.subHeaderText>
-                  {`${content.popularity} stars`}
-                </styled.subHeaderText>
-              </styled.subContainer>
+              <Popularity popularity={content.popularity} iconSize={iconSize} />
             )}
             {type === "album" && (
-              <styled.subContainer>
-                <AiOutlineCalendar size={iconSize} />
-                <styled.subHeaderText>
-                  {content.release_date}
-                </styled.subHeaderText>
-              </styled.subContainer>
+              <ReleaseDate
+                releaseDate={content.release_date}
+                iconSize={iconSize}
+              />
             )}
             {type === "album" && (
-              <styled.subContainer>
-                <HiOutlineMusicNote size={iconSize} />
-                <styled.subHeaderText>
-                  {`${content.total_tracks} tracks`}
-                </styled.subHeaderText>
-              </styled.subContainer>
+              <NumberOfTracks
+                totalTracks={content.total_tracks}
+                iconSize={iconSize}
+              />
             )}
             {type === "track" && (
-              <styled.subContainer>
-                <BiTime size={iconSize} />
-                <styled.subHeaderText>
-                  {trackDurationInMins(content.duration_ms)}
-                </styled.subHeaderText>
-              </styled.subContainer>
+              <Duration duration={content.duration_ms} iconSize={iconSize} />
             )}
             {type === "track" && (
-              <styled.subContainer>
-                <HiOutlineMusicNote size={iconSize} />
-                <styled.subHeaderText>
-                  {`${content.track_number}${
-                    content.track_number === 1
-                      ? "st"
-                      : content.track_number === 2
-                      ? "nd"
-                      : content.track_number === 3
-                      ? "rd"
-                      : "th"
-                  } track`}
-                </styled.subHeaderText>
-              </styled.subContainer>
+              <TrackNumber
+                trackNumber={content.track_number}
+                iconSize={iconSize}
+              />
             )}
             {type === "playlist" && (
-              <styled.subContainer>
-                <HiOutlineMusicNote size={iconSize} />
-                <styled.subHeaderText>
-                  {`${getTotalTracks()} tracks`}
-                </styled.subHeaderText>
-              </styled.subContainer>
+              <NumberOfTracks
+                totalTracks={getTotalTracks()}
+                iconSize={iconSize}
+              />
             )}
           </styled.row>
-          {type === "artist" && (
-            <styled.genreContainer>
-              {content.genres.length > 1 ? (
-                content.genres.map((genre) => (
-                  <styled.genre key={genre}>
-                    <styled.genreText>{genre}</styled.genreText>
-                  </styled.genre>
-                ))
-              ) : (
-                <styled.genreText>{`${content.name}'s genre data is not available`}</styled.genreText>
-              )}
-            </styled.genreContainer>
-          )}
+          {type === "artist" && <GenreList content={content} />}
           {(type === "track" || type === "album") && (
-            <styled.trackLinksContainer>
-              <styled.artistHeader>
-                {content.artists.length > 1 ? "Artists:" : "Artist:"}
-              </styled.artistHeader>
-              {content.artists.map((artist) => (
-                <styled.artistContainer
-                  key={artist.id}
-                  artist={true}
-                  onClick={() => navigate(`/music/artist/${artist.id}`)}
-                >
-                  <BsFillPersonFill size={iconSize} />
-                  <styled.artistText>{artist.name}</styled.artistText>
-                </styled.artistContainer>
-              ))}
-            </styled.trackLinksContainer>
+            <Artists artists={content.artists} iconSize={iconSize} />
           )}
           {(type === "playlist" || type === "track" || type === "artist") && (
             <styled.detailsText>
-              {cleanTextSnippets(content.description)}
+              {HTMLReactParser(cleanTextSnippets(content.description))}
             </styled.detailsText>
           )}
           {type === "album" && (
             <styled.detailsText>{content.label}</styled.detailsText>
           )}
-          {(type === "artist" || type === "album" || type === "track") && (
-            <styled.AddLink onClick={() => handlePost(content)}>
-              <styled.addLinkText>
-                {isLoading ? <Spinner /> : linkText()}
-              </styled.addLinkText>
-            </styled.AddLink>
-          )}
-          {type === "track" && (
-            <styled.row>
-              <styled.AddLink onClick={() => goWatchVideo("song")}>
-                <BiMoviePlay size={20} />
-                <styled.addLinkText>Play video</styled.addLinkText>
-              </styled.AddLink>
-              <styled.link
-                href={content.preview_url}
-                target="_blank"
-                rel="noreferrer"
-              >
-                <styled.AddLink>
-                  <IoPlayOutline size={20} color="aliceblue" />
-                  <styled.addLinkText>Play Audio</styled.addLinkText>
-                </styled.AddLink>
-              </styled.link>
-            </styled.row>
-          )}
+          <styled.row>
+            {(type === "artist" || type === "album" || type === "track") && (
+              <Link
+                onClickFunc={() => handlePost(content)}
+                text={isLoading ? <Spinner /> : linkText()}
+                type={"add"}
+              />
+            )}
+            {type === "track" && (
+              <>
+                <Link
+                  onClickFunc={() => goWatchVideo("song")}
+                  text={"Play video"}
+                  type={"video"}
+                />
+                <styled.link
+                  href={content.preview_url}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <Link text={"Play Audio"} onClickFunc={null} type={"audio"} />
+                </styled.link>
+              </>
+            )}
+          </styled.row>
         </styled.detailsContainer>
       </styled.contentWrapper>
       {postResponse.message && (

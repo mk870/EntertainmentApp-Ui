@@ -1,9 +1,11 @@
-import styled from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 import {
   mainThemeColor,
   redColor,
   secondaryThemeColor,
 } from "../../../Css/Variables";
+import { slideOnLeftClickAnimation, slideOnRightClickAnimation } from "Utils/CarouselCardAnimations";
+
 
 export const CardWrapper = styled.div`
   display: flex;
@@ -11,12 +13,30 @@ export const CardWrapper = styled.div`
   justify-content: center;
   flex-direction: column;
   position: relative;
+  ${({
+    isInCarousel,
+    animationTime,
+    animationDistance,
+    leftCarouselMovement,
+  }) =>
+    isInCarousel &&
+    leftCarouselMovement &&
+    slideOnLeftClickAnimation(animationTime, animationDistance)}
+  ${({
+    isInCarousel,
+    animationTime,
+    animationDistance,
+    rightCarouselMovement,
+  }) =>
+    isInCarousel &&
+    rightCarouselMovement &&
+    slideOnRightClickAnimation(animationTime, animationDistance)}
   width: ${(props) => (props.size === "large" ? "225px" : "180px")};
   height: ${(props) => (props.size === "large" ? "250px" : "175px")};
   margin: 0 3px;
   @media (max-width: 400px) {
-    width: 140px;
-    height: 130px;
+    width: 100%;
+    height: 390px;
   }
   &:hover {
     cursor: pointer;
@@ -40,8 +60,8 @@ export const poster = styled.img`
   height: ${(props) => (props.size === "large" ? "250px" : "175px")};
   border-radius: 10px;
   @media (max-width: 400px) {
-    width: 140px;
-    height: 130px;
+    width: 100%;
+    height: 390px;
   }
 `;
 export const ratingContainer = styled.div`

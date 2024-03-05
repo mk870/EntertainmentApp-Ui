@@ -10,6 +10,14 @@ import { AiOutlineHome } from "react-icons/ai";
 import { RiSlideshow3Line } from "react-icons/ri";
 import { HiOutlineMusicNote } from "react-icons/hi";
 
+export const artistsNewsCategory = "musicians";
+export const moviesNewsCategory = "movies";
+export const tvShowsNewsCategory = "tv shows";
+export const albumsNewsCategory = "albums";
+export const songsNewsCategory = "songs";
+export const actorsNewsCategory = "hollywood actors";
+export const entertainmentNewsCategory = "entertainment";
+
 export const menuList = [
   {
     name: "Home",

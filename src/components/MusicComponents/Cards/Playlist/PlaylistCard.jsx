@@ -5,7 +5,15 @@ import { useNavigate } from "react-router-dom";
 import * as styled from "./PlaylistCardStyles";
 import emptyPlaylistPoster from "../../../../Assets/empty_playlist_poster.jpg";
 
-const PlaylistCard = ({ content, size }) => {
+const PlaylistCard = ({
+  content,
+  size,
+  isInCarousel,
+  animationTime,
+  animationDistance,
+  leftCarouselMovement,
+  rightCarouselMovement,
+}) => {
   const navigate = useNavigate();
   const onNavigate = (e, id) => {
     e.stopPropagation();
@@ -16,12 +24,20 @@ const PlaylistCard = ({ content, size }) => {
       return content.images[0].url;
     } else return emptyPlaylistPoster;
   };
-  const getTracksTotal = ()=>{
-    if(content.tracks?.total) return content.tracks.total
-    else return "---"
-  }
+  const getTracksTotal = () => {
+    if (content.tracks?.total) return content.tracks.total;
+    else return "---";
+  };
   return (
-    <styled.CardWrapper size={size} onClick={(e) => onNavigate(e, content.id)}>
+    <styled.CardWrapper
+      size={size}
+      onClick={(e) => onNavigate(e, content.id)}
+      isInCarousel={isInCarousel}
+      animationDistance={animationDistance}
+      animationTime={animationTime}
+      leftCarouselMovement={leftCarouselMovement}
+      rightCarouselMovement={rightCarouselMovement}
+    >
       <styled.poster size={size} src={getPoster()} />
       <styled.detailsContainer>
         <styled.name>{content.name}</styled.name>

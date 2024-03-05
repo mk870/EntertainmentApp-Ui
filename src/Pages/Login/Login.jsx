@@ -78,11 +78,15 @@ const Login = () => {
   useEffect(() => {
     if (loginUserData.password !== "") {
       passwordValidator(setIsPasswordValidationError, loginUserData.password);
+    }else{
+      setIsPasswordValidationError(false);
     }
   }, [loginUserData.password]);
   useEffect(() => {
     if (loginUserData.email !== "") {
       emailValidator(setIsEmailValidationError, loginUserData.email);
+    }else{
+      setIsEmailValidationError(false)
     }
   }, [loginUserData.email]);
   useEffect(() => {

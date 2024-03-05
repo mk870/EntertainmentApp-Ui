@@ -149,11 +149,15 @@ const SignUp = () => {
   useEffect(() => {
     if (signUpData.password !== "") {
       passwordValidator(setIsPasswordValidationError, signUpData.password);
+    } else {
+      setIsPasswordValidationError(false);
     }
   }, [signUpData.password]);
   useEffect(() => {
     if (signUpData.email !== "") {
       emailValidator(setIsEmailValidationError, signUpData.email);
+    } else {
+      setIsEmailValidationError(false);
     }
   }, [signUpData.email]);
   useEffect(() => {
@@ -163,6 +167,8 @@ const SignUp = () => {
       } else {
         setIsFirstNameValidationError(false);
       }
+    } else {
+      setIsFirstNameValidationError(false);
     }
   }, [signUpData.firstName]);
   useEffect(() => {
@@ -172,6 +178,8 @@ const SignUp = () => {
       } else {
         setIsLastNameValidationError(false);
       }
+    } else {
+      setIsLastNameValidationError(false);
     }
   }, [signUpData.lastName]);
   useEffect(() => {

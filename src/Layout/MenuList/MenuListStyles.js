@@ -110,9 +110,7 @@ export const logoutWrapper = styled.div`
   width: 85%;
   height: 35px;
   font-size: 15px;
-  p {
-    margin-left: 10px;
-  }
+  margin-top:10px;
   &:hover {
     cursor: pointer;
     background-color: ${menuHoverColor};
@@ -127,7 +125,7 @@ export const MenuGroup = styled.div`
   width: 85%;
   height: 35px;
   border-radius: 4px;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
   font-size: 15px;
   box-sizing: border-box;
   padding: 3px 0px 3px 3px;

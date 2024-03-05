@@ -102,76 +102,12 @@ export const subContainer = styled.div`
   flex-direction: row;
   margin-right: 10px;
 `;
-export const creatorsContainer = styled.div`
-  display: flex;
-  margin-bottom: 10px;
-  flex-wrap:wrap;
-  gap: 4px;
-  .heading {
-    color: ${mainThemeColor};
-    font-size: 15px;
-    font-weight:800;
-  }
-  .creatorText {
-    color: aliceblue;
-    font-size: 14px;
-  }
-`;
 
-export const genreContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: start;
-  flex-direction: row;
-  flex-wrap: wrap;
-  width: 100%;
-  gap: 5px;
-`;
-export const genre = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  border: 1px solid aliceblue;
-  border-radius: 10px;
-  width: 110px;
-  height: 20px;
-`;
-export const genreText = styled.p`
-  font-size: 12px;
-  color: aliceblue;
-  text-align: center;
-`;
 
 export const detailsText = styled.p`
   font-size: 14px;
   color: aliceblue;
   flex: 1;
-`;
-
-export const AddLink = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  flex-direction: row;
-  min-width: 30px;
-  background-color: ${mainThemeColor};
-  height: 30px;
-  border-radius: 5px;
-  padding: 0 5px;
-  &:hover {
-    cursor: pointer;
-  }
-  @media (max-width: 920px) {
-    min-width: 125px;
-  }
-`;
-export const addLinkText = styled.p`
-  font-size: 14px;
-  color: aliceblue;
-  @media (max-width: 410px) {
-    font-size: 13px;
-  }
 `;
 
 export const videoLinksContainer = styled.div`
@@ -182,21 +118,4 @@ export const videoLinksContainer = styled.div`
   min-width: 100%;
   padding-top:10px;
   gap:15px;
-`;
-
-export const videoLink = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: start;
-  flex-direction: row;
-  background-color: ${mainThemeColor};
-  min-width: 90px;
-  height: 30px;
-  border-radius: 5px;
-  .video-icon {
-    margin:0 7px;
-  }
-  &:hover {
-    cursor:pointer;
-  }
 `;

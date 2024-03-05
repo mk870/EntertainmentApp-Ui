@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import {
   backgroundColor,
+  boxShadow,
   redColor,
   secondaryThemeColor,
 } from "../../../../Css/Variables";
@@ -15,12 +16,15 @@ export const CardWrapper = styled.div`
   min-height: ${(props) => (props.isInCarousel ? "175px" : "260px")};
   border-radius: 10px;
   box-sizing: border-box;
+  margin-bottom: ${(props) => (props.isInCarousel ? "0px" : "10px")};
+  padding-bottom: ${(props) => (props.isInCarousel ? "0px" : "5px")};
   @media (max-width: 600px) {
     width: 150px;
     min-height: 180px;
   }
   &:hover {
     cursor: pointer;
+    box-shadow: ${boxShadow};
   }
 `;
 export const poster = styled.img`
@@ -29,9 +33,6 @@ export const poster = styled.img`
   border-radius: 10px;
   background: ${backgroundColor};
   transition: 0.2s ease-in-out all;
-  &:hover {
-    transform: scale(1.07);
-  }
   @media (max-width: 600px) {
     width: 140px;
     height: 130px;

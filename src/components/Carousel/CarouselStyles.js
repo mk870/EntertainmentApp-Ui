@@ -1,10 +1,6 @@
-import styled, { keyframes } from "styled-components";
-import { mainThemeColor, secondaryThemeColor } from "../../Css/Variables";
+import styled from "styled-components";
+import { backgroundColor, mainThemeColor, secondaryThemeColor } from "../../Css/Variables";
 
-const opacityAnimation = keyframes`
-  0% { opacity:0;}
-  100% { opacity: 1; }
-`;
 
 export const CarouselWrapper = styled.div`
   display: flex;
@@ -65,13 +61,13 @@ export const slidercontent = styled.div`
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    right: 3px;
+    right: 10px;
     top: 45%;
     bottom: 50%;
     z-index: 10;
     padding: 4px;
     border-radius: 100%;
-    background-color: ${secondaryThemeColor};
+    background-color: ${backgroundColor};
     &:hover {
     cursor: pointer;
   }
@@ -82,13 +78,13 @@ export const slidercontent = styled.div`
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    left: 3px;
+    left: 10px;
     top: 45%;
     bottom: 50%;
     z-index: 10;
     padding: 4px;
     border-radius: 100%;
-    background-color: ${secondaryThemeColor};
+    background-color: ${backgroundColor};
     &:hover {
     cursor: pointer;
   }
@@ -97,21 +93,15 @@ export const slidercontent = styled.div`
     display: none;
   }
   .current {
-    animation: ${opacityAnimation} 0.5s;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content:space-between;
     align-items: center;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
     width: 100%;
     height: 100%;
-    border-radius: 10px;
   }
-  @media (max-width: 600px) {
+  @media (max-width: 400px) {
+    width: 100%;
     .current {
       justify-content: center;
     }
@@ -123,3 +113,15 @@ export const slidercontent = styled.div`
     min-height: 130px;
   }
 `;
+export const CardWrapper = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content:center;
+    align-items: center;
+    width:fit-content;
+    /* border:1px solid red; */
+    @media (max-width: 400px) {
+    width: 100%;
+    height: 390px;
+  }
+`

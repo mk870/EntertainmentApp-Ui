@@ -40,7 +40,7 @@ export const DrawerContainer = styled.div`
   left: 0;
   top: 0;
   bottom: 0;
-  width: 150px;
+  width: 190px;
   z-index: 1000;
   ${({ isOpen }) => (isOpen ? slideInAnimation : slideOutAnimation)}
 `;
