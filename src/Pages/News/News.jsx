@@ -54,7 +54,7 @@ const News = () => {
   return (
     <styled.container>
       {isLoading && <CardGridSkeleton />}
-      {error && <HttpError message={error} size={"large"} />}
+      {error && <HttpError message={`${error}, please try again`} size={"large"} />}
       {data && (
         <>
           <styled.TitleWrapper>
