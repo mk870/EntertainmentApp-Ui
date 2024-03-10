@@ -14,6 +14,7 @@ import Snackbar from "components/Snackbar/Snackbar";
 import Spinner from "components/Spinner/Spinner";
 import { signupRequest } from "HttpServices/Post/postData";
 import PageHOC from "components/HOCs/Page/PageHOC";
+import GoogleAuth from "components/GoogleAuth/GoogleAuth";
 
 const SignUp = () => {
   const [signUpData, setSignUpData] = useState({
@@ -255,6 +256,7 @@ const SignUp = () => {
               ))}
             </styled.validationErrorWrapper>
           )}
+          <GoogleAuth setIsLoading={setIsLoading} type={"signup"} />
           <styled.SignupText>
             you already have an account?{" "}
             <styled.SignupTextSpan onClick={() => navigate("/login")}>

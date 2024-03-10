@@ -62,3 +62,5 @@ export const youtubeKey = process.env.REACT_APP_YOUTUBE_API_KEY;
 export const client_id = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
 export const client_secret = process.env.REACT_APP_SPOTIFY_CLIENT_SECRET;
 export const newsApiKey = process.env.REACT_APP_NEWS_API_KEY;
+export const googleClientId = process.env.REACT_APP_CLIENT_ID
+export const googleSecretId = process.env.REACT_APP_SECRET_ID

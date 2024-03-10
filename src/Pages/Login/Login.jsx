@@ -16,6 +16,7 @@ import Spinner from "../../components/Spinner/Spinner";
 import { loginRequest } from "../../HttpServices/Post/postData";
 import { AppContext } from "../../Context/AppContext";
 import PageHOC from "components/HOCs/Page/PageHOC";
+import GoogleAuth from "components/GoogleAuth/GoogleAuth";
 
 const Login = () => {
   const [postResponse, setPostResponse] = useState({
@@ -31,7 +32,7 @@ const Login = () => {
   const [isPasswordValidationError, setIsPasswordValidationError] =
     useState(false);
   const [isEmailValidationError, setIsEmailValidationError] = useState(false);
-  const {setAccessToken} = useContext(AppContext)
+  const { setAccessToken } = useContext(AppContext);
   const navigate = useNavigate();
   const handleOnChangePassword = (value) => {
     setLoginUserData({
@@ -78,15 +79,15 @@ const Login = () => {
   useEffect(() => {
     if (loginUserData.password !== "") {
       passwordValidator(setIsPasswordValidationError, loginUserData.password);
-    }else{
+    } else {
       setIsPasswordValidationError(false);
     }
   }, [loginUserData.password]);
   useEffect(() => {
     if (loginUserData.email !== "") {
       emailValidator(setIsEmailValidationError, loginUserData.email);
-    }else{
-      setIsEmailValidationError(false)
+    } else {
+      setIsEmailValidationError(false);
     }
   }, [loginUserData.email]);
   useEffect(() => {
@@ -134,6 +135,7 @@ const Login = () => {
               ))}
             </styled.validationErrorWrapper>
           )}
+          <GoogleAuth setIsLoading={setIsLoading} type={"login"} />
           <styled.LoginText>
             you don't have an account?{" "}
             <styled.LoginTextSpan onClick={() => navigate("/signup")}>
@@ -143,7 +145,7 @@ const Login = () => {
           <styled.LoginBtnContainer>
             <Button
               onClickFunc={undefined}
-              buttonText={isLoading ? <Spinner/> : "login"}
+              buttonText={isLoading ? <Spinner /> : "login"}
               type={"submit"}
             />
           </styled.LoginBtnContainer>
