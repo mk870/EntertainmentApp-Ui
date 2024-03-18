@@ -147,6 +147,7 @@ const Login = () => {
               onClickFunc={undefined}
               buttonText={isLoading ? <Spinner /> : "login"}
               type={"submit"}
+              disabled={isLoading ? true : false}
             />
           </styled.LoginBtnContainer>
         </styled.LoginForm>

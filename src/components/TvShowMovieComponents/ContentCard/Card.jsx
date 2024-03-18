@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { AiFillStar, AiOutlinePlus } from "react-icons/ai";
 import { FaImdb } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import * as styled from "./CardStyles";
 import emptyProfilePic from "Assets/empty-profile.jpg";
@@ -35,6 +36,7 @@ const Card = ({
   });
   const { accessToken, setDeletedItemId } = useContext(AppContext);
   const navigate = useNavigate();
+  const screenSize = useSelector((state) => state.screenSize.value);
   const onNavigate = (e) => {
     e.stopPropagation();
     if (type === "movie") {
@@ -58,7 +60,6 @@ const Card = ({
     e.stopPropagation();
     if (accessToken) {
       setIsLoading(true);
-      console.log(contentData);
       if (type === "movie") {
         let data = {
           Title: contentData.title ? contentData.title : "",
@@ -205,7 +206,7 @@ const Card = ({
         {size === "large" && (
           <styled.date>{getReleaseDateOrCharacterName(content)}</styled.date>
         )}
-        {size === "large" && (
+        {(size === "large" || screenSize <= 400) && (
           <styled.largeCardRatingContainer>
             <FaImdb size={29} color={"gold"} className="imdb-icon" />
             <styled.ratingText size={size}>
@@ -214,18 +215,27 @@ const Card = ({
           </styled.largeCardRatingContainer>
         )}
       </styled.contentDetails>
-      <styled.linksContainer size={size} type={type}>
-        <styled.viewLink size={size} onClick={(e) => onNavigate(e)}>
+      <styled.linksContainer
+        size={screenSize > 400 ? size : "large"}
+        type={type}
+      >
+        <styled.viewLink
+          size={screenSize > 400 ? size : "large"}
+          onClick={(e) => onNavigate(e)}
+        >
           view
         </styled.viewLink>
         {type !== "actor" && !isFromLocalServer && (
-          <styled.addLink size={size} onClick={(e) => handlePost(content, e)}>
+          <styled.addLink
+            size={screenSize > 400 ? size : "large"}
+            onClick={(e) => handlePost(content, e)}
+          >
             {isLoading ? <Spinner /> : <AiOutlinePlus size={14} />}
           </styled.addLink>
         )}
         {isFromLocalServer && (
           <styled.deleteLink
-            size={size}
+            size={screenSize > 400 ? size : "large"}
             onClick={(e) => handleDelete(e, content.id)}
           >
             {isLoading ? <Spinner /> : "Delete"}

@@ -40,7 +40,7 @@ export const DrawerContainer = styled.div`
   left: 0;
   top: 0;
   bottom: 0;
-  width: 190px;
+  width: 250px;
   z-index: 1000;
   ${({ isOpen }) => (isOpen ? slideInAnimation : slideOutAnimation)}
 `;
@@ -53,4 +53,5 @@ export const DrawerOverlay = styled.div`
   bottom: 0;
   right: 0;
   pointer-events: all;
+  z-index: 1000;
 `;

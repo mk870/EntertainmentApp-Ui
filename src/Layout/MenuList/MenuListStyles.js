@@ -38,6 +38,11 @@ export const MenuLogo = styled.div`
     width: 120px;
     height: 90px;
   }
+  @media (max-width: 980px) {
+    justify-content: start;
+    width: 200px;
+    height: 90px;
+  }
 `;
 export const MenuHeader = styled.p`
   font-size: 16px;
@@ -91,6 +96,9 @@ export const header = styled.span`
   font-weight: bold;
   text-align: start;
   margin-left: -45px;
+  @media (max-width: 980px) {
+    margin-left: -125px;
+  }
 `;
 export const divider = styled.div`
   border-bottom: 1px solid ${secondaryThemeColor};
