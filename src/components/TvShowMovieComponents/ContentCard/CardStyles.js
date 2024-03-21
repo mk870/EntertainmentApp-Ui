@@ -3,6 +3,7 @@ import {
   mainThemeColor,
   redColor,
   secondaryThemeColor,
+  transparentMainThemeColor,
 } from "../../../Css/Variables";
 import { slideOnLeftClickAnimation, slideOnRightClickAnimation } from "Utils/CarouselCardAnimations";
 
@@ -136,6 +137,7 @@ export const viewLink = styled.div`
   z-index: 8;
   &:hover {
     cursor: pointer;
+    background-color:${transparentMainThemeColor};
   }
 `;
 export const addLink = styled.div`

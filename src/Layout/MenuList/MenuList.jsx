@@ -16,6 +16,7 @@ import {
   musicLibraryList,
   newsList,
 } from "Utils/Constants";
+import MenuCard from "./MenuCard/MenuCard";
 
 const MenuList = () => {
   const [clickedMenuListItem, setClickedMenuListItem] = useState("/");
@@ -137,6 +138,7 @@ const MenuList = () => {
           />
         )}
       </styled.InnerWrapper>
+      <MenuCard/>
       <styled.logoutWrapper onClick={handleLogOutOrLogin}>
         <styled.menuItemText
           clicked={"/login" === clickedMenuListItem ? true : false}
