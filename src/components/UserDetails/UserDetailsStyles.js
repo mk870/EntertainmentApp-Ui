@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { mainThemeColor, secondaryThemeColor } from "../../Css/Variables";
+import { mainThemeColor, secondaryThemeColor, transparentMainThemeColor } from "../../Css/Variables";
 
 export const UserCardWrapper = styled.div`
   display: flex;
@@ -73,6 +73,7 @@ export const LogInOrOutWrapper = styled.div`
   color: ${secondaryThemeColor};
   &:hover {
     cursor: pointer;
+    background-color:${transparentMainThemeColor};
   }
   @media (max-width: 400px) {
     justify-content: start;

@@ -9,6 +9,7 @@ import { IoPersonOutline } from "react-icons/io5";
 import { AiOutlineHome } from "react-icons/ai";
 import { RiSlideshow3Line } from "react-icons/ri";
 import { HiOutlineMusicNote } from "react-icons/hi";
+import { FaRegNewspaper } from "react-icons/fa";
 
 export const artistsNewsCategory = "musicians";
 export const moviesNewsCategory = "movies";
@@ -99,5 +100,36 @@ export const moviesAndTvShowsLibraryList = [
     name: "Actors",
     path: "/my-actors",
     icon: <MdOutlineRecentActors />,
+  },
+];
+const size = 25;
+export const menuCardRoutelist = [
+  {
+    name: "Movies",
+    path: "/",
+    icon: <MdOutlineLocalMovies color="black" size={size} />,
+    text:"Enjoy all kinds of movies",
+    btnText:"go to movies"
+  },
+  {
+    name: "TvShows",
+    path: "/tv-shows",
+    icon: <RiSlideshow3Line color="black" size={size} />,
+    text:"Watch all kinds of tv-shows",
+    btnText:"go to tv shows"
+  },
+  {
+    name: "Music",
+    path: "/music",
+    icon: <HiOutlineMusicNote color="black" size={size} />,
+    text:"Listen to all types of music",
+    btnText:"listen to music"
+  },
+  {
+    name: "News",
+    path: "/news/entertainment",
+    icon: <FaRegNewspaper color="black" size={size} />,
+    text:"Get all the latest news bulletins",
+    btnText:"visit the news room"
   },
 ];
