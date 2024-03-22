@@ -109,27 +109,27 @@ export const menuCardRoutelist = [
     path: "/",
     icon: <MdOutlineLocalMovies color="black" size={size} />,
     text:"Enjoy all kinds of movies",
-    btnText:"go to movies"
+    btnText:"Go to movies"
   },
   {
     name: "TvShows",
     path: "/tv-shows",
     icon: <RiSlideshow3Line color="black" size={size} />,
     text:"Watch all kinds of tv-shows",
-    btnText:"go to tv shows"
+    btnText:"Checkout tv-shows"
   },
   {
     name: "Music",
     path: "/music",
     icon: <HiOutlineMusicNote color="black" size={size} />,
     text:"Listen to all types of music",
-    btnText:"listen to music"
+    btnText:"Listen to music"
   },
   {
     name: "News",
     path: "/news/entertainment",
     icon: <FaRegNewspaper color="black" size={size} />,
     text:"Get all the latest news bulletins",
-    btnText:"visit the news room"
+    btnText:"Read the news"
   },
 ];

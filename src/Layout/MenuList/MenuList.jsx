@@ -102,7 +102,7 @@ const MenuList = () => {
         <styled.MenuGroup
           onClick={() => toggleMenuGroup(moviesAndTVShowsMenuGroupName)}
         >
-          <styled.menuItemText>Movies/Shows</styled.menuItemText>
+          <styled.menuItemText>Movies&Shows</styled.menuItemText>
           {openMenuGroupList === null ||
           openMenuGroupList === musicMenuGroupName ||
           openMenuGroupList === newsMenuGroupName ? (

@@ -1,5 +1,13 @@
 import { mainThemeColor, secondaryThemeColor } from "Css/Variables";
-import styled from "styled-components";
+import styled, { css, keyframes } from "styled-components";
+
+const dropDown = keyframes`
+  0% { opacity: 0;}
+  100% { opacity: 1;}
+`;
+const dropDownAnimation = css`
+  animation: ${dropDown} 1s ease;
+`;
 
 export const GenresWrapper = styled.div`
   display: flex;
@@ -31,6 +39,7 @@ export const Grid = styled.div`
   display: grid;
   gap: 5px;
   grid-template-columns: ${(props) => (props.showMore ? "1fr 1fr" : "1fr")};
+  ${({showMore})=>showMore && dropDownAnimation}
   align-items: center;
   width: 100%;
 `;

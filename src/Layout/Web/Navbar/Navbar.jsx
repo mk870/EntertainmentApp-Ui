@@ -3,7 +3,7 @@ import React from "react";
 import * as styled from "./NavbarStyles";
 import UserDetails from "components/UserDetails/UserDetails";
 import { useLocation, useNavigate } from "react-router-dom";
-import { mainThemeColor, secondaryThemeColor } from "Css/Variables";
+import { mainThemeColor, menuHoverColor, secondaryThemeColor } from "Css/Variables";
 
 const Navbar = ({ showUserDetails }) => {
   const navigate = useNavigate();
@@ -31,11 +31,13 @@ const Navbar = ({ showUserDetails }) => {
       return {
         color: "aliceblue",
         borderBottom: mainThemeColor,
+        backGroundColor:menuHoverColor,
       };
     } else {
       return {
         color: secondaryThemeColor,
         borderBottom: "transparent",
+        backGroundColor:"transparent",
       };
     }
   };
