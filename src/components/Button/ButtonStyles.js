@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { mainThemeColor } from "../../Css/Variables";
+import { mainThemeColor, transparentMainThemeColor } from "../../Css/Variables";
 
 export const ButtonField = styled.button`
   background-color: ${mainThemeColor};
@@ -18,7 +18,7 @@ export const ButtonField = styled.button`
   font-size: 15px;
   font-weight: 700;
   &:hover {
-    background-color: #029999;
+    background-color: ${transparentMainThemeColor};
     cursor: pointer;
   }
 `;

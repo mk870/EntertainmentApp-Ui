@@ -1,4 +1,4 @@
-import { secondaryThemeColor } from "Css/Variables";
+import { menuHoverColor, secondaryThemeColor } from "Css/Variables";
 import styled from "styled-components";
 
 export const Container = styled.div`
@@ -25,10 +25,14 @@ export const pageLinks = styled.div`
 export const pageLink = styled.p`
   color: ${(props) => props.styles.color};
   border-bottom: 2px solid ${(props) => props.styles.borderBottom};
-  margin: 10px;
+  background-color: ${(props) => props.styles.backGroundColor};
+  margin: 5px;
   font-size: 15px;
-  padding-bottom: 2px;
+  box-sizing:border-box;
+  padding: 5px;
+  border-radius:5px;
   &:hover {
     cursor: pointer;
+    background-color: ${menuHoverColor};
   }
 `;

@@ -1,7 +1,7 @@
 import { keyframes } from "styled-components"
 
-export const mainThemeColor = 'rgb(0,212,212)'
-export const transparentMainThemeColor = 'rgba(0,212,212,0.5)'
+export const mainThemeColor = '#1C7C8D'
+export const transparentMainThemeColor = '#13515C'
 export const secondaryThemeColor = '#575958'
 export const inputColor = '#b6bab7'
 export const backgroundColor = '#0d0c0f'
