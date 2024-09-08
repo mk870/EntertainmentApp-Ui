@@ -75,6 +75,7 @@ const InputField = ({
         onChange={(e) => onChangeFunc(e.target.value)}
         value={inputValue}
         spellCheck="false"
+        autoFocus={false}
         autoCorrect="off"
         autoComplete="off"
         placeholder={hasFloatingLabel ? undefined : label}
