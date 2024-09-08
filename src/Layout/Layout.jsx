@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from "react";
+import React, { useLayoutEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import MobileView from "./Mobile/MobileView";
@@ -12,14 +12,14 @@ const Layout = ({ children }) => {
   const dispatch = useDispatch()
   const screenSize = useSelector((state)=>state.screenSize.value)
   const [openMobileMenu, setOpenMobileMenu] = useState(false);
-  useEffect(() => {
+  useLayoutEffect(() => {
     const handleResize = () => dispatch(setScreenSize(window.innerWidth));
     window.addEventListener("resize", handleResize);
     handleResize();
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (screenSize) {
       if (screenSize <= 980) {
         setMobileMenu(true);
