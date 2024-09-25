@@ -26,10 +26,10 @@ import PageHOC from "components/HOCs/Page/PageHOC";
 
 const Movie = () => {
   const { id } = useParams();
-  const movieDetails = useTMDB({ url: `/movie/${id}` });
-  const recommendations = useTMDB({ url: `/movie/${id}/recommendations` });
-  const reviews = useTMDB({ url: `/movie/${id}/reviews` });
-  const cast = useTMDB({ url: `/movie/${id}/credits` });
+  const movieDetails = useTMDB({ url: `movie/${id}` });
+  const recommendations = useTMDB({ url: `movie/${id}/recommendations` });
+  const reviews = useTMDB({ url: `movie/${id}/reviews` });
+  const cast = useTMDB({ url: `movie/${id}/credits` });
   const getMoviePoster = (image) => {
     if (image) return `https://image.tmdb.org/t/p/w500/${image}`;
     else return emptyMoviePoster;
